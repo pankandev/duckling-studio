@@ -7,6 +7,11 @@ export default function ChatsPage() {
             <Link href={('/')}>
                 Volver
             </Link>
+            <div className="flex flex-col items-center justify-center">
+                <ul>
+
+                </ul>
+            </div>
         </div>
     );
 }

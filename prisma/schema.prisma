@@ -1,0 +1,23 @@
+datasource Postgres {
+  provider = "postgresql"
+  url      = "postgresql://postgres:postgres@localhost:5432/postgres"
+}
+
+generator Client {
+  provider = "prisma-client-js"
+}
+
+model Chat {
+  id           Int           @id @default(autoincrement())
+  display_name String
+  messages     ChatMessage[]
+}
+
+model ChatMessage {
+  id        Int    @id @default(autoincrement())
+  is_user   String
+  content   String
+  extraData Json
+  chat      Chat   @relation(fields: [chat_id], references: [id])
+  chat_id   Int
+}

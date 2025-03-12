@@ -6,9 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "npx prisma migrate dev"
   },
   "dependencies": {
+    "@prisma/client": "^6.5.0",
     "ai": "^4.1.54",
     "next": "15.2.2",
     "react": "^19.0.0",
@@ -22,6 +25,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.2",
+    "prisma": "^6.5.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
