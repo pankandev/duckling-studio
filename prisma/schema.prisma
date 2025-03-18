@@ -8,16 +8,23 @@ generator Client {
 }
 
 model Chat {
-  id           Int           @id @default(autoincrement())
-  display_name String
-  messages     ChatMessage[]
+  id          Int           @id @default(autoincrement())
+  displayName String
+  messages    ChatMessage[]
+  createdAt   DateTime      @default(now())
+}
+
+enum ChatMessageRole {
+  USER
+  ASSISTANT
 }
 
 model ChatMessage {
-  id        Int    @id @default(autoincrement())
-  is_user   String
+  id        Int             @id @default(autoincrement())
+  role      ChatMessageRole
   content   String
   extraData Json
-  chat      Chat   @relation(fields: [chat_id], references: [id])
-  chat_id   Int
+  chat      Chat            @relation(fields: [chatId], references: [id])
+  chatId    Int
+  createdAt DateTime        @default(now())
 }

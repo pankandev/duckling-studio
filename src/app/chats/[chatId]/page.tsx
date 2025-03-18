@@ -1,15 +1,17 @@
 import Link from "next/link";
-import MessageList from "@/app/chats/[chatId]/components/message-list";
+import Chat from "@/app/chats/components/chat";
 
 
-export default function Page() {
-    const db = getDb();
+export default async function Page({params}: {params: Promise<{chatId: string}>}) {
+    const chatIdString = (await params).chatId;
+    const chatId = parseInt(chatIdString, 10);
+
     return (
         <div>
             <Link href={('/chats')}>
                 Volver
             </Link>
-            <MessageList></MessageList>
+            <Chat chatId={chatId}></Chat>
         </div>
     )
 }
