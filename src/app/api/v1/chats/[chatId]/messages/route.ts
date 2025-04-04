@@ -1,0 +1,100 @@
+import {streamText} from "ai";
+import {safeParseInt} from "@/lib/parsers/primitives";
+import {HttpError} from "@/lib/http/http-error";
+import {prisma} from "@/lib/db/client";
+import {ChatMessage} from "@prisma/client";
+import {buildListItemResponse} from "@/lib/http/rest-response";
+import {chatMessageFromDb} from "@/lib/resources/chat-message-resource";
+import {ChatMessageInputSchema} from "@/lib/types/chats";
+import {ChatMessageAiCompatible, dbMessageListToAiSdk, DefaultLLM} from "@/lib/ai/llm";
+import {aiSdkToInsertMessageDbList} from "@/lib/ai/ai";
+
+
+export async function GET(_: Request, {params}: { params: Promise<{ chatId: string }> }): Promise<Response> {
+    const chatIdParse = safeParseInt((await params).chatId);
+    if (!chatIdParse.success) {
+        return HttpError.badRequestZod(chatIdParse.error).asResponse();
+    }
+    const chatId = chatIdParse.data;
+    const chat = await prisma.chat.findFirst({
+        where: {id: chatId}
+    });
+    if (!chat) {
+        return HttpError.notFound('chat', {id: chatId}).asResponse();
+    }
+
+    const messages: ChatMessage[] = await prisma.chatMessage.findMany({
+        where: {
+            chatId,
+        },
+        orderBy: {createdAt: 'asc'}
+    });
+
+    return buildListItemResponse(messages.map(m => chatMessageFromDb(m)));
+}
+
+const SystemMessage: string = (
+    'Your role is to be a helpful assistant.'
+);
+
+export async function POST(request: Request, {params}: { params: Promise<{ chatId: string }> }): Promise<Response> {
+    const chatIdParse = safeParseInt((await params).chatId);
+    if (!chatIdParse.success) {
+        return HttpError.notFound('chat', {id: chatIdParse.data}).asResponse();
+    }
+    const chatId = chatIdParse.data;
+
+    const messageParse = ChatMessageInputSchema.safeParse(await request.json());
+    if (!messageParse.success) {
+        return HttpError.badRequestZod(messageParse.error).asResponse();
+    }
+    const chat = await prisma.chat.findFirst({
+        where: {id: chatId},
+        select: {id: true}
+    });
+    if (chat === null) {
+        return HttpError.notFound(
+            'chat',
+            {id: chatId},
+        ).asResponse();
+    }
+
+    const newMessage: ChatMessageAiCompatible = {
+        role: "USER",
+        content: messageParse.data.content,
+    };
+
+    const messages: ChatMessageAiCompatible[] = [
+        ...(
+            await prisma.chatMessage.findMany({
+                where: {chatId: chatId},
+                orderBy: {createdAt: 'asc'}
+            })
+        ),
+        newMessage,
+    ];
+
+    const messagesAi = dbMessageListToAiSdk(messages);
+
+    const result = streamText({
+        model: DefaultLLM,
+        system: SystemMessage,
+        messages: messagesAi,
+        onFinish: async (m) => {
+            await prisma.chatMessage.createMany({
+                data: [
+                    {
+                        role: 'USER',
+                        content: messageParse.data.content,
+                        extraData: {},
+                        chatId: chatId,
+                    },
+                    ...aiSdkToInsertMessageDbList(m.response.messages, chatId)
+                ]
+            });
+        }
+    });
+
+    result.consumeStream().then();
+    return result.toTextStreamResponse();
+}

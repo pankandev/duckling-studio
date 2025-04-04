@@ -1,29 +1,27 @@
+'use client';
+
 import Link from "next/link";
 import React from "react";
-import {listChats} from "@/services/chats";
+import {useChats} from "@/lib/api-services/chats";
+import ChatList from "@/components/chat-list";
 
 
-export default async function ChatsLayout({children}: {children: React.ReactNode}) {
-    const chats = await listChats();
+export default function ChatsLayout({children}: { children: React.ReactNode }) {
+    const {data} = useChats();
+
     return (
         <div>
             <Link href={('/')}>
                 Volver
             </Link>
             <div className="flex flex-row items-start">
-                <div className="flex flex-col items-center justify-center">
-                    {
-                        chats.length > 0 ? (
-                            chats.map((chat) => (
-                                <div key={chat.id}>{chat.displayName}</div>
-                            ))
-                        ) : (
-                            <p>
-                                No chat found for this page.
-                            </p>
-                        )
-                    }
-                </div>
+                {
+                    data ? (
+                        data.success ?
+                            (<ChatList chats={data.value}></ChatList>) :
+                            (<div>{data.error.message}</div>)
+                    ) : null
+                }
                 <div className="flex flex-col items-center justify-center">
                     {children}
                 </div>

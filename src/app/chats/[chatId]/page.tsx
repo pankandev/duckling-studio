@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Chat from "@/app/chats/components/chat";
+import Chat from "@/components/chat";
 
 
 export default async function Page({params}: {params: Promise<{chatId: string}>}) {
