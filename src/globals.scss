@@ -3,4 +3,49 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  @apply bg-gray-900 text-white;
+}
+
+html, body {
+  @apply h-full;
+}
+
+.message-user {
+  @apply bg-gray-800/40 ml-12;
+}
+
+.message-assistant {
+  @apply bg-gray-800/60 mr-12;
+}
+
+.btn {
+  @apply transition-colors;
+
+  &:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+.message-content-markdown {
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  ul, ol {
+    li {
+      @apply ml-5 pb-1;
+    }
+  }
+
+  pre {
+    @apply bg-gray-950 rounded-xl px-3 py-3 overflow-x-auto border border-gray-600;
+  }
+
+  >*:not(:last-child) {
+    @apply mb-2;
+  }
 }

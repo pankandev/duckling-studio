@@ -1,11 +1,11 @@
 'use client'
 
-import MessageList from "@/components/message-list";
-import MessageInput from "@/components/message-input";
-import {useState} from "react";
+import React, {useState} from "react";
 import {ChatMessageInput} from "@/lib/types/chats";
 import {readTextStream} from "@/lib/api-services/stream";
 import {useChatMessages} from "@/lib/api-services/chat-messages";
+import {ChatMessageResource} from "@/lib/resources/chat-message-resource";
+import ChatPanel from "@/components/chat-panel";
 
 
 function sendMessageAtChat(chatId: number, message: ChatMessageInput): Promise<Response> {
@@ -22,39 +22,58 @@ export default function Chat({chatId}: {
         data: messagesResult,
         error: messagesFetchError,
         isLoading: isLoadingMessages,
-        mutate: mutateMessages
+        mutate: mutateMessages,
     } = useChatMessages(chatId);
 
-    const [isSendingMessage, setIsSendingMessage] = useState<boolean>(isLoadingMessages);
+    const [isSendingMessage, setIsSendingMessage] = useState<boolean>(false);
 
-    const [streamingMessage, setStreamingMessage] = useState<string | null>(null);
+    const [streamingMessages, setStreamingMessages] = useState<ChatMessageResource[] | null>(null);
 
     async function sendMessage(message: ChatMessageInput) {
         setIsSendingMessage(true);
+        const userMessage: ChatMessageResource = {
+            id: -1,
+            chatId: -1,
+            content: message.content,
+            role: "USER"
+        };
         const result = await sendMessageAtChat(chatId, message);
         await mutateMessages();
         if (result.ok) {
             let message = '';
-            setStreamingMessage('');
+            setStreamingMessages([userMessage]);
             for await (const textPart of readTextStream(result)) {
                 message += textPart;
-                setStreamingMessage(message);
+                const streamingMessage: ChatMessageResource = {
+                    id: -2,
+                    chatId: -2,
+                    content: message,
+                    role: "ASSISTANT"
+                };
+                setStreamingMessages([userMessage, streamingMessage]);
             }
-            setStreamingMessage(null);
+            setStreamingMessages(null);
         }
         await mutateMessages();
         setIsSendingMessage(false);
     }
 
-    const isLoading = isSendingMessage && isLoadingMessages;
+    const isLoading = isSendingMessage || isLoadingMessages;
+
+    if (!messagesResult?.success) {
+        return (
+            <>
+                {messagesFetchError && <div>{messagesFetchError.toString()}</div>}
+            </>
+        );
+    }
+
+    const messages = [...messagesResult.value];
+    if (streamingMessages) {
+        messages.push(...streamingMessages);
+    }
 
     return (
-        <div className="flex flex-col">
-            {messagesResult?.success &&
-                <MessageList messages={messagesResult.value} streamingMessage={streamingMessage ?? undefined}></MessageList>}
-            {messagesFetchError && <div>{messagesFetchError.toString()}</div>}
-            {isLoadingMessages && <div>Loading...</div>}
-            <MessageInput onSend={sendMessage} disabled={isLoading}></MessageInput>
-        </div>
+        <ChatPanel messages={messages} onSend={sendMessage} disabled={isLoading}></ChatPanel>
     )
 }

@@ -75,6 +75,7 @@ export async function POST(request: Request, {params}: { params: Promise<{ chatI
     ];
 
     const messagesAi = dbMessageListToAiSdk(messages);
+    const now = new Date();
 
     const result = streamText({
         model: DefaultLLM,
@@ -88,6 +89,7 @@ export async function POST(request: Request, {params}: { params: Promise<{ chatI
                         content: messageParse.data.content,
                         extraData: {},
                         chatId: chatId,
+                        createdAt: now
                     },
                     ...aiSdkToInsertMessageDbList(m.response.messages, chatId)
                 ]

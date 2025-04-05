@@ -5,5 +5,5 @@ export interface ChatMessageInput {
 }
 
 export const ChatMessageInputSchema: z.ZodSchema<ChatMessageInput> = z.object({
-    content: z.string(),
+    content: z.string().min(1),
 });

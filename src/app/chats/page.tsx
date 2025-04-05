@@ -20,9 +20,7 @@ export default function ChatsPage() {
     }
 
     return (
-        <div>
             <MessageInput onSend={startChatFromMessage} disabled={loading}>
             </MessageInput>
-        </div>
     );
 }
