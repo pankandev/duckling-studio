@@ -37,11 +37,11 @@ export default function Chat({chatId}: {
             content: message.content,
             role: "USER"
         };
+        setStreamingMessages([userMessage]);
         const result = await sendMessageAtChat(chatId, message);
         await mutateMessages();
         if (result.ok) {
             let message = '';
-            setStreamingMessages([userMessage]);
             for await (const textPart of readTextStream(result)) {
                 message += textPart;
                 const streamingMessage: ChatMessageResource = {

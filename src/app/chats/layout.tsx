@@ -17,6 +17,9 @@ export default function ChatsLayout({children}: { children: React.ReactNode }) {
                     <Link className="pb-2" href={('/')}>
                         Home
                     </Link>
+                    <Link className="pb-2" href={('/chats')}>
+                        New Chat
+                    </Link>
                     {
                         data && (
                             data.success ?

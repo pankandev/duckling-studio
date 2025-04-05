@@ -4,7 +4,11 @@ import {useCallback, useEffect, useRef, useState} from "react";
 import MessageList from "./message-list";
 import MessageInput from "./message-input";
 
-const ChatPanel = ({onSend, disabled, messages}: {onSend: (input: ChatMessageInput) => unknown, disabled: boolean, messages: ChatMessageResource[]}) => {
+const ChatPanel = ({onSend, disabled, messages}: {
+    onSend: (input: ChatMessageInput) => unknown,
+    disabled: boolean,
+    messages: ChatMessageResource[]
+}) => {
     const [showScrollToBottomButton, setShowScrollToBottomButton] = useState<boolean>(false);
     const messagesContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -62,6 +66,11 @@ const ChatPanel = ({onSend, disabled, messages}: {onSend: (input: ChatMessageInp
             >
                 <div className="flex flex-col items-stretch w-full max-w-3xl grow">
                     <MessageList messages={messages}></MessageList>
+                    {messages.length === 0 && (
+                        <p className='text-center w-full opacity-50 mt-12'>
+                            No messages
+                        </p>
+                    )}
                 </div>
             </div>
             {/* Input */}

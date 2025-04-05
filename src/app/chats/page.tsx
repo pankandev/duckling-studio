@@ -1,10 +1,10 @@
 'use client';
 
 import React, {useState} from 'react';
-import MessageInput from "@/components/message-input";
 import {createEmptyChat} from "@/lib/api-services/chats";
 import {useRouter} from "next/navigation";
 import {ChatMessageInput} from "@/lib/types/chats";
+import ChatPanel from "@/components/chat-panel";
 
 export default function ChatsPage() {
     const [loading, setLoading] = useState(false);
@@ -15,12 +15,11 @@ export default function ChatsPage() {
         const chatResult = await createEmptyChat(initialMessage.content);
         setLoading(false);
         if (chatResult.success) {
-            router.push(`/chats/${chatResult.value}`);
+            router.replace(`/chats/${chatResult.value}`);
         }
     }
 
     return (
-            <MessageInput onSend={startChatFromMessage} disabled={loading}>
-            </MessageInput>
+        <ChatPanel messages={[]} onSend={startChatFromMessage} disabled={loading}></ChatPanel>
     );
 }
