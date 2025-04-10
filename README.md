@@ -1,4 +1,4 @@
-# Duckling Studio
+# Duckling Studio 🦆
 
 Duckling Studio is my playground to try some experiments with LLMs, automate random stuff and
 things like that.
@@ -8,7 +8,29 @@ For now, this is just a ChatGPT clone, but there are plans to add more features 
 ## Overview
 
 Currently, Duckling Studio functions as a conversational AI interface similar to ChatGPT. The application is built using
-modern web technologies and provides a foundation for future enhancements.
+Next.js and PostgresSQL (I love PostgresSQL so much).
+
+## Features
+
+- Conversational AI interface with Claude.
+- Streaming messages.
+- Previous chats list.
+
+## Planned Features
+
+- Chat management.
+- Message edition (even the assistant ones!)
+- Custom AI model configuration (Ollama, LM Studio, OpenAI, etc.).
+- Conversation agent management (different "personalities").
+- File attachments.
+- Some tools (search, reasoning, uhm.... weather?).
+- Whatever experiments I come up with.
+
+## Tech Stack
+
+- Next.js - React framework
+- PostgreSQL - Database
+- Docker - Containerization
 
 ## Prerequisites
 
@@ -48,28 +70,10 @@ modern web technologies and provides a foundation for future enhancements.
 
 The application should now be running at http://localhost:3000.
 
-## Features
-
-- Conversational AI interface with Claude.
-- Streaming messages.
-- Previous chats list.
-
-## Planned Features
-
-- Chat management.
-- Message edition (even the assistant ones!)
-- Custom AI model configuration (Ollama, LM Studio, OpenAI, etc.).
-- Conversation agent management (different "personalities").
-- File attachments.
-- Some tools (search, reasoning, uhm.... weather?).
-- Whatever experiments I come up with.
-
-## Tech Stack
-
-- Next.js - React framework
-- PostgreSQL - Database
-- Docker - Containerization
-
 ## Contributing
 
 This project is currently a personal development exercise, but suggestions and feedback are welcome.
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 (GPL-3.0) - see the [LICENSE.md](LICENSE.md) file for details.
