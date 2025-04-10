@@ -10,14 +10,17 @@ import {prisma} from "@/lib/server/db/client";
 export async function generateChatNameFromMessage(message: string): Promise<string> {
     const systemMessage = "" +
         "You will receive a message from a chat" +
-        "Your role is to describe in a single sentence the topic" +
+        "Your role is to create a title about the topic" +
         "this chat will be about." +
         "" +
         "Do not include quotes around the name" +
         "" +
         "Examples:" +
         "why is keras not as used as pytorch or tensorflow? -> Keras vs PyTorch Tensorflow " +
-        "I dont know what I am really looking in a job, i have a lot of criteria but no job check all the boxes -> Job criteria priorization";
+        "In nextjs I want to be able to submit the form when the user presses enter on the textarea, any ideas? -> Submit form on Enter" +
+        "What are some RAG techniques for caching? -> RAG Caching Techniques" +
+        "I am writing a description fro my linkedin, is this ok? -> LinkedIn Description Refinement" +
+        "Give me ideas for a TTRPG session for Cyberpunk Red. -> Cyberpunk Red Session Ideas";
     const response = await generateText({
         model: DefaultLLM,
         system: systemMessage,
