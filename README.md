@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Duckling Studio
+
+Duckling Studio is my playground to try some experiments with LLMs, automate random stuff and
+things like that.
+
+For now, this is just a ChatGPT clone, but there are plans to add more features later.
+
+## Overview
+
+Currently, Duckling Studio functions as a conversational AI interface similar to ChatGPT. The application is built using
+modern web technologies and provides a foundation for future enhancements.
+
+## Prerequisites
+
+- Node.js
+- pnpm package manager
+- Docker and Docker Compose
+- Anthropic API key for Claude AI integration
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
+    ```bash
+    git clone https://github.com/pankandev/duckling-studio.git
+    cd duckling-studio
+    ```
+2. Install dependencies
+    ```bash
+    pnpm install
+    ```
+3. Set up environment variables
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   Create a .env file in the root directory with the following content:
+   ```dotenv
+   ANTHROPIC_API_KEY=your_api_key_here
+   ```
+   Replace `your_api_key_here` with your actual Anthropic API key.
+4. Set up the database
+   The application requires a PostgreSQL database. A Docker Compose configuration is provided for easy setup:
+    ```bash
+    docker-compose up -d
+    ```
+   This will start a PostgreSQL instance as defined in the docker-compose.yml file.
+5. Run the development server
+    ```bash
+    pnpm run dev
+    ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application should now be running at http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Conversational AI interface with Claude.
+- Streaming messages.
+- Previous chats list.
 
-## Learn More
+## Planned Features
 
-To learn more about Next.js, take a look at the following resources:
+- Chat management.
+- Message edition (even the assistant ones!)
+- Custom AI model configuration (Ollama, LM Studio, OpenAI, etc.).
+- Conversation agent management (different "personalities").
+- File attachments.
+- Some tools (search, reasoning, uhm.... weather?).
+- Whatever experiments I come up with.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js - React framework
+- PostgreSQL - Database
+- Docker - Containerization
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is currently a personal development exercise, but suggestions and feedback are welcome.
