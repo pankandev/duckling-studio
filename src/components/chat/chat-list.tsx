@@ -18,7 +18,7 @@ export default function ChatList({chats}: { chats: ChatResource[] }) {
         );
     }
     return (
-        <div className="flex flex-col items-stretch justify-center w-full max-w-[18em] gap-2">
+        <div className="flex flex-col items-stretch justify-center w-full max-w-full gap-2">
             {list}
         </div>
     );
