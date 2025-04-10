@@ -1,6 +1,6 @@
 import React from 'react';
-import {ChatResource} from "@/lib/resources/chat-resource";
 import Link from "next/link";
+import {ChatResource} from "@/lib/common/resources/chat-resource";
 
 export default function ChatListItem({chat}: { chat: ChatResource }) {
     return <Link

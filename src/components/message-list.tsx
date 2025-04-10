@@ -1,6 +1,6 @@
 import React, {Fragment} from "react";
 import MessageListItem from "@/components/message";
-import {ChatMessageResource} from "@/lib/resources/chat-message-resource";
+import {ChatMessageResource} from "@/lib/common/resources/chat-message-resource";
 
 
 export default function MessageList(props: {

@@ -1,8 +1,8 @@
 'use client'
 
 import React from "react";
-import {ChatMessageResource} from "@/lib/resources/chat-message-resource";
 import MarkdownIt from 'markdown-it';
+import { ChatMessageResource } from "@/lib/common/resources/chat-message-resource";
 
 export default function MessageListItem({message}: { message: ChatMessageResource }): React.ReactNode {
     const markdownIt = new MarkdownIt();

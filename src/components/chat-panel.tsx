@@ -1,8 +1,8 @@
-import {ChatMessageInput} from "@/lib/types/chats";
-import {ChatMessageResource} from "@/lib/resources/chat-message-resource";
 import {useCallback, useEffect, useRef, useState} from "react";
 import MessageList from "./message-list";
 import MessageInput from "./message-input";
+import {ChatMessageResource} from "@/lib/common/resources/chat-message-resource";
+import {ChatMessageInput} from "@/lib/common/types/chats";
 
 const ChatPanel = ({onSend, disabled, messages}: {
     onSend: (input: ChatMessageInput) => unknown,
@@ -80,7 +80,7 @@ const ChatPanel = ({onSend, disabled, messages}: {
                     <div className="floating-buttons absolute top-0 -translate-y-full">
                         <button
                             onClick={scrollToBottom}
-                            className="btn bg-gray-600 hover:bg-gray-700 active:bg-gray-800 rounded px-3 py-1 rounded mb-2"
+                            className="btn bg-gray-600 hover:bg-gray-700 active:bg-gray-800 px-3 py-1 rounded mb-2"
                         >
                             Go Bottom
                         </button>

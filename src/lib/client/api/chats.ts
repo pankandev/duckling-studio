@@ -1,11 +1,11 @@
 'use client'
 
-import {apiPost} from "@/lib/api-services/client";
 import {z} from "zod";
-import {Result} from "@/lib/result";
-import {ChatResource, ChatResourceSchema} from "@/lib/resources/chat-resource";
+import {Result} from "@/lib/common/result";
 import useSWR, {SWRResponse} from "swr";
-import {buildListItemFetcher} from "@/lib/swr/buildGetItemFetcher";
+import {apiPost} from "@/lib/client/api/client";
+import {ChatResource, ChatResourceSchema} from "@/lib/common/resources/chat-resource";
+import {buildListItemFetcher} from "@/lib/client/swr/buildGetItemFetcher";
 
 
 export function useChats(): SWRResponse<Result<ChatResource[]>> {

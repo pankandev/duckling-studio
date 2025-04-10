@@ -1,8 +1,8 @@
 'use client'
 
 import {z} from "zod";
-import {err, ok, Result} from "../result";
-import {HttpError} from "@/lib/http/http-error";
+import {err, ok, Result} from "@/lib/common/result";
+import {HttpError} from "@/lib/common/http/http-error";
 
 export interface ApiGetSettings<TBody> {
     url: string;

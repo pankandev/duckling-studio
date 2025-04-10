@@ -1,10 +1,10 @@
 import {z} from "zod";
 
 import {generateText} from "ai";
-import {DefaultLLM} from "@/lib/ai/llm";
-import {HttpError} from "@/lib/http/http-error";
-import {prisma} from "@/lib/db/client";
-import {buildListItemResponse, buildSingleItemResponse} from "@/lib/http/rest-response";
+import {buildListItemResponse, buildSingleItemResponse} from "@/lib/common/http/rest-response";
+import {DefaultLLM} from "@/lib/server/ai/llm";
+import {HttpError} from "@/lib/common/http/http-error";
+import {prisma} from "@/lib/server/db/client";
 
 
 export async function generateChatNameFromMessage(message: string): Promise<string> {

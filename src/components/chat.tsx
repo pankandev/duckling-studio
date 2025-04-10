@@ -1,11 +1,11 @@
 'use client'
 
 import React, {useState} from "react";
-import {ChatMessageInput} from "@/lib/types/chats";
-import {readTextStream} from "@/lib/api-services/stream";
-import {useChatMessages} from "@/lib/api-services/chat-messages";
-import {ChatMessageResource} from "@/lib/resources/chat-message-resource";
 import ChatPanel from "@/components/chat-panel";
+import {ChatMessageInput} from "@/lib/common/types/chats";
+import {ChatMessageResource} from "@/lib/common/resources/chat-message-resource";
+import {readTextStream} from "@/lib/client/api/stream";
+import {useChatMessages} from "@/lib/client/api/chat-messages";
 
 
 function sendMessageAtChat(chatId: number, message: ChatMessageInput): Promise<Response> {

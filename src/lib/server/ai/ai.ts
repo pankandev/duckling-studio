@@ -1,7 +1,13 @@
 import {CoreMessage} from "ai";
-import {ChatMessageCreateManyInput} from "@/services/chats";
 
-export function aiSdkToInsertMessageDb(message: CoreMessage, chatId: number): ChatMessageCreateManyInput {
+interface ChatCreate {
+    chatId: number;
+    role: "USER" | "ASSISTANT";
+    content: string;
+    extraData: object
+}
+
+export function aiSdkToInsertMessageDb(message: CoreMessage, chatId: number): ChatCreate {
     const contentRaw = message.content;
 
     let content: string;
@@ -21,6 +27,6 @@ export function aiSdkToInsertMessageDb(message: CoreMessage, chatId: number): Ch
     };
 }
 
-export function aiSdkToInsertMessageDbList(messages: CoreMessage[], chatId: number): ChatMessageCreateManyInput[] {
+export function aiSdkToInsertMessageDbList(messages: CoreMessage[], chatId: number): ChatCreate[] {
     return messages.map(m => aiSdkToInsertMessageDb(m, chatId));
 }

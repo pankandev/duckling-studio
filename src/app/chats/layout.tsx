@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import React from "react";
-import {useChats} from "@/lib/api-services/chats";
 import ChatList from "@/components/chat-list";
+import {useChats} from "@/lib/client/api/chats";
 
 
 export default function ChatsLayout({children}: { children: React.ReactNode }) {

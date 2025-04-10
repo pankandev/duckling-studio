@@ -1,10 +1,10 @@
 'use client';
 
 import React, {useState} from 'react';
-import {createEmptyChat} from "@/lib/api-services/chats";
 import {useRouter} from "next/navigation";
-import {ChatMessageInput} from "@/lib/types/chats";
 import ChatPanel from "@/components/chat-panel";
+import { ChatMessageInput } from '@/lib/common/types/chats';
+import {createEmptyChat} from "@/lib/client/api/chats";
 
 export default function ChatsPage() {
     const [loading, setLoading] = useState(false);

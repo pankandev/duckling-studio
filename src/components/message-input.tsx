@@ -1,7 +1,7 @@
 import {z} from "zod";
 import Form from "next/form";
 import React, {useCallback} from "react";
-import {ChatMessageInput} from "@/lib/types/chats";
+import { ChatMessageInput } from "@/lib/common/types/chats";
 
 
 export default function MessageInput({onSend, disabled}: {onSend: (message: ChatMessageInput) => unknown, disabled: boolean }) {

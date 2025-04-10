@@ -1,9 +1,9 @@
 'use client'
 
 import {z} from "zod";
-import {apiGet} from "@/lib/api-services/client";
-import {buildRestResponseListItemSchema, buildRestResponseSingleItemSchema} from "@/lib/http/rest-schema";
-import {Result} from "../result";
+import {buildRestResponseListItemSchema, buildRestResponseSingleItemSchema} from "@/lib/common/http/rest-schema";
+import { Result } from "@/lib/common/result";
+import {apiGet} from "@/lib/client/api/client";
 
 export function buildGetItemFetcher<T>(itemSchema: z.Schema<T>): (url: string) => Promise<Result<T>> {
     return async url => {

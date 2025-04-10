@@ -1,13 +1,13 @@
 import {streamText} from "ai";
-import {safeParseInt} from "@/lib/parsers/primitives";
-import {HttpError} from "@/lib/http/http-error";
-import {prisma} from "@/lib/db/client";
+import {safeParseInt} from "@/lib/common/parsers/primitives";
+import {HttpError} from "@/lib/common/http/http-error";
+import {prisma} from "@/lib/server/db/client";
 import {ChatMessage} from "@prisma/client";
-import {buildListItemResponse} from "@/lib/http/rest-response";
-import {chatMessageFromDb} from "@/lib/resources/chat-message-resource";
-import {ChatMessageInputSchema} from "@/lib/types/chats";
-import {ChatMessageAiCompatible, dbMessageListToAiSdk, DefaultLLM} from "@/lib/ai/llm";
-import {aiSdkToInsertMessageDbList} from "@/lib/ai/ai";
+import {buildListItemResponse} from "@/lib/common/http/rest-response";
+import {chatMessageFromDb} from "@/lib/common/resources/chat-message-resource";
+import {ChatMessageInputSchema} from "@/lib/common/types/chats";
+import {ChatMessageAiCompatible, dbMessageListToAiSdk, DefaultLLM} from "@/lib/server/ai/llm";
+import {aiSdkToInsertMessageDbList} from "@/lib/server/ai/ai";
 
 
 export async function GET(_: Request, {params}: { params: Promise<{ chatId: string }> }): Promise<Response> {

@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
-import {ChatResource} from "@/lib/resources/chat-resource";
 import ChatListItem from "@/components/chat-list-item";
+import {ChatResource} from "@/lib/common/resources/chat-resource";
 
 export default function ChatList({chats}: { chats: ChatResource[] }) {
     let list: ReactNode;
