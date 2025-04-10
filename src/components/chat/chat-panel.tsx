@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useRef, useState} from "react";
-import MessageList from "./message-list";
-import MessageInput from "./message-input";
+import MessageList from "../messages/message-list";
+import MessageInput from "../messages/message-input";
 import {ChatMessageResource} from "@/lib/common/resources/chat-message-resource";
 import {ChatMessageInput} from "@/lib/common/types/chats";
 

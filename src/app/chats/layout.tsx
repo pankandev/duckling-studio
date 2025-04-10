@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import React from "react";
-import ChatList from "@/components/chat-list";
+import ChatList from "@/components/chat/chat-list";
 import {useChats} from "@/lib/client/api/chats";
 
 

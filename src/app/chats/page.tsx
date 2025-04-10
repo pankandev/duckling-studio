@@ -2,7 +2,7 @@
 
 import React, {useState} from 'react';
 import {useRouter} from "next/navigation";
-import ChatPanel from "@/components/chat-panel";
+import ChatPanel from "@/components/chat/chat-panel";
 import { ChatMessageInput } from '@/lib/common/types/chats';
 import {createEmptyChat} from "@/lib/client/api/chats";
 

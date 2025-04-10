@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import MessageListItem from "@/components/message";
+import MessageListItem from "@/components/messages/message";
 import {ChatMessageResource} from "@/lib/common/resources/chat-message-resource";
 
 

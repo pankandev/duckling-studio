@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState} from "react";
-import ChatPanel from "@/components/chat-panel";
+import ChatPanel from "@/components/chat/chat-panel";
 import {ChatMessageInput} from "@/lib/common/types/chats";
 import {ChatMessageResource} from "@/lib/common/resources/chat-message-resource";
 import {readTextStream} from "@/lib/client/api/stream";
