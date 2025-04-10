@@ -20,7 +20,7 @@ export default function ChatsLayout({children}: { children: React.ReactNode }) {
                     <Link className="pb-2" href={('/chats/new')}>
                         New Chat
                     </Link>
-                    <div className="max-h-full overflow-y-auto pr-4">
+                    <div className="max-h-full overflow-y-auto pr-4 py-2">
                         {
                             data && (
                                 data.success ?
@@ -28,6 +28,9 @@ export default function ChatsLayout({children}: { children: React.ReactNode }) {
                                     (<div>{data.error.message}</div>)
                             )
                         }
+                    </div>
+                    <div className="h-24">
+
                     </div>
                 </div>
                 {/* Router Outlet */}
