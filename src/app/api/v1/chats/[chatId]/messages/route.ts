@@ -5,9 +5,9 @@ import {prisma} from "@/lib/server/db/client";
 import {ChatMessage} from "@prisma/client";
 import {buildListItemResponse} from "@/lib/common/http/rest-response";
 import {chatMessageFromDb} from "@/lib/common/resources/chat-message-resource";
-import {ChatMessageInputSchema} from "@/lib/common/types/chats";
 import {ChatMessageAiCompatible, dbMessageListToAiSdk, DefaultLLM} from "@/lib/server/ai/llm";
 import {aiSdkToInsertMessageDbList} from "@/lib/server/ai/ai";
+import {ChatMessageInputSchema} from "@/lib/client/types/chats";
 
 
 export async function GET(_: Request, {params}: { params: Promise<{ chatId: string }> }): Promise<Response> {

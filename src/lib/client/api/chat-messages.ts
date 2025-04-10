@@ -3,6 +3,7 @@ import useSWR, {SWRResponse} from "swr";
 import {buildListItemFetcher} from "@/lib/client/swr/buildGetItemFetcher";
 import {ChatMessageResource, ChatMessageSchema} from "@/lib/common/resources/chat-message-resource";
 
-export function useChatMessages(chatId: number): SWRResponse<Result<ChatMessageResource[]>> {
-    return useSWR(`/api/v1/chats/${chatId}/messages`, buildListItemFetcher(ChatMessageSchema));
+export function useChatMessages(chatId: number | null): SWRResponse<Result<ChatMessageResource[]>> {
+    const url = chatId !== null ? `/api/v1/chats/${chatId}/messages` : null;
+    return useSWR(url, buildListItemFetcher(ChatMessageSchema));
 }

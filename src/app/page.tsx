@@ -4,7 +4,7 @@ export default function Home() {
     return (
         <div>
             <main>
-                <Link href={'/chats'} passHref>
+                <Link href={'/chats/new'} passHref>
                     Chats
                 </Link>
             </main>

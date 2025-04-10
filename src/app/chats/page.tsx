@@ -1,25 +1,7 @@
-'use client';
+import {redirect} from "next/navigation";
 
-import React, {useState} from 'react';
-import {useRouter} from "next/navigation";
-import ChatPanel from "@/components/chat/chat-panel";
-import { ChatMessageInput } from '@/lib/common/types/chats';
-import {createEmptyChat} from "@/lib/client/api/chats";
+const Page = async () => {
+    return redirect('/chats/new');
+};
 
-export default function ChatsPage() {
-    const [loading, setLoading] = useState(false);
-    const router = useRouter();
-
-    async function startChatFromMessage(initialMessage: ChatMessageInput) {
-        setLoading(true);
-        const chatResult = await createEmptyChat(initialMessage.content);
-        setLoading(false);
-        if (chatResult.success) {
-            router.replace(`/chats/${chatResult.value}`);
-        }
-    }
-
-    return (
-        <ChatPanel messages={[]} onSend={startChatFromMessage} disabled={loading}></ChatPanel>
-    );
-}
+export default Page;
