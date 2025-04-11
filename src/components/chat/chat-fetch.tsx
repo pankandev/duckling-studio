@@ -93,7 +93,12 @@ const ChatFetch = ({chatId}: { chatId: number | null }) => {
 
     const isLoading = isSendingMessage || isLoadingMessages;
     return (
-        <Chat messages={messages} onSend={sendMessage} disabled={isLoading}></Chat>
+        <Chat
+            messages={messages}
+            onSend={sendMessage}
+            disabled={isLoading}
+            onMessageUpdate={() => mutateMessages()}
+        ></Chat>
     );
 };
 

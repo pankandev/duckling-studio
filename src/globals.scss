@@ -10,12 +10,15 @@ html, body {
   @apply h-full;
 }
 
-.message-user {
-  @apply bg-gray-800/40 ml-12;
-}
+.chat-message {
 
-.message-assistant {
-  @apply bg-gray-800/60 mr-12;
+  &.message-user {
+    @apply bg-gray-800/40 ml-12;
+  }
+
+  &.message-assistant {
+    @apply bg-gray-800/60 mr-12;
+  }
 }
 
 .btn {

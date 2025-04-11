@@ -6,10 +6,11 @@ import MessageInput from "../messages/message-input";
 import {ChatMessageResource} from "@/lib/common/resources/chat-message-resource";
 import {ChatMessageInput} from "@/lib/client/types/chats";
 
-const Chat = ({onSend, disabled, messages}: {
+const Chat = ({onSend, disabled, messages, onMessageUpdate}: {
     onSend: (input: ChatMessageInput) => unknown,
     disabled: boolean,
-    messages: ChatMessageResource[]
+    messages: ChatMessageResource[],
+    onMessageUpdate?: () => unknown,
 }) => {
     const [showScrollToBottomButton, setShowScrollToBottomButton] = useState<boolean>(false);
     const messagesContainerRef = useRef<HTMLDivElement | null>(null);
@@ -67,7 +68,7 @@ const Chat = ({onSend, disabled, messages}: {
                 onScroll={onMessagesScroll}
             >
                 <div className="flex flex-col items-stretch w-full max-w-3xl grow">
-                    <MessageList messages={messages}></MessageList>
+                    <MessageList messages={messages} onMessageUpdate={onMessageUpdate}></MessageList>
                     {messages.length === 0 && (
                         <p className='text-center w-full opacity-50 mt-12'>
                             No messages
