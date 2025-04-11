@@ -1,4 +1,5 @@
 import {z, ZodError, ZodSchema} from "zod";
+import {FailureResult} from "@/lib/common/result";
 
 export interface HttpErrorBody {
     code: string;
@@ -80,5 +81,12 @@ export class HttpError extends Error {
                 issues: error.issues.map(i => ({code: i.code, message: i.message, path: i.path}))
             }
         )
+    }
+
+    static fromResult(result: FailureResult<number>): HttpError {
+        if (result.error instanceof HttpError) {
+            return result.error;
+        }
+        return HttpError.unknown(500);
     }
 }
