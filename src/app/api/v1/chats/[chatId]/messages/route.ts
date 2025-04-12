@@ -5,9 +5,10 @@ import {prisma} from "@/lib/server/db/client";
 import {ChatMessage} from "@prisma/client";
 import {buildListItemResponse} from "@/lib/common/http/rest-response";
 import {chatMessageFromDb} from "@/lib/common/resources/chat-message-resource";
-import {ChatMessageAiCompatible, dbMessageListToAiSdk, loadModel} from "@/lib/server/ai/llm";
+import {ChatMessageAiCompatible, dbMessageListToAiSdk} from "@/lib/server/ai/llm";
 import {aiSdkToInsertMessageDbList} from "@/lib/server/ai/ai";
 import {ChatMessageInputSchema} from "@/lib/client/types/chats";
+import {loadChatModel} from "@/lib/server/ai/chat-load";
 
 
 export async function GET(_: Request, {params}: { params: Promise<{ chatId: string }> }): Promise<Response> {
@@ -44,40 +45,10 @@ export async function POST(request: Request, {params}: { params: Promise<{ chatI
     if (!messageParse.success) {
         return HttpError.badRequestZod(messageParse.error).asResponse();
     }
-    const chat = await prisma.chat.findFirst({
-        where: {id: chatId},
-        include: {
-            currentConfig: {
-                include: {
-                    provider: {
-                        select: {
-                            handle: true,
-                        }
-                    }
-                }
-            }
-        }
-    });
-    if (chat === null) {
-        return HttpError.notFound(
-            'chat',
-            {id: chatId},
-        ).asResponse();
-    }
 
-    if (!chat.currentConfig) {
-        return HttpError.conflict(
-            'no-llm-configuration-set',
-            'Chat has no LLM configuration set'
-        ).asResponse();
-    }
-
-    const model = await loadModel(chat.currentConfig.provider.handle, chat.currentConfig.model);
-    if (!model) {
-        return HttpError.conflict(
-            'invalid-llm-configuration',
-            `Model "${chat.currentConfig.model}" for provider "${chat.currentConfig.provider.handle}" could not be loaded.`
-        ).asResponse();
+    const chatConfig = await loadChatModel(chatId);
+    if (!chatConfig.success) {
+        return HttpError.fromResult(chatConfig).asResponse();
     }
 
     const newMessage: ChatMessageAiCompatible = {
@@ -99,8 +70,8 @@ export async function POST(request: Request, {params}: { params: Promise<{ chatI
     const now = new Date();
 
     const result = streamText({
-        model: model,
-        system: chat.systemMessage ?? undefined,
+        model: chatConfig.value.model,
+        system: chatConfig.value.systemMessage ?? undefined,
         messages: messagesAi,
         onFinish: async (m) => {
             await prisma.chatMessage.createMany({
