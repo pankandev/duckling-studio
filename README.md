@@ -63,7 +63,11 @@ Next.js and PostgresSQL (I love PostgresSQL so much).
     docker-compose up -d
     ```
    This will start a PostgreSQL instance as defined in the docker-compose.yml file.
-5. Run the development server
+5. Migrate database schema
+    ```bash
+    pnpm run prisma:migrate
+    ```
+7. Run the development server
     ```bash
     pnpm run dev
     ```
