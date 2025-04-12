@@ -8,10 +8,13 @@ generator Client {
 }
 
 model Chat {
-  id          Int           @id @default(autoincrement())
-  displayName String
-  messages    ChatMessage[]
-  createdAt   DateTime      @default(now())
+  id              Int           @id @default(autoincrement())
+  displayName     String
+  messages        ChatMessage[]
+  createdAt       DateTime      @default(now())
+  systemMessage   String?
+  currentConfigId Int?
+  currentConfig   LLMConfig?    @relation(fields: [currentConfigId], references: [id], onDelete: SetNull)
 }
 
 enum ChatMessageRole {
@@ -24,7 +27,25 @@ model ChatMessage {
   role      ChatMessageRole
   content   String
   extraData Json
-  chat      Chat            @relation(fields: [chatId], references: [id])
+  chat      Chat            @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId    Int
   createdAt DateTime        @default(now())
+}
+
+model LLMProvider {
+  id     Int    @id @default(autoincrement())
+  handle String @unique
+  name   String
+
+  configs LLMConfig[]
+}
+
+model LLMConfig {
+  id         Int         @id @default(autoincrement())
+  providerId Int
+  model      String
+  provider   LLMProvider @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  chats      Chat[]
+
+  createdAt DateTime @default(now())
 }

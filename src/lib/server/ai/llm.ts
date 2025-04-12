@@ -1,6 +1,12 @@
-import {CoreMessage, LanguageModel} from "ai";
-import {anthropic} from '@ai-sdk/anthropic';
-import {ChatMessage} from "@prisma/client";
+import {CoreMessage, LanguageModelV1} from "ai";
+
+import {ChatMessage, LLMConfig} from "@prisma/client";
+import {ModelFactory} from "@/lib/server/ai/models/model-factory";
+import {ClaudeAIFactory} from "./models/claude-ai";
+import {LMStudioFactory} from "@/lib/server/ai/models/lm-studio";
+import {OpenAIFactory} from "@/lib/server/ai/models/openai";
+import {OllamaFactory} from "@/lib/server/ai/models/ollama";
+
 
 export type ChatMessageAiCompatible = Pick<ChatMessage, 'role' | 'content'>
 
@@ -24,4 +30,21 @@ export function dbMessageListToAiSdk(messages: ChatMessageAiCompatible[]): CoreM
 }
 
 
-export const DefaultLLM: LanguageModel = anthropic('claude-3-7-sonnet-20250219');
+const ModelFactoryByProviderHandle = {
+    claudeai: new ClaudeAIFactory(),
+    openai: new OpenAIFactory(),
+    ollama: new OllamaFactory(),
+    lmstudio: new LMStudioFactory(),
+}
+
+
+export async function loadModel(providerId: string, modelId?: string): Promise<LanguageModelV1 | null> {
+    const modelFactoryMap: Record<string, ModelFactory | undefined> = ModelFactoryByProviderHandle;
+    const factory = modelFactoryMap[providerId];
+    if (!factory) {
+        return null;
+    }
+    return modelId ?
+        await factory.create(modelId) :
+        factory.getDefault();
+}

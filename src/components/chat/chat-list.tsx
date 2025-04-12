@@ -83,7 +83,9 @@ export default function ChatList({chats}: { chats: ChatResource[] }) {
     let list: ReactNode;
     if (chats.length === 0) {
         list = (
-            <p>No chat found for this page.</p>
+            <div className="flex flex-col items-center">
+                <p className="text-muted">No chats found</p>
+            </div>
         );
     } else {
         list = (

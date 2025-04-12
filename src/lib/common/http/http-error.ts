@@ -89,4 +89,15 @@ export class HttpError extends Error {
         }
         return HttpError.unknown(500);
     }
+
+    static conflict(code: string, message: string) {
+        return new HttpError(
+            409,
+            'conflict',
+            message,
+            {
+                code,
+            }
+        );
+    }
 }
