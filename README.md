@@ -16,6 +16,10 @@ Next.js and PostgresSQL (I love PostgresSQL so much).
 - Streaming messages.
 - Previous chats list.
 
+Here is a screenshot of the chats view:
+
+![Duckling Studio Chats Screenshot](images/duckling-studio-chats.png)
+
 ## Planned Features
 
 - Chat management.
