@@ -7,7 +7,7 @@ import {HttpError} from "@/lib/common/http/http-error";
 export interface ApiGetSettings<TBody> {
     url: string;
     queryParams?: Record<string, string | number>;
-    responseSchema: z.Schema<TBody>;
+    responseSchema: z.Schema<TBody, z.ZodTypeDef, unknown>;
 }
 
 interface ApiWriteSettingsBase<TBody> {
@@ -32,7 +32,7 @@ export type ApiWriteSettings<TBody, TResponse> = ApiWriteSettingsTyped<TBody, TR
  *
  * @returns A {@link Result} object with the parsed response, or a {@link HttpError}
  */
-async function parseJsonResponse<T>(response: Response, schema: z.Schema<T>): Promise<Result<T>> {
+async function parseJsonResponse<T>(response: Response, schema: z.Schema<T, z.ZodTypeDef, unknown>): Promise<Result<T>> {
     // checks if response was successful
     if (!response.ok) {
         return err(await HttpError.fromResponse(response));

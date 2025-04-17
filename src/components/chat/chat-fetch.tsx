@@ -67,8 +67,8 @@ const ChatFetch = ({chatId}: { chatId: number | null }) => {
                 };
                 setStreamingMessages([userMessage, streamingMessage]);
             }
-            setStreamingMessages(null);
         }
+        setStreamingMessages(null);
         await mutateMessages();
         if (chatId === null) {
             router.replace("/chats/" + thisChatId);

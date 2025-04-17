@@ -1,13 +1,14 @@
 import {z} from "zod";
 
-import {generateText} from "ai";
+import {generateText, LanguageModelV1} from "ai";
 import {buildListItemResponse, buildSingleItemResponse} from "@/lib/common/http/rest-response";
-import {DefaultLLM} from "@/lib/server/ai/llm";
 import {HttpError} from "@/lib/common/http/http-error";
 import {prisma} from "@/lib/server/db/client";
+import {loadModel} from "@/lib/server/ai/llm";
+import {ChatResourceSchema} from "@/lib/common/resources/chat-resource";
 
 
-export async function generateChatNameFromMessage(message: string): Promise<string> {
+export async function generateChatNameFromMessage(message: string, model: LanguageModelV1): Promise<string> {
     const systemMessage = "" +
         "You will receive a message from a chat\n\n" +
         "Your role is to create a title about the topic\n" +
@@ -22,7 +23,7 @@ export async function generateChatNameFromMessage(message: string): Promise<stri
         "I am writing a description fro my linkedin, is this ok? -> LinkedIn Description Refinement\n" +
         "Give me ideas for a TTRPG session for Cyberpunk Red. -> Cyberpunk Red Session Ideas\n";
     const response = await generateText({
-        model: DefaultLLM,
+        model: model,
         system: systemMessage,
         prompt: message
     });
@@ -31,6 +32,7 @@ export async function generateChatNameFromMessage(message: string): Promise<stri
 
 const CreateChatSchema = z.object({
     initialMessage: z.string(),
+    configId: z.number().int(),
 });
 
 export async function POST(request: Request): Promise<Response> {
@@ -39,9 +41,36 @@ export async function POST(request: Request): Promise<Response> {
         return HttpError.badRequestZod(bodyParseResult.error).asResponse();
     }
 
+    const chatConfig = await prisma.lLMConfig.findFirst({
+        where: {
+            id: bodyParseResult.data.configId
+        },
+        select: {
+            model: true,
+            provider: true,
+        }
+    });
+
+    if (!chatConfig) {
+        return HttpError.notFound(
+            'llm-config',
+            {
+                id: bodyParseResult.data.configId
+            }).asResponse();
+    }
+
+    const model = await loadModel(chatConfig.provider.handle, chatConfig.model);
+    if (!model) {
+        return HttpError.notFound(
+            'llm-model',
+            {
+                provider: chatConfig.provider.handle,
+                model: chatConfig.model
+            }).asResponse();
+    }
     const chat = await prisma.chat.create({
         data: {
-            displayName: await generateChatNameFromMessage(bodyParseResult.data.initialMessage),
+            displayName: await generateChatNameFromMessage(bodyParseResult.data.initialMessage, model),
         }
     });
 
@@ -49,7 +78,7 @@ export async function POST(request: Request): Promise<Response> {
 }
 
 export async function GET(): Promise<Response> {
-    const messages = await prisma.chat.findMany({
+    const chats = await prisma.chat.findMany({
         orderBy: [
             {
                 createdAt: 'desc'
@@ -57,5 +86,5 @@ export async function GET(): Promise<Response> {
         ],
     });
 
-    return buildListItemResponse(messages);
+    return buildListItemResponse(chats.map(c => ChatResourceSchema.parse(c)));
 }

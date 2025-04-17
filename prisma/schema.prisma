@@ -48,4 +48,5 @@ model LLMConfig {
   chats      Chat[]
 
   createdAt DateTime @default(now())
+  lastUsed DateTime @default(now())
 }

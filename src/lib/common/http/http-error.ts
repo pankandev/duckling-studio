@@ -76,7 +76,7 @@ export class HttpError extends Error {
         return new HttpError(
             400,
             'bad-request-body',
-            `${error.message}`,
+            `${error.issues[0]?.code}`,
             {
                 issues: error.issues.map(i => ({code: i.code, message: i.message, path: i.path}))
             }
