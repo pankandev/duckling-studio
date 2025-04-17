@@ -4,8 +4,8 @@ import {buildListItemFetcher} from "@/lib/client/swr/buildGetItemFetcher";
 import {
     LLMConfigResource,
     LLMConfigSchema,
-    LLMProviderResource,
-    LLMProviderSchema
+    LLMProviderWithModelsResource,
+    LLMProviderWithModelsSchema
 } from "@/lib/common/resources/llm-config";
 
 
@@ -15,8 +15,8 @@ export function useLLMConfigs(): SWRResponse<Result<LLMConfigResource[]>> {
     });
 }
 
-export function useLLMProviders(): SWRResponse<Result<LLMProviderResource[]>> {
-    return useSWR('/api/v1/llm-providers', buildListItemFetcher(LLMProviderSchema), {
+export function useLLMProviders(): SWRResponse<Result<LLMProviderWithModelsResource[]>> {
+    return useSWR('/api/v1/llm-providers', buildListItemFetcher(LLMProviderWithModelsSchema), {
         revalidateOnFocus: false,
     });
 }

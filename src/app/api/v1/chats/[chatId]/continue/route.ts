@@ -4,7 +4,7 @@ import {prisma} from "@/lib/server/db/client";
 import {ChatMessageAiCompatible, dbMessageListToAiSdk} from "@/lib/server/ai/llm";
 import {streamText} from "ai";
 import {aiSdkToInsertMessageDbList} from "@/lib/server/ai/ai";
-import {loadChatModel} from "@/lib/server/ai/chat-load";
+import {loadChatConfiguration} from "@/lib/server/ai/chat-load";
 
 
 export async function POST(_: Request, {params}: { params: Promise<{ chatId: string }> }): Promise<Response> {
@@ -14,7 +14,7 @@ export async function POST(_: Request, {params}: { params: Promise<{ chatId: str
     }
     const chatId = chatIdParse.data;
 
-    const chatConfig = await loadChatModel(chatId);
+    const chatConfig = await loadChatConfiguration(chatId);
     if (!chatConfig.success) {
         return HttpError.fromResult(chatConfig).asResponse();
     }

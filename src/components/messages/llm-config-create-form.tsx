@@ -1,21 +1,23 @@
 'use client';
 
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {LLMConfigCreate, LLMConfigResource, LLMConfigSchema} from "@/lib/common/resources/llm-config";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {useLLMConfigs, useLLMProviders} from "@/lib/client/api/llm-configs";
 import {z} from "zod";
-import {Input} from "@/components/ui/input";
-import { Label } from '@/components/ui/label';
+import {Label} from '@/components/ui/label';
 import FormGroup from "@/components/form/form-group";
-import { Button } from '@/components/ui/button';
+import {Button} from '@/components/ui/button';
 import {apiPost} from "@/lib/client/api/client";
 import {buildRestResponseSingleItemSchema} from "@/lib/common/http/rest-schema";
+import LLMProviderModelsSelect from "@/components/messages/llm-provider-models-select";
 
 const LLMConfigCreateForm = ({onCreate}: { onCreate: (config: LLMConfigResource) => unknown }) => {
     const configProvidersResult = useLLMProviders();
     const {mutate: mutateConfigs} = useLLMConfigs();
     const configProviders = configProvidersResult.data?.success ? configProvidersResult.data.value : [];
+
+    const [selectedProviderHandle, setSelectedProviderHandle] = useState<string | null>(null);
 
     const submit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -50,7 +52,7 @@ const LLMConfigCreateForm = ({onCreate}: { onCreate: (config: LLMConfigResource)
         <form onSubmit={submit} className="flex flex-col gap-5 items-stretch">
             <FormGroup>
                 <Label htmlFor="provider">Provider</Label>
-                <Select name="provider">
+                <Select name="provider" value={selectedProviderHandle ?? undefined} onValueChange={providerHandle => setSelectedProviderHandle(providerHandle)}>
                     <SelectTrigger className="w-full">
                         <SelectValue placeholder="Select a provider..."/>
                     </SelectTrigger>
@@ -65,7 +67,7 @@ const LLMConfigCreateForm = ({onCreate}: { onCreate: (config: LLMConfigResource)
             </FormGroup>
             <FormGroup>
                 <Label htmlFor="model">Model Name</Label>
-                <Input id="model" name="model" type="text" placeholder="Model Name"/>
+                <LLMProviderModelsSelect name="model" providerHandle={selectedProviderHandle}></LLMProviderModelsSelect>
             </FormGroup>
             <Button className="mt-5" type="submit">
                 Create

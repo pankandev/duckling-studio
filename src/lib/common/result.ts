@@ -17,6 +17,7 @@ export class SuccessResult<T> implements ResultBase<T> {
 
 export class FailureResult<T> implements ResultBase<T> {
     success = false as const;
+    value = undefined;
 
     constructor(
         public readonly error: Error,

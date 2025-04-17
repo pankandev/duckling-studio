@@ -12,7 +12,10 @@ export function useChats(): SWRResponse<Result<ChatResource[]>> {
     return useSWR('/api/v1/chats', buildListItemFetcher(ChatResourceSchema));
 }
 
-export async function createEmptyChat(initialMessage: string): Promise<Result<number>> {
+export async function createEmptyChat(
+    initialMessage: string,
+    configId: number,
+): Promise<Result<number>> {
     const response = await apiPost({
         responseSchema: z.object({
             item: z.object({
@@ -22,6 +25,7 @@ export async function createEmptyChat(initialMessage: string): Promise<Result<nu
         url: '/api/v1/chats',
         body: {
             initialMessage,
+            configId,
         }
     });
     return response.map(r => r.item.id);

@@ -5,15 +5,19 @@ const TextArea = (
         id,
         value,
         onChange,
-        onCancel,
+        onSubmitRequest,
+        onEscape,
         disabled,
+        onBlur,
         className,
     }: {
-        id: string,
-        className: string,
+        id?: string,
+        className?: string,
         value?: string,
         onChange?: (v: string) => unknown,
-        onCancel?: () => void,
+        onSubmitRequest?: (value: string) => unknown,
+        onEscape?: () => void,
+        onBlur?: (v: string) => void,
         disabled?: boolean,
     },
 ) => {
@@ -33,6 +37,12 @@ const TextArea = (
     }, [innerText])
 
     useEffect(() => {
+        if (value !== undefined) {
+            setInnerText(value);
+        }
+    }, [value]);
+
+    useEffect(() => {
         const textArea = textareaRef.current;
         if (textArea !== null) {
             textArea.focus();
@@ -40,24 +50,27 @@ const TextArea = (
     }, []);
 
     const handleChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
+        onChange?.(e.target.value);
         setInnerText(e.target.value);
-    }, []);
+    }, [onChange]);
 
     const handleKeyDown = useCallback((e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.shiftKey && e.key === 'Enter') {
             e.preventDefault();
-            onChange?.(e.currentTarget.value);
+            onSubmitRequest?.(e.currentTarget.value);
         }
         if (e.key === 'Escape') {
             e.preventDefault();
-            onCancel?.();
+            onEscape?.();
         }
-    }, [onCancel, onChange]);
+    }, [onEscape, onSubmitRequest]);
 
-    const onBlur = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-        e.preventDefault();
-        onChange?.(e.currentTarget.value);
-    }, [onChange]);
+    const onBlurInner = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
+        if (onBlur !== undefined) {
+            e.preventDefault();
+            onBlur(innerText);
+        }
+    }, [onBlur, innerText]);
 
     return (
         <textarea
@@ -66,7 +79,7 @@ const TextArea = (
             ref={textareaRef}
             value={innerText}
             onChange={handleChange}
-            onBlur={onBlur}
+            onBlur={onBlurInner}
             className={'resize-none overflow-hidden border p-2 rounded ' +className}
             onKeyDown={handleKeyDown}
             disabled={disabled}

@@ -1,6 +1,8 @@
-import {ModelFactory} from "@/lib/server/ai/models/model-factory";
+import {LLMModelArray, ModelFactory} from "@/lib/server/ai/models/model-factory";
 import {LanguageModelV1} from "ai";
 import type {OpenAICompatibleProvider} from "@ai-sdk/openai-compatible";
+import {HashedArray} from "@/lib/common/data-structures/hashed-array";
+import {HttpError} from "@/lib/common/http/http-error";
 
 export class LMStudioFactory implements ModelFactory {
     constructor(
@@ -23,6 +25,28 @@ export class LMStudioFactory implements ModelFactory {
 
     async getDefault(): Promise<LanguageModelV1> {
         const provider = await LMStudioFactory.load(this.baseURL);
-        return provider('claude-3-7-sonnet-20250219');
+        return provider('llama3.2');
+    }
+
+    #modelsCache: LLMModelArray | null = null;
+
+    async listModels(): Promise<LLMModelArray> {
+        if (this.#modelsCache !== null) {
+            return this.#modelsCache;
+        }
+        const response = await fetch(this.baseURL + '/models');
+        const models: LLMModelArray = new HashedArray(m => m.id);
+        if (!response.ok) {
+            throw HttpError.unknown(500);
+        }
+        const {data}: { data: { id: string }[] } = await response.json();
+        for await (const model of data) {
+            models.push({
+                id: model.id,
+                name: model.id
+            });
+        }
+        this.#modelsCache = models;
+        return models;
     }
 }

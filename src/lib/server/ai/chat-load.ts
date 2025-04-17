@@ -1,12 +1,43 @@
 import {err, ok, Result} from "@/lib/common/result";
-import {LanguageModelV1} from "ai";
 import {prisma} from "@/lib/server/db/client";
 import {HttpError} from "@/lib/common/http/http-error";
+import {LanguageModelV1} from "ai";
 import {loadModel} from "@/lib/server/ai/llm";
 
 export interface ChatConfiguration {
-    model: LanguageModelV1;
     systemMessage: string | null;
+}
+
+export async function loadChatConfigModel(configId: number): Promise<Result<LanguageModelV1>> {
+    const config = await prisma.lLMConfig.findFirst({
+        where: {id: configId},
+        include: {
+            provider: true,
+        }
+    });
+    if (!config) {
+        return err(
+            HttpError.notFound(
+                'llm-config',
+                {
+                    id: configId,
+                }
+            )
+        );
+    }
+
+    const model = await loadModel(config.provider.handle, config.model);
+    if (!model) {
+        return err(
+            HttpError.notFound(
+                'llm-model',
+                {
+                    provider: config.provider.handle,
+                    model: config.model
+                })
+        );
+    }
+    return ok(model)
 }
 
 
@@ -18,19 +49,11 @@ export interface ChatConfiguration {
  *
  * @returns A {@link Result} object with the {@link ChatConfiguration}
  */
-export async function loadChatModel(chatId: number): Promise<Result<ChatConfiguration>> {
+export async function loadChatConfiguration(chatId: number): Promise<Result<ChatConfiguration>> {
     const chat = await prisma.chat.findFirst({
         where: {id: chatId},
-        include: {
-            currentConfig: {
-                include: {
-                    provider: {
-                        select: {
-                            handle: true,
-                        }
-                    }
-                }
-            }
+        select: {
+            systemMessage: true,
         }
     });
     if (chat === null) {
@@ -42,27 +65,7 @@ export async function loadChatModel(chatId: number): Promise<Result<ChatConfigur
         );
     }
 
-    if (!chat.currentConfig) {
-        return err(
-            HttpError.conflict(
-                'no-llm-configuration-set',
-                'Chat has no LLM configuration set'
-            ),
-        );
-    }
-
-    const model = await loadModel(chat.currentConfig.provider.handle, chat.currentConfig.model);
-    if (!model) {
-        return err(
-            HttpError.conflict(
-                'invalid-llm-configuration',
-                `Model "${chat.currentConfig.model}" for provider "${chat.currentConfig.provider.handle}" could not be loaded.`
-            ),
-        );
-    }
-
     return ok({
-        model,
         systemMessage: chat.systemMessage,
     });
 }

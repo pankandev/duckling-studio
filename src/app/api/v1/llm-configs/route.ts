@@ -2,6 +2,7 @@ import {prisma} from "@/lib/server/db/client";
 import {buildListItemResponse, buildSingleItemResponse} from "@/lib/common/http/rest-response";
 import {LLMConfigCreate, LLMConfigSchema} from "@/lib/common/resources/llm-config";
 import {HttpError} from "@/lib/common/http/http-error";
+import {doesModelExist} from "@/lib/server/ai/llm";
 
 
 export async function GET(): Promise<Response> {
@@ -19,6 +20,7 @@ export async function GET(): Promise<Response> {
     );
 }
 
+
 export async function POST(request: Request): Promise<Response> {
     const bodyRaw = await request.json();
     const bodyParseResult = LLMConfigCreate.safeParse(bodyRaw);
@@ -33,11 +35,19 @@ export async function POST(request: Request): Promise<Response> {
             },
             select: {
                 id: true,
+                handle: true,
             }
         });
 
         if (!provider) {
             return HttpError.notFound('llm-provider', {handle: bodyParseResult.data.providerHandle}).asResponse();
+        }
+
+        if (!await doesModelExist(provider.handle, bodyParseResult.data.model)) {
+            return HttpError.notFound('llm', {
+                provider: bodyParseResult.data.providerHandle,
+                model: bodyParseResult.data.model
+            }).asResponse();
         }
 
         const config = await t.lLMConfig.create({
@@ -50,7 +60,6 @@ export async function POST(request: Request): Promise<Response> {
             }
         });
 
-        console.log(config);
         return buildSingleItemResponse(LLMConfigSchema.parse(config));
     })
 }

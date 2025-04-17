@@ -1,14 +1,14 @@
 import {useChatLLMConfig} from "@/lib/client/providers/chat-llm-config";
 import {useLLMConfigs} from "@/lib/client/api/llm-configs";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
-import {Button} from "../ui/button";
+import {Select, SelectContent, SelectItem, SelectTrigger} from "@/components/ui/select";
 import {Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
 import {Plus} from "lucide-react";
 import LLMConfigCreateForm from "@/components/messages/llm-config-create-form";
 import {useCallback, useState} from "react";
 import {LLMConfigResource} from "@/lib/common/resources/llm-config";
+import LLMConfigSelectItem from "@/components/messages/llm-config-select-item";
 
-const LLMConfigSelectIcon = () => {
+const LLMConfigSelect = () => {
     const configListResult = useLLMConfigs();
     const configList = configListResult.data?.success ? configListResult.data.value : [];
     const store = useChatLLMConfig();
@@ -24,35 +24,24 @@ const LLMConfigSelectIcon = () => {
         <Dialog open={openCreateForm} onOpenChange={setOpenCreateForm}>
             <Select onValueChange={(id) => store.setCurrentLLMConfigId(parseInt(id))}>
                 <SelectTrigger
-                    className="flex flex-row w-[5rem] min-h-full p-0 bg-gray-600 border-none rounded-none rounded-l-2xl items-center justify-center"
+                    className="flex flex-row bg-gray-600 items-center justify-center max-w-full w-[20rem]"
                 >
-                    <div
-                        className="grow flex flex-col items-center max-w-[3rem] overflow-hidden">
-                        {
-                            store.llmConfig ? (
-                                <>
-                                    <div>
-                                        {store.llmConfig.provider.handle}
-                                    </div>
-                                    <div className="text-ellipsis whitespace-nowrap text-nowrap text-muted text-xs">
-                                        {store.llmConfig.model}
-                                    </div>
-                                </>) : <>None</>
-                        }
-                    </div>
+                    {
+                        store.llmConfig &&
+                            <LLMConfigSelectItem config={store.llmConfig}>
+                            </LLMConfigSelectItem>
+                    }
                 </SelectTrigger>
                 <SelectContent>
                     {
                         configList.map(item => (
-                            <SelectItem key={item.id} value={item.id.toString(10)}>
-                                <div className="flex flex-row items-center">
-                                    {item.provider.handle}: {item.model}
-                                </div>
+                            <SelectItem className="flex flex-col items-stretch" key={item.id} value={item.id.toString(10)}>
+                                <LLMConfigSelectItem config={item}></LLMConfigSelectItem>
                             </SelectItem>
                         ))
                     }
-                    <DialogTrigger>
-                        <div className="flex flex-row items-center px-2 py-1">
+                    <DialogTrigger className="w-full">
+                        <div className="rounded-s h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5 mt-2 hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 flex flex-row items-center px-2 py-1 text-sm">
                             <Plus className="h-4 w-4 mr-2"/>
                             Create new config...
                         </div>
@@ -74,4 +63,4 @@ const LLMConfigSelectIcon = () => {
     );
 };
 
-export default LLMConfigSelectIcon;
+export default LLMConfigSelect;

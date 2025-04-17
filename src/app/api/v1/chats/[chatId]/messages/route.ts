@@ -8,7 +8,7 @@ import {chatMessageFromDb} from "@/lib/common/resources/chat-message-resource";
 import {ChatMessageAiCompatible, dbMessageListToAiSdk} from "@/lib/server/ai/llm";
 import {aiSdkToInsertMessageDbList} from "@/lib/server/ai/ai";
 import {ChatMessageInputSchema} from "@/lib/client/types/chats";
-import {loadChatModel} from "@/lib/server/ai/chat-load";
+import {loadChatConfigModel, loadChatConfiguration} from "@/lib/server/ai/chat-load";
 
 
 export async function GET(_: Request, {params}: { params: Promise<{ chatId: string }> }): Promise<Response> {
@@ -46,7 +46,7 @@ export async function POST(request: Request, {params}: { params: Promise<{ chatI
         return HttpError.badRequestZod(messageParse.error).asResponse();
     }
 
-    const chatConfig = await loadChatModel(chatId);
+    const chatConfig = await loadChatConfiguration(chatId);
     if (!chatConfig.success) {
         return HttpError.fromResult(chatConfig).asResponse();
     }
@@ -69,8 +69,13 @@ export async function POST(request: Request, {params}: { params: Promise<{ chatI
     const messagesAi = dbMessageListToAiSdk(messages);
     const now = new Date();
 
+    const modelResult = await loadChatConfigModel(messageParse.data.configId)
+    if (!modelResult.success) {
+        return HttpError.fromResult(modelResult).asResponse();
+    }
+
     const result = streamText({
-        model: chatConfig.value.model,
+        model: modelResult.value,
         system: chatConfig.value.systemMessage ?? undefined,
         messages: messagesAi,
         onFinish: async (m) => {

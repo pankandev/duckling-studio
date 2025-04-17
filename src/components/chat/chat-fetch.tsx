@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {createEmptyChat} from "@/lib/client/api/chats";
 import {ChatMessageInput} from "@/lib/client/types/chats";
 import {useRouter} from "next/navigation";
@@ -42,7 +42,7 @@ const ChatFetch = ({chatId}: { chatId: number | null }) => {
         let thisChatId: number;
         if (chatId === null) {
             // create chat if not defined
-            const thisChatIdResult = await createEmptyChat(message.content);
+            const thisChatIdResult = await createEmptyChat(message.content, message.configId);
             if (!thisChatIdResult.success) {
                 setStreamingMessages(null);
                 setIsSendingMessage(false);

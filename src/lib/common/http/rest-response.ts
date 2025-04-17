@@ -1,23 +1,33 @@
 /**
  * Creates a response for the REST API to return a single resource.
- * @param schema The item to return.
+ * @param item The item to return.
  *
  * @returns The created response
  */
-export function buildSingleItemResponse<T>(schema: T): Response {
+export function buildSingleItemResponse<T>(item: T): Response {
     return Response.json({
-        item: schema,
+        item: item,
     });
 }
 
 /**
  * Creates a response for the REST API to return multiple resources.
- * @param schema The items to return.
+ * @param items The items to return.
  *
  * @returns The created response
  */
-export function buildListItemResponse<T>(schema: T): Response {
+export function buildListItemResponse<T>(items: T[]): Response {
     return Response.json({
-        items: schema,
+        items: items,
     })
+}
+
+/**
+ * Creates a simple OK response from the REST API.
+ * @returns The created response
+ */
+export function buildOkResponse(): Response {
+    return Response.json({
+        ok: true,
+    });
 }

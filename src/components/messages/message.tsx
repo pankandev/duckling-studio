@@ -88,8 +88,9 @@ export default function MessageListItem(
                 isEditing ? (
                     <TextArea
                         value={message.content}
-                        onChange={editMessageCallback}
-                        onCancel={() => setEditing(false)}
+                        onSubmitRequest={editMessageCallback}
+                        onBlur={editMessageCallback}
+                        onEscape={() => setEditing(false)}
                         disabled={isUpdating}
                     />
                 ) : (<div className="message-content-markdown"
