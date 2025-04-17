@@ -63,7 +63,7 @@ export default function MessageListItem(
     }, [onUpdate, message]);
 
     const markdownIt = new MarkdownIt();
-    const classNames = 'chat-message flex flex-col items-stretch gap-2 text-sm bg-gray-800/60 rounded-xl py-3 px-3 message-' + message.role.toLowerCase();
+    const classNames = 'chat-message message-' + message.role.toLowerCase();
 
     if (isDeleting) {
         return (<></>);

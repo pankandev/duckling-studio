@@ -16,6 +16,16 @@ export interface LLMConfigResource {
     provider: LLMProviderResource;
 }
 
+export interface LLMConfigCreate {
+    model: string;
+    providerHandle: string;
+}
+
+export const LLMConfigCreate = z.object({
+    model: z.string(),
+    providerHandle: z.string(),
+});
+
 export const LLMProviderSchema: z.ZodSchema<LLMProviderResource, z.ZodTypeDef, unknown> = z.object({
     handle: z.string(),
     name: z.string(),

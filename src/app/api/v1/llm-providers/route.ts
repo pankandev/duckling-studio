@@ -1,16 +1,16 @@
 import {prisma} from "@/lib/server/db/client";
 import {buildListItemResponse} from "@/lib/common/http/rest-response";
-import {LLMConfigSchema} from "@/lib/common/resources/llm-config";
+import {LLMProviderSchema} from "@/lib/common/resources/llm-config";
 
 
 export async function GET(): Promise<Response> {
-    const configs = await prisma.lLMConfig.findMany({
+    const providers = await prisma.lLMProvider.findMany({
         orderBy: {
-            lastUsed: 'desc',
+            handle: 'desc',
         }
     });
 
     return buildListItemResponse(
-        configs.map(m => LLMConfigSchema.parse(m)),
+        providers.map(m => LLMProviderSchema.parse(m)),
     );
 }

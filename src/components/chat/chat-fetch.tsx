@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {createEmptyChat} from "@/lib/client/api/chats";
 import {ChatMessageInput} from "@/lib/client/types/chats";
 import {useRouter} from "next/navigation";
@@ -76,7 +76,6 @@ const ChatFetch = ({chatId}: { chatId: number | null }) => {
             setIsSendingMessage(false);
         }
     }, [chatId, mutateMessages, router]);
-
 
     if (messagesResult && !messagesResult.success) {
         return (

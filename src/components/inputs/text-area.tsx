@@ -2,19 +2,23 @@ import React, {ChangeEvent, KeyboardEvent, useCallback, useEffect, useRef, useSt
 
 const TextArea = (
     {
+        id,
         value,
         onChange,
         onCancel,
         disabled,
+        className,
     }: {
-        value: string,
-        onChange: (v: string) => unknown,
-        onCancel: () => void,
-        disabled: boolean,
+        id: string,
+        className: string,
+        value?: string,
+        onChange?: (v: string) => unknown,
+        onCancel?: () => void,
+        disabled?: boolean,
     },
 ) => {
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-    const [innerText, setInnerText] = useState(value);
+    const [innerText, setInnerText] = useState(value ?? '');
 
     function adjustTextAreaSize(textArea: HTMLTextAreaElement) {
         textArea.style.height = 'auto'; // reset height
@@ -42,26 +46,28 @@ const TextArea = (
     const handleKeyDown = useCallback((e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.shiftKey && e.key === 'Enter') {
             e.preventDefault();
-            onChange(e.currentTarget.value);
+            onChange?.(e.currentTarget.value);
         }
         if (e.key === 'Escape') {
             e.preventDefault();
-            onCancel();
+            onCancel?.();
         }
     }, [onCancel, onChange]);
 
     const onBlur = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
         e.preventDefault();
-        onChange(e.currentTarget.value);
+        onChange?.(e.currentTarget.value);
     }, [onChange]);
 
     return (
         <textarea
+            id={id}
+            name={id}
             ref={textareaRef}
             value={innerText}
             onChange={handleChange}
             onBlur={onBlur}
-            className="resize-none overflow-hidden border border-gray-600 p-2 rounded"
+            className={'resize-none overflow-hidden border p-2 rounded ' +className}
             onKeyDown={handleKeyDown}
             disabled={disabled}
         >
