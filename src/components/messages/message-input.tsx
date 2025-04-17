@@ -6,6 +6,7 @@ import LLMConfigSelect from "@/components/messages/llm-config-select";
 import {useChatLLMConfig} from "@/lib/client/providers/chat-llm-config";
 import {Button} from "@/components/ui/button";
 import TextArea from "@/components/inputs/text-area";
+import {Send} from "lucide-react";
 
 
 export default function MessageInput({onSend, disabled}: {
@@ -38,22 +39,25 @@ export default function MessageInput({onSend, disabled}: {
 
     return (
         <div className="flex flex-col items-stretch gap-2">
-            <Form ref={form} className="flex flex-row items-stretch" action={submit}>
-                <TextArea
-                    id="content"
-                    value={chatContent}
-                    className="bg-transparent border-b border-b-border border-t border-t-border rounded-l-2xl px-4 py-2 resize-y grow min-h-6"
-                    onSubmitRequest={requestSubmit}
-                />
-                <Button
-                    className="rounded-l-none rounded-r-2xl h-full"
-                    disabled={disabled}
-                    type="submit"
-                >
-                    Send
-                </Button>
+            <Form ref={form} className="flex flex-row items-stretch w-full" action={submit}>
+                <div className="flex flex-row items-stretch grow">
+                    <TextArea
+                        id="content"
+                        value={chatContent}
+                        className="bg-transparent border-b border-r-transparent border-b-border border-t border-t-border rounded-l-2xl px-4 py-2 grow"
+                        onSubmitRequest={requestSubmit}
+                        onChange={v => setChatContent(v)}
+                    />
+                    <Button
+                        className="rounded-l-none rounded-r-2xl h-full"
+                        disabled={disabled || chatContent.length === 0}
+                        type="submit"
+                    >
+                        <Send></Send>
+                    </Button>
+                </div>
             </Form>
             <LLMConfigSelect></LLMConfigSelect>
         </div>
-    );
+);
 }

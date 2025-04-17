@@ -26,7 +26,7 @@ const TextArea = (
 
     function adjustTextAreaSize(textArea: HTMLTextAreaElement) {
         textArea.style.height = 'auto'; // reset height
-        textArea.style.height = `${textArea.scrollHeight + 4}px`; // set to scroll height
+        textArea.style.height = `${textArea.scrollHeight}px`; // set to scroll height
     }
 
     useEffect(() => {
@@ -80,7 +80,7 @@ const TextArea = (
             value={innerText}
             onChange={handleChange}
             onBlur={onBlurInner}
-            className={'resize-none overflow-hidden border p-2 rounded ' +className}
+            className={'flex flex-row items-center resize-none overflow-hidden border p-2 rounded ' +className}
             onKeyDown={handleKeyDown}
             disabled={disabled}
         >
