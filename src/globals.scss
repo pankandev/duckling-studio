@@ -197,7 +197,7 @@ html, body {
   }
 
   pre {
-    @apply bg-gray-950 rounded-xl px-3 py-3 overflow-x-auto border border-gray-600;
+    @apply bg-card-foreground/5 rounded-xl px-3 py-3 overflow-x-auto border border-accent-foreground/5;
   }
 
   > *:not(:last-child) {
