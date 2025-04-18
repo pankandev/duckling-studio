@@ -60,6 +60,7 @@ export function useChatLLMConfig(): ChatConfigStore {
         config = configResult.data.value.find(
             configItem => configItem.id === store.currentLLMConfigId
         ) ?? null;
+        config ??= configResult.data.value[0] ?? null;
     }
 
     return {

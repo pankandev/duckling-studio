@@ -7,6 +7,7 @@ import LLMConfigCreateForm from "@/components/messages/llm-config-create-form";
 import {useCallback, useState} from "react";
 import {LLMConfigResource} from "@/lib/common/resources/llm-config";
 import LLMConfigSelectItem from "@/components/messages/llm-config-select-item";
+import {SelectValue} from "@radix-ui/react-select";
 
 const LLMConfigSelect = () => {
     const configListResult = useLLMConfigs();
@@ -24,12 +25,10 @@ const LLMConfigSelect = () => {
         <Dialog open={openCreateForm} onOpenChange={setOpenCreateForm}>
             <Select onValueChange={(id) => store.setCurrentLLMConfigId(parseInt(id))}>
                 <SelectTrigger
-                    className="flex flex-row bg-gray-600 items-center justify-center max-w-full w-[20rem]"
+                    className="flex flex-row bg-gray-600 items-center justify-between max-w-full w-[20rem]"
                 >
                     {
-                        store.llmConfig &&
-                            <LLMConfigSelectItem config={store.llmConfig}>
-                            </LLMConfigSelectItem>
+                        store.llmConfig ? <LLMConfigSelectItem config={store.llmConfig}/> : <SelectValue placeholder="Select a config..."/>
                     }
                 </SelectTrigger>
                 <SelectContent>
