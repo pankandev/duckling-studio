@@ -6,10 +6,13 @@ import ChatList from "@/components/chat/chat-list";
 import {useChats} from "@/lib/client/api/chats";
 import {Home, Pencil} from "lucide-react";
 import {Button} from "@/components/ui/button";
+import clsx from "clsx";
+import {usePathname} from "next/navigation";
 
 
 export default function ChatsLayout({children}: { children: React.ReactNode }) {
     const {data} = useChats();
+    const pathname = usePathname();
 
     return (
         <>
@@ -24,7 +27,12 @@ export default function ChatsLayout({children}: { children: React.ReactNode }) {
                         <Home size={16}></Home>
                         </Link>
                     </Button>
-                    <Button asChild variant="ghost" className="text-sm flex flex-row justify-between items-center">
+                    <Button asChild variant="ghost" className={clsx(
+                        'text-sm flex flex-row justify-between items-center',
+                        {
+                            'bg-accent/95': pathname === '/chats/new',
+                        }
+                    )}>
                         <Link href={('/chats/new')}>
                             New Chat
                             <Pencil size={16}></Pencil>
