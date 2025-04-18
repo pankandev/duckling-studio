@@ -5,6 +5,8 @@ import MessageList from "../messages/message-list";
 import MessageInput from "../messages/message-input";
 import {ChatMessageResource} from "@/lib/common/resources/chat-message-resource";
 import {ChatMessageInput} from "@/lib/client/types/chats";
+import { Button } from "../ui/button";
+import {ChevronDown} from "lucide-react";
 
 const Chat = ({onSend, disabled, messages, onMessageUpdate}: {
     onSend: (input: ChatMessageInput) => unknown,
@@ -81,12 +83,13 @@ const Chat = ({onSend, disabled, messages, onMessageUpdate}: {
                 {
                     showScrollToBottomButton &&
                     <div className="floating-buttons absolute top-0 -translate-y-full">
-                        <button
+                        <Button
                             onClick={scrollToBottom}
-                            className="btn bg-gray-600 hover:bg-gray-700 active:bg-gray-800 px-3 py-1 rounded mb-2"
+                            variant="outline"
+                            className="mb-2"
                         >
-                            Go Bottom
-                        </button>
+                            <ChevronDown></ChevronDown>
+                        </Button>
                     </div>
                 }
                 <div className="flex flex-col items-stretch max-w-3xl w-full">
