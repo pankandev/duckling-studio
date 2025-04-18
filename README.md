@@ -14,7 +14,13 @@ Next.js and PostgresSQL (I love PostgresSQL so much).
 
 - Conversational AI interface with Claude.
 - Streaming messages.
-- Previous chats list.
+- Basic chat management.
+- Message edition
+- Switch between multiple LLMs. Current providers include:
+  - Ollama
+  - LM Studio
+  - Claude AI
+  - OpenAI
 
 Here is a screenshot of the chats view:
 
@@ -22,9 +28,6 @@ Here is a screenshot of the chats view:
 
 ## Planned Features
 
-- Chat management.
-- Message edition (even the assistant ones!)
-- Custom AI model configuration (Ollama, LM Studio, OpenAI, etc.).
 - Conversation agent management (different "personalities").
 - File attachments.
 - Some tools (search, reasoning, uhm.... weather?).
@@ -34,6 +37,7 @@ Here is a screenshot of the chats view:
 
 - Next.js - React framework
 - PostgreSQL - Database
+- Prisma ORM - Database migration and schema definition
 - Docker - Containerization
 
 ## Prerequisites
@@ -41,7 +45,11 @@ Here is a screenshot of the chats view:
 - Node.js
 - pnpm package manager
 - Docker and Docker Compose
-- Anthropic API key for Claude AI integration
+- Either:
+  - Ollama installed and running on your machine.
+  - LM Studio installed and running on your machine
+  - Anthropic API key
+  - OpenAI API key
 
 ## Getting Started
 
@@ -56,20 +64,25 @@ Here is a screenshot of the chats view:
     ```
 3. Set up environment variables
 
-   Create a .env file in the root directory with the following content:
+   Create a .env file in the root directory with the used API keys:
    ```dotenv
-   ANTHROPIC_API_KEY=your_api_key_here
+   ANTHROPIC_API_KEY=your_anthropic_api_key_here
+   OPENAI_API_KEY=your_openai_api_key_here
    ```
-   Replace `your_api_key_here` with your actual Anthropic API key.
+   Replace `your_openai_api_key_here` or `your_anthropic_api_key_here` with your actual Anthropic or OpenAI API key.
 4. Set up the database
-   The application requires a PostgreSQL database. A Docker Compose configuration is provided for easy setup:
+   The application requires a PostgresSQL database. A Docker Compose configuration is provided for easy setup:
     ```bash
     docker-compose up -d
     ```
-   This will start a PostgreSQL instance as defined in the docker-compose.yml file.
+   This will start a PostgresSQL instance as defined in the docker-compose.yml file.
 5. Migrate database schema
     ```bash
     pnpm run prisma:migrate
+    ```
+6. Insert initial data into the database
+    ```bash
+    pnpm run prisma:seed
     ```
 7. Run the development server
     ```bash
