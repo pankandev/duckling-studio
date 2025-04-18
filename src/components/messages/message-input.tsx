@@ -49,7 +49,7 @@ export default function MessageInput({onSend, disabled}: {
                         onChange={v => setChatContent(v)}
                     />
                     <Button
-                        className="rounded-l-none rounded-r-2xl h-full"
+                        className="rounded-l-none rounded-r-2xl h-full w-[5rem]"
                         disabled={disabled || chatContent.length === 0}
                         type="submit"
                     >
@@ -57,7 +57,9 @@ export default function MessageInput({onSend, disabled}: {
                     </Button>
                 </div>
             </Form>
-            <LLMConfigSelect></LLMConfigSelect>
+            <div className="flex flex-row">
+                <LLMConfigSelect></LLMConfigSelect>
+            </div>
         </div>
-);
+    );
 }

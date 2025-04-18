@@ -7,11 +7,13 @@ export interface ChatGroup {
     chats: ChatResource[];
 }
 
-const ChatListGroup = ({group}: {group: ChatGroup}) => {
+const ChatListGroup = ({group}: { group: ChatGroup }) => {
     return (
-        <div className="flex flex-col items-stretch w-full gap-1">
+        <div className="flex flex-col items-stretch w-full gap-3">
             <span className="text-xs font-bold">{group.name}</span>
-            {group.chats.map((chat) => (<ChatListItem chat={chat} key={chat.id}/>))}
+            <div className="flex flex-col items-stretch gap-1">
+                {group.chats.map((chat) => (<ChatListItem chat={chat} key={chat.id}/>))}
+            </div>
         </div>
     );
 };

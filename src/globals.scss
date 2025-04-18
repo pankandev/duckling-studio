@@ -174,7 +174,7 @@ html, body {
 }
 
 .btn {
-  @apply transition-colors;
+  @apply transition-colors hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 rounded;
 
   &:not(:disabled) {
     @apply cursor-pointer;
@@ -202,6 +202,18 @@ html, body {
 
   > *:not(:last-child) {
     @apply mb-2;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+
+  h1 {
+    @apply text-xl;
+  }
+
+  h2 {
+    @apply text-lg;
   }
 }
 

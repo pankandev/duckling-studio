@@ -52,9 +52,9 @@ const LLMConfigCreateForm = ({onCreate}: { onCreate: (config: LLMConfigResource)
         <form onSubmit={submit} className="flex flex-col gap-5 items-stretch">
             <FormGroup>
                 <Label htmlFor="provider">Provider</Label>
-                <Select name="provider" value={selectedProviderHandle ?? undefined} onValueChange={providerHandle => setSelectedProviderHandle(providerHandle)}>
+                <Select name="provider" disabled={configProvidersResult.isLoading} value={selectedProviderHandle ?? undefined} onValueChange={providerHandle => setSelectedProviderHandle(providerHandle)}>
                     <SelectTrigger className="w-full">
-                        <SelectValue placeholder="Select a provider..."/>
+                        <SelectValue placeholder={configProvidersResult.isLoading ? 'Loading...' : 'Select a provider...'}/>
                     </SelectTrigger>
                     <SelectContent>
                         {configProviders.map(provider => (

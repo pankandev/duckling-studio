@@ -7,6 +7,8 @@ import TextArea from "@/components/inputs/text-area";
 import {ChatMessageUpdateBody} from "@/lib/client/types/chats";
 import {err, ok, Result} from "@/lib/common/result";
 import {HttpError} from "@/lib/common/http/http-error";
+import {Button} from "../ui/button";
+import {Pencil, Trash} from "lucide-react";
 
 async function updateMessageContent(messageId: number, update: ChatMessageUpdateBody): Promise<Result<void>> {
     const response = await fetch(`/api/v1/messages/${messageId}/`, {
@@ -63,40 +65,51 @@ export default function MessageListItem(
     }, [onUpdate, message]);
 
     const markdownIt = new MarkdownIt();
-    const classNames = 'chat-message message-' + message.role.toLowerCase();
+    const isUser = message.role === 'USER';
+    const topContainerClassNames = isUser ? 'items-end' : 'items-stretch'
 
     if (isDeleting) {
         return (<></>);
     }
     return (
-        <div className={classNames}>
-            <div className="chat-message-tools flex flex-row-reverse gap-2">
-                <button
-                    className="btn text-gray-200 p-1 hover:bg-gray-200/10 rounded"
-                    onClick={deleteMessageCallback}
-                >
-                    Delete
-                </button>
-                <button
-                    className="btn text-gray-200 p-1 hover:bg-gray-200/10 rounded"
-                    onClick={() => setEditing(!isEditing)}
-                >
-                    Edit
-                </button>
+        <div className={'flex flex-col gap-1 ' + topContainerClassNames}>
+            <div className={'chat-message flex flex-col message-' + message.role.toLowerCase()}>
+                {
+                    isEditing ? (
+                        <TextArea
+                            className="w-full"
+                            value={message.content}
+                            onSubmitRequest={editMessageCallback}
+                            onBlur={editMessageCallback}
+                            onEscape={() => setEditing(false)}
+                            disabled={isUpdating}
+                        />
+                    ) : (<div className="message-content-markdown"
+                              dangerouslySetInnerHTML={{__html: markdownIt.render(message.content)}}>
+                    </div>)
+                }
             </div>
-            {
-                isEditing ? (
-                    <TextArea
-                        value={message.content}
-                        onSubmitRequest={editMessageCallback}
-                        onBlur={editMessageCallback}
-                        onEscape={() => setEditing(false)}
-                        disabled={isUpdating}
-                    />
-                ) : (<div className="message-content-markdown"
-                          dangerouslySetInnerHTML={{__html: markdownIt.render(message.content)}}>
-                </div>)
-            }
+            <div
+                className={'chat-message-tools flex flex-row gap-2 text-sm ' + (isUser ? 'justify-end' : 'justify-start')}>
+                {!isEditing && (
+                    <>
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => setEditing(!isEditing)}
+                        >
+                            <Pencil size={4}></Pencil>
+                        </Button>
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={deleteMessageCallback}
+                        >
+                            <Trash></Trash>
+                        </Button>
+                    </>
+                )}
+            </div>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useCallback, useState} from 'react';
-import {createEmptyChat} from "@/lib/client/api/chats";
+import {createEmptyChat, useChats} from "@/lib/client/api/chats";
 import {ChatMessageInput} from "@/lib/client/types/chats";
 import {useRouter} from "next/navigation";
 import {useChatMessages} from "@/lib/client/api/chat-messages";
@@ -20,6 +20,7 @@ const ChatFetch = ({chatId}: { chatId: number | null }) => {
     const router = useRouter();
     const [streamingMessages, setStreamingMessages] = useState<ChatMessageResource[] | null>(null);
     const [isSendingMessage, setIsSendingMessage] = useState<boolean>(false);
+    const {mutate: mutateChats} = useChats();
 
     const {
         data: messagesResult,
@@ -49,6 +50,7 @@ const ChatFetch = ({chatId}: { chatId: number | null }) => {
                 return;
             }
             thisChatId = thisChatIdResult.value;
+            mutateChats().then();
         } else {
             thisChatId = chatId;
         }

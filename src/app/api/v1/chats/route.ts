@@ -10,13 +10,14 @@ import {ChatResourceSchema} from "@/lib/common/resources/chat-resource";
 
 export async function generateChatNameFromMessage(message: string, model: LanguageModelV1): Promise<string> {
     const systemMessage = "" +
-        "You will receive a message from a chat\n\n" +
-        "Your role is to create a title about the topic\n" +
+        "You will receive the first message for a new chat session with an LLM\n\n" +
+        "Your role is to create a short title about what\n" +
         "this chat will be about.\n" +
         "\n" +
         "Do not include quotes around the name\n" +
         "\n" +
         "Examples:\n" +
+        "hey! -> New chat\n"+
         "why is keras not as used as pytorch or tensorflow? -> Keras vs PyTorch Tensorflow\n" +
         "In nextjs I want to be able to submit the form when the user presses enter on the textarea, any ideas? -> Submit form on Enter\n" +
         "What are some RAG techniques for caching? -> RAG Caching Techniques\n" +
