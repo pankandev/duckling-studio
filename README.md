@@ -15,7 +15,7 @@ Next.js and PostgresSQL (I love PostgresSQL so much).
 - Conversational AI interface with Claude.
 - Streaming messages.
 - Basic chat management.
-- Message edition
+- Message edition (even those from the assistant!)
 - Switch between multiple LLMs. Current providers include:
   - Ollama
   - LM Studio
