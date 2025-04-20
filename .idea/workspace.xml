@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="fix: fix containerized ollama and lm studio connection">
+    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add mlapi and redis">
+      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/mlapi.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mlapi/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mlapi/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mlapi/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/ai/llm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/ai/llm.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/ollama.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/ollama.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,41 +69,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.docker-compose.yml.postgres: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.web: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.web/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/classifier&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.18.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.17.27&quot;,
-    &quot;jsx.switch.disabled&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/pcamp/WebstormProjects/claude-chat/src/app/api/v1&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;npm.create-migration.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev (1).executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.prisma:generate (1).executor&quot;: &quot;Run&quot;,
-    &quot;npm.prisma:generate.executor&quot;: &quot;Run&quot;,
-    &quot;npm.prisma:migrate.executor&quot;: &quot;Run&quot;,
-    &quot;npm.prisma:seed.executor&quot;: &quot;Run&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\pcamp\\WebstormProjects\\claude-chat\\apps\\web\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker-compose.yml.mlapi: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.postgres: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.redis: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.web: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "Docker.web/Dockerfile.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "feature/classifier",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.nodejs.core.library.configured.version": "20.18.0",
+    "javascript.nodejs.core.library.typings.version": "20.17.27",
+    "jsx.switch.disabled": "true",
+    "last_opened_file_path": "C:/Users/pcamp/WebstormProjects/claude-chat/src/app/api/v1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "pnpm",
+    "npm.create-migration.executor": "Run",
+    "npm.dev (1).executor": "Run",
+    "npm.dev.executor": "Run",
+    "npm.prisma:generate (1).executor": "Run",
+    "npm.prisma:generate.executor": "Run",
+    "npm.prisma:migrate.executor": "Run",
+    "npm.prisma:seed.executor": "Run",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
+    "ts.external.directory.path": "C:\\Users\\pcamp\\WebstormProjects\\claude-chat\\apps\\web\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\app\api\v1" />
@@ -133,13 +143,25 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.web: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="docker-compose.yml.mlapi: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
-          <option name="envFilePath" value="" />
           <option name="services">
             <list>
-              <option value="web" />
+              <option value="mlapi" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.redis: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="redis" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
@@ -164,16 +186,6 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="dev (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/apps/web/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="dev" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="prisma:generate (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/apps/web/package.json" />
       <command value="run" />
@@ -185,19 +197,19 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Docker.docker-compose.yml.mlapi: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
       <item itemvalue="Docker.web/Dockerfile" />
-      <item itemvalue="npm.dev (1)" />
       <item itemvalue="npm.prisma:generate (1)" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.mlapi: Compose Deployment" />
         <item itemvalue="npm.prisma:generate (1)" />
         <item itemvalue="Docker.web/Dockerfile" />
-        <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
-        <item itemvalue="npm.dev (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -273,7 +285,8 @@
       <workItem from="1745098424326" duration="8131000" />
       <workItem from="1745116890873" duration="622000" />
       <workItem from="1745118436585" duration="1449000" />
-      <workItem from="1745124397689" duration="1105000" />
+      <workItem from="1745124397689" duration="2086000" />
+      <workItem from="1745126562066" duration="2315000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
@@ -587,15 +600,21 @@
       <option name="project" value="LOCAL" />
       <updated>1745119642111</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="fix: fix LM Studio generated baseURL">
+      <option name="closed" value="true" />
+      <created>1745125757105</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1745125757105</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: fix license address" />
-    <MESSAGE value="fefat: added better examples for chat generation" />
     <MESSAGE value="feat: added breaklines" />
     <MESSAGE value="feat: add endpoints to delete and edit messages" />
     <MESSAGE value="feat: add delete and edit message buttons" />
@@ -619,6 +638,8 @@
     <MESSAGE value="refactor: moved next.js app into apps/web" />
     <MESSAGE value="feat: add web app container" />
     <MESSAGE value="fix: fix containerized ollama and lm studio connection" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: fix containerized ollama and lm studio connection" />
+    <MESSAGE value="fix: fix LM Studio generated baseURL" />
+    <MESSAGE value="feat: add mlapi and redis" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add mlapi and redis" />
   </component>
 </project>

@@ -34,12 +34,42 @@ services:
       DATABASE_URL: 'postgresql://postgres:postgres@postgres:5432/postgres?schema=public'
       OLLAMA_URL: 'http://host.docker.internal:11434'
       LMSTUDIO_URL: 'http://host.docker.internal:1234'
+      ML_API_URL: 'http://mlapi:5000'
     extra_hosts:
       - "host.docker.internal:host-gateway"
     command: >
       sh -c "pnpm run prisma:migrate &&
             pnpm run prisma:seed &&
             pnpm start"
+  mlapi:
+    build:
+      context: ./apps/mlapi
+      dockerfile: Dockerfile
+    ports:
+      - '127.0.0.1:8000:8000'
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+      - ALLOW_CORS_ORIGIN_URL=http://web:3000
+    networks:
+      - duckling-services-network
+      - duckling-web-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "127.0.0.1:6379:6379"
+    networks:
+      - duckling-services-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+
 
 networks:
   duckling-web-network:
