@@ -8,7 +8,7 @@ services:
     cpu_count: 1
     mem_reservation: 512M
     networks:
-      - duckling-network
+      - duckling-web-network
     ports:
       - '127.0.0.1:5432:5432'
     healthcheck:
@@ -25,20 +25,23 @@ services:
     env_file:
       - ./apps/web/.env
     networks:
-      - duckling-network
+      - duckling-web-network
     ports:
       - '3000:3000'
     depends_on:
       - postgres
     environment:
       DATABASE_URL: 'postgresql://postgres:postgres@postgres:5432/postgres?schema=public'
+      OLLAMA_URL: 'http://host.docker.internal:11434'
+      LMSTUDIO_URL: 'http://host.docker.internal:1234'
     command: >
       sh -c "pnpm run prisma:migrate &&
             pnpm run prisma:seed &&
             pnpm start"
 
 networks:
-  duckling-network:
+  duckling-web-network:
+  duckling-services-network:
 
 volumes:
   postgres_data:

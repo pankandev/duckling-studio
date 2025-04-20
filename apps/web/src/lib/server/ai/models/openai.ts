@@ -2,6 +2,7 @@ import {LLMModelArray, ModelFactory} from "@/lib/server/ai/models/model-factory"
 import {LanguageModelV1} from "ai";
 import type {OpenAIProvider} from "@ai-sdk/openai";
 import {HashedArray} from "@/lib/common/data-structures/hashed-array";
+import {DateTime} from "luxon";
 
 export class OpenAIFactory implements ModelFactory {
     private static async load(): Promise<OpenAIProvider> {
@@ -20,9 +21,11 @@ export class OpenAIFactory implements ModelFactory {
     }
 
     #modelsCache: LLMModelArray | null = null;
+    #lastCache = DateTime.now().minus({years: 7});
 
     async listModels(): Promise<LLMModelArray> {
-        if (this.#modelsCache !== null) {
+        const cacheIsStale = Math.abs(this.#lastCache.diffNow().as('hours')) > 1;
+        if (this.#modelsCache !== null && !cacheIsStale) {
             return this.#modelsCache;
         }
         const {OpenAI} = await import("openai");

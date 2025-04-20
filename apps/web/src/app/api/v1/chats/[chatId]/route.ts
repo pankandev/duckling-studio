@@ -11,10 +11,9 @@ export async function DELETE(_: Request, {params}: {params: Promise<{chatId: str
     }
     const chatId = chatIdParse.data;
 
-    const r = await prisma.chat.delete({
+    await prisma.chat.delete({
         where: {id: chatId},
     });
-    console.log(r);
 
     return buildOkResponse();
 }

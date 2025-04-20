@@ -3,6 +3,7 @@ import {PrismaClient} from "@prisma/client";
 async function main(prisma: PrismaClient) {
     await prisma.lLMProvider.createMany(
         {
+            skipDuplicates: true,
             data: [
                 {
                     handle: 'claudeai',

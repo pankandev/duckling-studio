@@ -5,29 +5,33 @@ import {HashedArray} from "@/lib/common/data-structures/hashed-array";
 
 
 export class OllamaFactory implements ModelFactory {
-    private static async load(): Promise<OllamaProvider> {
+    constructor(
+        private readonly url: string = 'http://localhost:1234/v1',
+    ) {
+    }
+
+    private static async load(url: string): Promise<OllamaProvider> {
         const ai = await import("ollama-ai-provider");
-        return ai.ollama;
+        return ai.createOllama({
+            baseURL: url
+        });
     }
 
     async create(model: string): Promise<LanguageModelV1> {
-        const provider = await OllamaFactory.load();
+        const provider = await OllamaFactory.load(this.url);
         return provider(model);
     }
 
     async getDefault(): Promise<LanguageModelV1> {
-        const provider = await OllamaFactory.load();
+        const provider = await OllamaFactory.load(this.url);
         return provider('llama3.2');
     }
 
-    #modelsCache: LLMModelArray | null = null;
-
     async listModels(): Promise<LLMModelArray> {
-        if (this.#modelsCache !== null) {
-            return this.#modelsCache;
-        }
-
-        const {default: ollama} = await import("ollama");
+        const {Ollama} = await import("ollama");
+        const ollama = new Ollama({
+            host: this.url,
+        });
         const response = await ollama.list();
         const models: LLMModelArray = new HashedArray(m => m.id);
         for await (const model of response.models) {
@@ -36,8 +40,6 @@ export class OllamaFactory implements ModelFactory {
                 name: model.name,
             });
         }
-
-        this.#modelsCache = models;
 
         return models;
     }

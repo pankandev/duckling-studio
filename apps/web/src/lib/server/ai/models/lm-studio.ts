@@ -28,12 +28,7 @@ export class LMStudioFactory implements ModelFactory {
         return provider('llama3.2');
     }
 
-    #modelsCache: LLMModelArray | null = null;
-
     async listModels(): Promise<LLMModelArray> {
-        if (this.#modelsCache !== null) {
-            return this.#modelsCache;
-        }
         const response = await fetch(this.baseURL + '/models');
         const models: LLMModelArray = new HashedArray(m => m.id);
         if (!response.ok) {
@@ -46,7 +41,6 @@ export class LMStudioFactory implements ModelFactory {
                 name: model.id
             });
         }
-        this.#modelsCache = models;
         return models;
     }
 }

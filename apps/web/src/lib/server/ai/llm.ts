@@ -36,7 +36,9 @@ export function dbMessageListToAiSdk(messages: ChatMessageAiCompatible[]): CoreM
 const ModelFactoryByProviderHandle = {
     claudeai: new ClaudeAIFactory(),
     openai: new OpenAIFactory(),
-    ollama: new OllamaFactory(),
+    ollama: new OllamaFactory(
+        process.env['OLLAMA_URL'] ?? 'http://localhost:11434',
+    ),
     lmstudio: new LMStudioFactory(
         process.env['LMSTUDIO_URL'] ?? 'http://localhost:1234/v1',
     ),

@@ -3,6 +3,7 @@ import {LanguageModelV1} from "ai";
 import type {AnthropicProvider} from "@ai-sdk/anthropic";
 import {AnthropicMessagesModelId} from "@ai-sdk/anthropic/internal";
 import {HashedArray} from "@/lib/common/data-structures/hashed-array";
+import {DateTime} from "luxon";
 
 export class ClaudeAIFactory implements ModelFactory {
     private static async load(): Promise<AnthropicProvider> {
@@ -21,9 +22,11 @@ export class ClaudeAIFactory implements ModelFactory {
     }
 
     #modelsCache: LLMModelArray | null = null;
+    #lastCache = DateTime.now().minus({years: 7});
 
     async listModels(): Promise<LLMModelArray> {
-        if (this.#modelsCache !== null) {
+        const cacheIsStale = Math.abs(this.#lastCache.diffNow().as('hours')) > 1;
+        if (this.#modelsCache !== null && !cacheIsStale) {
             return this.#modelsCache;
         }
         const {Anthropic} = await import("@anthropic-ai/sdk");
