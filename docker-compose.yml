@@ -34,6 +34,8 @@ services:
       DATABASE_URL: 'postgresql://postgres:postgres@postgres:5432/postgres?schema=public'
       OLLAMA_URL: 'http://host.docker.internal:11434'
       LMSTUDIO_URL: 'http://host.docker.internal:1234'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     command: >
       sh -c "pnpm run prisma:migrate &&
             pnpm run prisma:seed &&

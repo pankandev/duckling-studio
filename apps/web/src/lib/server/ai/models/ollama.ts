@@ -6,7 +6,7 @@ import {HashedArray} from "@/lib/common/data-structures/hashed-array";
 
 export class OllamaFactory implements ModelFactory {
     constructor(
-        private readonly url: string = 'http://localhost:1234/v1',
+        private readonly url: string = 'http://localhost:11434',
     ) {
     }
 

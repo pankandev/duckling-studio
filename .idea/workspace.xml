@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add web app container">
+    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="fix: fix containerized ollama and lm studio connection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/prisma/seed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/prisma/seed.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/app/api/v1/chats/[chatId]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/api/v1/chats/[chatId]/route.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/ai/llm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/ai/llm.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/claude-ai.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/claude-ai.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/lm-studio.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/lm-studio.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/ollama.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/ollama.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/openai.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/openai.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -277,7 +272,8 @@
       <workItem from="1745092887068" duration="3967000" />
       <workItem from="1745098424326" duration="8131000" />
       <workItem from="1745116890873" duration="622000" />
-      <workItem from="1745118436585" duration="1027000" />
+      <workItem from="1745118436585" duration="1449000" />
+      <workItem from="1745124397689" duration="1105000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
@@ -583,14 +579,21 @@
       <option name="project" value="LOCAL" />
       <updated>1745111259113</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="fix: fix containerized ollama and lm studio connection">
+      <option name="closed" value="true" />
+      <created>1745119642111</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1745119642111</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: add License information on readme" />
     <MESSAGE value="chore: fix license address" />
     <MESSAGE value="fefat: added better examples for chat generation" />
     <MESSAGE value="feat: added breaklines" />
@@ -615,6 +618,7 @@
     <MESSAGE value="chore: update README.md" />
     <MESSAGE value="refactor: moved next.js app into apps/web" />
     <MESSAGE value="feat: add web app container" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add web app container" />
+    <MESSAGE value="fix: fix containerized ollama and lm studio connection" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: fix containerized ollama and lm studio connection" />
   </component>
 </project>
