@@ -77,7 +77,7 @@ const ChatFetch = ({chatId}: { chatId: number | null }) => {
         } else {
             setIsSendingMessage(false);
         }
-    }, [chatId, mutateMessages, router]);
+    }, [chatId, mutateMessages, router, mutateChats]);
 
     if (messagesResult && !messagesResult.success) {
         return (

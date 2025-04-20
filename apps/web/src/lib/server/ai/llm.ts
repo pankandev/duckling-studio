@@ -37,7 +37,9 @@ const ModelFactoryByProviderHandle = {
     claudeai: new ClaudeAIFactory(),
     openai: new OpenAIFactory(),
     ollama: new OllamaFactory(),
-    lmstudio: new LMStudioFactory(),
+    lmstudio: new LMStudioFactory(
+        process.env['LMSTUDIO_URL'] ?? 'http://localhost:1234/v1',
+    ),
 }
 
 

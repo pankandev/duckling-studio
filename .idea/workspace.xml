@@ -4,23 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="chore: update README.md">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/duckling-studio-chats.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/postcss.config.mjs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/file.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/globe.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/next.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vercel.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/window.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" />
+    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="refactor: moved next.js app into apps/web">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/.dockerignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/images/duckling-studio-chats.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/duckling-studio-chats.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/api/v1/chats/[chatId]/continue/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/api/v1/chats/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/api/v1/chats/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/components/chat/chat-fetch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/components/chat/chat-fetch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/ai/llm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/ai/llm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/ollama.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/ai/models/ollama.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +74,9 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Docker.docker-compose.yml.postgres: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.web: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.web/Dockerfile.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -93,13 +94,15 @@
     &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
     &quot;npm.create-migration.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev (1).executor&quot;: &quot;Run&quot;,
     &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.prisma:generate (1).executor&quot;: &quot;Run&quot;,
     &quot;npm.prisma:generate.executor&quot;: &quot;Run&quot;,
     &quot;npm.prisma:migrate.executor&quot;: &quot;Run&quot;,
     &quot;npm.prisma:seed.executor&quot;: &quot;Run&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\pcamp\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\pcamp\\WebstormProjects\\claude-chat\\apps\\web\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -112,27 +115,41 @@
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\lib\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\pcamp\WebstormProjects\claude-chat" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\app\api\v1\llm-providers\[providerHandle]\models" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\images" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\components\inputs" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\components\messages" />
-      <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\components\chat" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.postgres: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.web: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
           <option name="envFilePath" value="" />
           <option name="services">
             <list>
-              <option value="postgres" />
+              <option value="web" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
@@ -140,8 +157,25 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
+    <configuration name="web/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="containerName" value="" />
+          <option name="envVars">
+            <list>
+              <DockerEnvVarImpl>
+                <option name="name" value="DOCKER_BUILDKIT" />
+                <option name="value" value="0" />
+              </DockerEnvVarImpl>
+            </list>
+          </option>
+          <option name="sourceFilePath" value="apps/web/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="dev (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/apps/web/package.json" />
       <command value="run" />
       <scripts>
         <script value="dev" />
@@ -150,8 +184,8 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="prisma:generate" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
+    <configuration name="prisma:generate (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/apps/web/package.json" />
       <command value="run" />
       <scripts>
         <script value="prisma:generate" />
@@ -160,33 +194,20 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="prisma:migrate" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="prisma:migrate" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="prisma:seed" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="prisma:seed" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
+    <list>
+      <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
+      <item itemvalue="Docker.web/Dockerfile" />
+      <item itemvalue="npm.dev (1)" />
+      <item itemvalue="npm.prisma:generate (1)" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.prisma:seed" />
-        <item itemvalue="npm.prisma:migrate" />
-        <item itemvalue="npm.prisma:generate" />
-        <item itemvalue="npm.dev" />
-        <item itemvalue="Docker.docker-compose.yml.postgres: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.web/Dockerfile" />
+        <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
+        <item itemvalue="npm.prisma:generate (1)" />
+        <item itemvalue="npm.dev (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -255,6 +276,11 @@
       <workItem from="1744866655304" duration="10861000" />
       <workItem from="1744917278330" duration="19603000" />
       <workItem from="1745009313819" duration="1879000" />
+      <workItem from="1745011287144" duration="2845000" />
+      <workItem from="1745029805915" duration="1267000" />
+      <workItem from="1745084760904" duration="4221000" />
+      <workItem from="1745092887068" duration="3967000" />
+      <workItem from="1745098424326" duration="5147000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
@@ -544,14 +570,21 @@
       <option name="project" value="LOCAL" />
       <updated>1745010784309</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="refactor: moved next.js app into apps/web">
+      <option name="closed" value="true" />
+      <created>1745011480148</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1745011480148</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: add chat list groups" />
     <MESSAGE value="chore: add README.md" />
     <MESSAGE value="chore: add License information on readme" />
     <MESSAGE value="chore: fix license address" />
@@ -576,6 +609,7 @@
     <MESSAGE value="chore: add updated screenshot on README.md" />
     <MESSAGE value="chore: updated README.md" />
     <MESSAGE value="chore: update README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: update README.md" />
+    <MESSAGE value="refactor: moved next.js app into apps/web" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: moved next.js app into apps/web" />
   </component>
 </project>

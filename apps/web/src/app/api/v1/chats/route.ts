@@ -8,7 +8,7 @@ import {loadModel} from "@/lib/server/ai/llm";
 import {ChatResourceSchema} from "@/lib/common/resources/chat-resource";
 
 
-export async function generateChatNameFromMessage(message: string, model: LanguageModelV1): Promise<string> {
+async function generateChatNameFromMessage(message: string, model: LanguageModelV1): Promise<string> {
     const systemMessage = "" +
         "You will receive the first message for a new chat session with an LLM\n\n" +
         "Your role is to create a short title about what\n" +
@@ -69,9 +69,11 @@ export async function POST(request: Request): Promise<Response> {
                 model: chatConfig.model
             }).asResponse();
     }
+
+    const name: string = await generateChatNameFromMessage(bodyParseResult.data.initialMessage, model);
     const chat = await prisma.chat.create({
         data: {
-            displayName: await generateChatNameFromMessage(bodyParseResult.data.initialMessage, model),
+            displayName: name,
         }
     });
 

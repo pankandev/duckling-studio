@@ -17,7 +17,7 @@ export class OllamaFactory implements ModelFactory {
 
     async getDefault(): Promise<LanguageModelV1> {
         const provider = await OllamaFactory.load();
-        return provider('claude-3-7-sonnet-20250219');
+        return provider('llama3.2');
     }
 
     #modelsCache: LLMModelArray | null = null;
