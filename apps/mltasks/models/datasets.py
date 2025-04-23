@@ -14,7 +14,7 @@ class TextClassifierDataset(SQLModelBase, IdMixin, TimestampMixin):
 
     __tablename__ = "text_classifier_datasets"
 
-    display_name: Mapped[str] = mapped_column(sa.Column(sa.String(1024), nullable=False))
+    display_name: Mapped[str] = mapped_column(sa.String(1024), nullable=False)
     """
     The human-readable name of this dataset.
     """
@@ -28,17 +28,17 @@ class TextClassifierDatasetItem(SQLModelBase, IdMixin, TimestampMixin):
 
     __tablename__ = "text_classifier_dataset_items"
 
-    dataset_id: Mapped[int] = mapped_column(sa.Column(IdInteger, sa.ForeignKey(TextClassifierDataset.id), nullable=False))
+    dataset_id: Mapped[int] = mapped_column(IdInteger, sa.ForeignKey(TextClassifierDataset.id), nullable=False)
     """
     The dataset this item belongs to.
     """
 
-    text_content: Mapped[str] = mapped_column(sa.Column(sa.String(), nullable=False))
+    text_content: Mapped[str] = mapped_column(sa.String(), nullable=False)
     """
     The text that will be classified.
     """
 
-    dataset_label_id: Mapped[uuid.UUID] = mapped_column(sa.Column(IdUUID, nullable=True))
+    dataset_label_id: Mapped[uuid.UUID] = mapped_column(IdUUID, nullable=True)
     """
     The ID of the label this item is classified as.
     """
@@ -77,22 +77,22 @@ class TextClassifierDatasetLabel(SQLModelBase, IdMixin, TimestampMixin):
 
     __tablename__ = "text_classifier_dataset_labels"
 
-    dataset_id: Mapped[int] = mapped_column(sa.Column(IdInteger, sa.ForeignKey(TextClassifierDataset.id), nullable=False))
+    dataset_id: Mapped[int] = mapped_column(IdInteger, sa.ForeignKey(TextClassifierDataset.id), nullable=False)
     """
     The dataset this label is associated with.
     """
 
-    dataset_label_id: Mapped[uuid.UUID] = mapped_column(sa.Column(IdUUID, nullable=False, server_default=generate_uuid4()))
+    dataset_label_id: Mapped[uuid.UUID] = mapped_column(IdUUID, nullable=False, server_default=generate_uuid4())
     """
     The dataset label id. This is unique per dataset.
     """
 
-    label: Mapped[str] = mapped_column(sa.Column(sa.String(256), nullable=False))
+    label: Mapped[str] = mapped_column(sa.String(256), nullable=False)
     """
     The label name.
     """
 
-    color: Mapped[str] = mapped_column(sa.Column(sa.String(256), nullable=True))
+    color: Mapped[str] = mapped_column(sa.String(256), nullable=True)
     """
     The color associated with this label.
     """
