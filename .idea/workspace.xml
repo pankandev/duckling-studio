@@ -4,26 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add mlapi and redis">
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/create.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/delete.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/list.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/list_items.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/router.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/update_item.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/scripts/data/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/scripts/download_example_csv.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/scripts/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/models/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/models/datasets.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/resources/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/resources/dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/routers/datasets.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/utils/responses.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/utils/responses.py" afterDir="false" />
-    </list>
+    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add mlapi and redis" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -308,7 +289,7 @@
       <workItem from="1745198372049" duration="265000" />
       <workItem from="1745266691583" duration="7741000" />
       <workItem from="1745365733576" duration="8316000" />
-      <workItem from="1745387601068" duration="3073000" />
+      <workItem from="1745387601068" duration="3667000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
