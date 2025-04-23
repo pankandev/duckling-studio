@@ -28,7 +28,7 @@ class TextClassifierDatasetItem(SQLModelBase, IdMixin, TimestampMixin):
 
     __tablename__ = "text_classifier_dataset_items"
 
-    dataset_id: Mapped[int] = mapped_column(IdInteger, sa.ForeignKey(TextClassifierDataset.id), nullable=False)
+    dataset_id: Mapped[int] = mapped_column(IdInteger, sa.ForeignKey(TextClassifierDataset.id, ondelete='CASCADE'), nullable=False)
     """
     The dataset this item belongs to.
     """
@@ -60,7 +60,8 @@ class TextClassifierDatasetItem(SQLModelBase, IdMixin, TimestampMixin):
             refcolumns=[
                 'text_classifier_dataset_labels.dataset_id',
                 'text_classifier_dataset_labels.dataset_label_id'
-            ]
+            ],
+            ondelete='SET NULL'
         ),
         sa.Index(
             'text_classifier_dataset_items_dataset_id_created_at_idx',
@@ -77,7 +78,7 @@ class TextClassifierDatasetLabel(SQLModelBase, IdMixin, TimestampMixin):
 
     __tablename__ = "text_classifier_dataset_labels"
 
-    dataset_id: Mapped[int] = mapped_column(IdInteger, sa.ForeignKey(TextClassifierDataset.id), nullable=False)
+    dataset_id: Mapped[int] = mapped_column(IdInteger, sa.ForeignKey(TextClassifierDataset.id, ondelete='CASCADE'), nullable=False)
     """
     The dataset this label is associated with.
     """
