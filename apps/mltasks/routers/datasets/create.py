@@ -13,6 +13,7 @@ from resources.dataset import DatasetResource
 from routers.datasets.router import router
 from services.app_error import AppError
 from services.db import get_db, SessionLocal
+from services.logger import LOGGER
 from utils.responses import SingleItemResponse
 
 
@@ -23,6 +24,7 @@ class DatasetCreateResponse(BaseModel):
 def process_csv_into_dataset(dataset_id: int, df: pd.DataFrame):
     # TODO: save import processes in the database to track progress and errors.
 
+    LOGGER.info(f"Importing .CSV file into dataset {dataset_id}")
     session = SessionLocal()
 
     # insert all the labels
@@ -44,8 +46,11 @@ def process_csv_into_dataset(dataset_id: int, df: pd.DataFrame):
         ).scalar_one()
         label_ids_by_label[label] = this_label_id
 
+    session.commit()
+
     # insert all the items
-    for _, row in df.iterrows():
+    row_index = 0
+    for row_index, (_, row) in enumerate(df.iterrows()):
         row_label = row['label']
         if not isinstance(row_label, str):
             continue
@@ -61,7 +66,12 @@ def process_csv_into_dataset(dataset_id: int, df: pd.DataFrame):
             })
         )
 
+        if row_index % 1000 == 0:
+            session.commit()
+            LOGGER.info(f"Imported {row_index} into dataset {dataset_id}")
+
     session.commit()
+    LOGGER.info(f"Finished importing {row_index} into dataset {dataset_id}")
 
 
 @router.post('/datasets')

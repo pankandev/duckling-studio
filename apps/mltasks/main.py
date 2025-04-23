@@ -1,8 +1,12 @@
+import logging
+
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 from routers.datasets import router as datasets_router
 from services.app_error import AppError
+
+logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(
     title="Duckling Studio Machine Learning Tasks API",
