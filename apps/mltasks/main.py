@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request
-from starlette.responses import JSONResponse
+from fastapi.responses import JSONResponse
 
 from routers.datasets import router as datasets_router
 from services.app_error import AppError
@@ -17,7 +17,7 @@ async def custom_http_exception_handler(_: Request, exc: AppError):
     )
 
 
-@app.get("/health")
+@app.get("/health", tags=['healthcheck'])
 async def health():
     return {"status": "ok"}
 

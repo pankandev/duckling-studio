@@ -5,44 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add mlapi and redis">
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/models/base.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/models/datasets.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/models/sqlalchemy_utils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/run.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/services/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/services/celery.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/generated/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/create.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/delete.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/list.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/list_items.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/router.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/update_item.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/scripts/data/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/scripts/download_example_csv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/scripts/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/mlapi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/mlapi.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mlapi/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mlapi/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mlapi/requirements.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/eslint.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/prisma/seed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/prisma/seed.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/app/api/v1/chats/[chatId]/messages/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/api/v1/chats/[chatId]/messages/route.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/common/resources/chat-message-resource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/common/resources/chat-message-resource.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/ai/llm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/ai/llm.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/db/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/db/client.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/models/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/models/datasets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/resources/dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/resources/dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/routers/datasets.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/utils/responses.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/utils/responses.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,46 +80,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.docker-compose.yml.dbmltasks: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.dbweb: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.mlapi: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.mltasks: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.postgres: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.redis: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.web: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
-    "Docker.web/Dockerfile.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "feature/classifier",
-    "ignore.virus.scanning.warn.message": "true",
-    "javascript.nodejs.core.library.configured.version": "20.18.0",
-    "javascript.nodejs.core.library.typings.version": "20.17.27",
-    "jsx.switch.disabled": "true",
-    "last_opened_file_path": "C:/Users/pcamp/WebstormProjects/claude-chat/src/app/api/v1",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "pnpm",
-    "npm.create-migration.executor": "Run",
-    "npm.dev (1).executor": "Run",
-    "npm.dev.executor": "Run",
-    "npm.prisma:generate (1).executor": "Run",
-    "npm.prisma:generate.executor": "Run",
-    "npm.prisma:migrate.executor": "Run",
-    "npm.prisma:seed.executor": "Run",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
-    "ts.external.directory.path": "C:\\Users\\pcamp\\WebstormProjects\\claude-chat\\apps\\web\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.docker-compose.yml.dbmltasks: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.dbweb: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.mlapi: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.mltasks: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.postgres: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.redis: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.web: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.web/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/classifier&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.18.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.17.27&quot;,
+    &quot;jsx.switch.disabled&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/pcamp/WebstormProjects/claude-chat/src/app/api/v1&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.create-migration.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev (1).executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.prisma:generate (1).executor&quot;: &quot;Run&quot;,
+    &quot;npm.prisma:generate.executor&quot;: &quot;Run&quot;,
+    &quot;npm.prisma:migrate.executor&quot;: &quot;Run&quot;,
+    &quot;npm.prisma:seed.executor&quot;: &quot;Run&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\pcamp\\WebstormProjects\\claude-chat\\apps\\web\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\app\api\v1" />
@@ -327,7 +307,8 @@
       <workItem from="1745126562066" duration="3819000" />
       <workItem from="1745198372049" duration="265000" />
       <workItem from="1745266691583" duration="7741000" />
-      <workItem from="1745365733576" duration="7603000" />
+      <workItem from="1745365733576" duration="8316000" />
+      <workItem from="1745387601068" duration="3073000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />

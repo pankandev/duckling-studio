@@ -1,7 +1,7 @@
 import uuid
 
 import sqlalchemy as sa
-from sqlalchemy.orm import MappedColumn, relationship
+from sqlalchemy.orm import MappedColumn, relationship, column_property
 
 from models.base import SQLModelBase, IdMixin, TimestampMixin
 from models.sqlalchemy_utils import IdInteger, IdUUID, generate_uuid4
@@ -18,6 +18,56 @@ class TextClassifierDataset(SQLModelBase, IdMixin, TimestampMixin):
     """
     The human-readable name of this dataset.
     """
+
+    labels: MappedColumn[list['TextClassifierDatasetLabel']] = relationship()
+
+class TextClassifierDatasetItem(SQLModelBase, IdMixin, TimestampMixin):
+    """
+    A dataset text item. This is a labeled text that will be used to train a new classifier.
+    """
+
+    __tablename__ = "text_classifier_dataset_items"
+
+    dataset_id: MappedColumn[int] = sa.Column(IdInteger, sa.ForeignKey(TextClassifierDataset.id), nullable=False)
+    """
+    The dataset this item belongs to.
+    """
+
+    text_content: MappedColumn[str] = sa.Column(sa.String(), nullable=False)
+    """
+    The text that will be classified.
+    """
+
+    dataset_label_id: MappedColumn[uuid.UUID] = sa.Column(IdUUID, nullable=True)
+    """
+    The ID of the label this item is classified as.
+    """
+
+    label: MappedColumn['TextClassifierDatasetLabel'] = relationship(
+        'TextClassifierDatasetLabel',
+        foreign_keys=[dataset_id, dataset_label_id],
+    )
+    """
+    The label this item is classified as.
+    """
+
+    __table_args__ = (
+        sa.ForeignKeyConstraint(
+            columns=[
+                dataset_id,
+                dataset_label_id
+            ],
+            refcolumns=[
+                'text_classifier_dataset_labels.dataset_id',
+                'text_classifier_dataset_labels.dataset_label_id'
+            ]
+        ),
+        sa.Index(
+            'text_classifier_dataset_items_dataset_id_created_at_idx',
+            dataset_id,
+            sa.desc('created_at')
+        )
+    )
 
 
 class TextClassifierDatasetLabel(SQLModelBase, IdMixin, TimestampMixin):
@@ -47,6 +97,23 @@ class TextClassifierDatasetLabel(SQLModelBase, IdMixin, TimestampMixin):
     The color associated with this label.
     """
 
+    dataset: MappedColumn[TextClassifierDataset] = relationship(
+        TextClassifierDataset,
+        back_populates='labels'
+    )
+
+    item_count: MappedColumn[int] = column_property(
+        sa.select(sa.func.count(TextClassifierDatasetItem.id))
+        .where(
+            sa.and_(
+                TextClassifierDatasetItem.dataset_id == sa.orm.foreign(dataset_id),
+                TextClassifierDatasetItem.dataset_label_id == sa.orm.foreign(dataset_label_id)
+            )
+        )
+        .correlate_except(TextClassifierDatasetItem)
+        .scalar_subquery()
+    )
+
     __table_args__ = (
         sa.UniqueConstraint(
             dataset_id,
@@ -54,43 +121,3 @@ class TextClassifierDatasetLabel(SQLModelBase, IdMixin, TimestampMixin):
         ),
     )
 
-
-class TextClassifierDatasetItem(SQLModelBase, IdMixin, TimestampMixin):
-    """
-    A dataset text item. This is a labeled text that will be used to train a new classifier.
-    """
-
-    __tablename__ = "text_classifier_dataset_items"
-
-    dataset_id: MappedColumn[int] = sa.Column(IdInteger, sa.ForeignKey(TextClassifierDataset.id), nullable=False)
-    """
-    The dataset this item belongs to.
-    """
-
-    text_content: MappedColumn[str] = sa.Column(sa.String(), nullable=False)
-    """
-    The text that will be classified.
-    """
-
-    dataset_label_id: MappedColumn[uuid.UUID] = sa.Column(IdUUID, nullable=True)
-    """
-    The ID of the label this item is classified as.
-    """
-
-    label: MappedColumn[TextClassifierDatasetLabel] = relationship(TextClassifierDatasetLabel, foreign_keys=[dataset_id, dataset_label_id])
-    """
-    The label this item is classified as.
-    """
-
-    __table_args__ = (
-        sa.ForeignKeyConstraint(
-            columns=[
-                dataset_id,
-                dataset_label_id
-            ],
-            refcolumns=[
-                TextClassifierDatasetLabel.dataset_id,
-                TextClassifierDatasetLabel.dataset_label_id
-            ]
-        ),
-    )
