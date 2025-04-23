@@ -1,3 +1,5 @@
+from typing import Annotated
+
 import sqlalchemy as sa
 from fastapi.params import Depends
 from sqlalchemy.orm import Session
@@ -10,7 +12,9 @@ from utils.responses import ListItemResponse
 
 
 @router.get('/datasets')
-async def list_datasets(session: Session = Depends(get_db)):
+async def list_datasets(
+        session: Annotated[Session, Depends(get_db)]
+):
     """
     Lists all the datasets in the database.
     :param session: The database session

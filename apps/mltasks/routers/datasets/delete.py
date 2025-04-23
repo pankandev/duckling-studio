@@ -1,3 +1,5 @@
+from typing import Annotated
+
 import sqlalchemy as sa
 from fastapi.params import Depends
 from sqlalchemy.orm import Session
@@ -13,7 +15,7 @@ from utils.responses import SingleItemResponse
 @router.delete('/datasets/{dataset_id}')
 async def delete_dataset(
         dataset_id: int,
-        session: Session = Depends(get_db),
+        session: Annotated[Session, Depends(get_db)],
 ):
     item = session.execute(
         sa.delete(TextClassifierDataset)

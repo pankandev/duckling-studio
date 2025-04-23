@@ -1,5 +1,5 @@
-import typing
 import uuid
+from typing import Annotated
 
 import pandas as pd
 import sqlalchemy as sa
@@ -31,7 +31,7 @@ def process_csv_into_dataset(dataset_id: int, df: pd.DataFrame):
         if not isinstance(label, str):
             continue
 
-        label_id = session.execute(
+        this_label_id = session.execute(
             sa
             .insert(
                 TextClassifierDatasetLabel
@@ -42,11 +42,14 @@ def process_csv_into_dataset(dataset_id: int, df: pd.DataFrame):
             })
             .returning(TextClassifierDatasetLabel.dataset_label_id)
         ).scalar_one()
-        label_ids_by_label[label] = label_id
+        label_ids_by_label[label] = this_label_id
 
     # insert all the items
     for _, row in df.iterrows():
-        label_id = label_ids_by_label.get(row['label'])
+        row_label = row['label']
+        if not isinstance(row_label, str):
+            continue
+        label_id = label_ids_by_label.get(row_label)
 
         session.execute(
             sa.insert(
@@ -64,9 +67,9 @@ def process_csv_into_dataset(dataset_id: int, df: pd.DataFrame):
 @router.post('/datasets')
 async def create_new_dataset(
         background_tasks: BackgroundTasks,
-        session: Session = Depends(get_db),
-        display_name: str = Form(...),
-        csv_file: typing.Optional[UploadFile] = File(None),
+        session: Annotated[Session, Depends(get_db)],
+        display_name: Annotated[str, Form(...)],
+        csv_file: Annotated[UploadFile | None, File(...)] = None,
 ):
     """
     Creates a dataset.

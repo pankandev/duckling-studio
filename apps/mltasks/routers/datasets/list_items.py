@@ -1,3 +1,5 @@
+from typing import Annotated
+
 import sqlalchemy as sa
 from fastapi.params import Depends, Query
 from sqlalchemy.orm import Session, joinedload
@@ -12,9 +14,10 @@ from utils.responses import ListItemResponse
 @router.get('/datasets/{dataset_id}/items/', tags=['datasets'])
 async def list_dataset_items(
         dataset_id: int,
-        session: Session = Depends(get_db),
-        offset: int = Query(0, ge=0, description="Starting position"),
-        limit: int = Query(20, le=100, description="Maximum number of items to return.")):
+        session: Annotated[Session, Depends(get_db)],
+        offset: Annotated[int, Query(ge=0, description="Starting position")] = 0,
+        limit: Annotated[int, Query(le=100, description="Maximum number of items to return.")] = 20
+):
     """
     Lists all the items in a dataset.
 

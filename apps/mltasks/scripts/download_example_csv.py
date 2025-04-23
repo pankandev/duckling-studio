@@ -1,9 +1,8 @@
 import os
-from tempfile import NamedTemporaryFile
 
-import kagglehub
+import kagglehub  # type: ignore
 import pandas as pd
-from kagglehub.exceptions import UnauthenticatedError
+from kagglehub.exceptions import UnauthenticatedError  # type: ignore
 
 
 # Download latest version

@@ -1,11 +1,11 @@
 from pydantic import BaseModel
-from typing_extensions import TypeVar
+from typing_extensions import TypeVar, Generic
 
-T = TypeVar("T")
+T = TypeVar("T", bound=BaseModel)
 
-class SingleItemResponse(BaseModel):
+class SingleItemResponse(BaseModel, Generic[T]):
     item: T
 
 
-class ListItemResponse(BaseModel):
+class ListItemResponse(BaseModel, Generic[T]):
     items: list[T]

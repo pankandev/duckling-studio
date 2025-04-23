@@ -1,3 +1,5 @@
+from typing import Annotated
+
 import sqlalchemy as sa
 from fastapi.params import Depends
 from pydantic import BaseModel
@@ -22,8 +24,13 @@ class UpdateDatasetItemRequest(BaseModel):
     The ID of the label to set the item to
     """
 
+
 @router.patch('/dataset-items/{item_id}/')
-async def update_dataset_item_label(item_id: int, update: UpdateDatasetItemRequest, session: Session = Depends(get_db)):
+async def update_dataset_item_label(
+        item_id: int,
+        update: UpdateDatasetItemRequest,
+        session: Annotated[Session, Depends(get_db)]
+):
     """
     Updates the label and/or text of a dataset item.
 
@@ -48,7 +55,7 @@ async def update_dataset_item_label(item_id: int, update: UpdateDatasetItemReque
     dataset_id = session.execute(
         sa.select(TextClassifierDatasetItem.dataset_id)
         .where(TextClassifierDatasetItem.id == item_id)
-        ).scalar_one_or_none()
+    ).scalar_one_or_none()
     if dataset_id is None:
         raise AppError(
             error_code='not_found',

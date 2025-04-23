@@ -9,3 +9,6 @@ python-multipart~=0.0.20
 
 alembic~=1.15.2
 mypy~=1.15.0
+
+pandas-stubs~=2.2.3.250308
+celery-types~=0.23.0
