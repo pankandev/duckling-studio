@@ -3,8 +3,9 @@ datasource Postgres {
   url      = env("DATABASE_URL")
 }
 
-generator Client {
+generator ClientWeb {
   provider = "prisma-client-js"
+  output = "../src/generated/prisma"
 }
 
 model Chat {

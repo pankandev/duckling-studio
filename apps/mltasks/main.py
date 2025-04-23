@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 app = FastAPI(
-    title="Duckling Studio ML API",
+    title="Duckling Studio Machine Learning Tasks API",
 )
 
 

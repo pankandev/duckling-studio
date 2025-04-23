@@ -1,6 +1,6 @@
 import {CoreMessage, LanguageModelV1} from "ai";
 
-import {ChatMessage} from "@prisma/client";
+import {ChatMessage} from "@/generated/prisma";
 import {ModelFactory} from "@/lib/server/ai/models/model-factory";
 import {ClaudeAIFactory} from "./models/claude-ai";
 import {LMStudioFactory} from "@/lib/server/ai/models/lm-studio";

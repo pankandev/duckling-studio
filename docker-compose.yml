@@ -1,6 +1,6 @@
 version: '3'
 services:
-  postgres:
+  dbweb:
     image: postgres:17
     environment:
       POSTGRES_USER: postgres
@@ -17,7 +17,25 @@ services:
       timeout: 2s
       retries: 20
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - dbweb_data:/var/lib/postgresql/data
+  dbmltasks:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    cpu_count: 1
+    mem_reservation: 512M
+    networks:
+      - duckling-mltasks-network
+    ports:
+      - '127.0.0.1:5433:5432'
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 2s
+      retries: 20
+    volumes:
+      - dbmltasks_data:/var/lib/postgresql/data
   web:
     build:
       context: ./apps/web
@@ -29,41 +47,47 @@ services:
     ports:
       - '3000:3000'
     depends_on:
-      - postgres
+      - dbweb
+      # - mltasks
     environment:
-      DATABASE_URL: 'postgresql://postgres:postgres@postgres:5432/postgres?schema=public'
+      DATABASE_URL: 'postgresql://postgres:postgres@dbweb:5432/postgres?schema=public'
       OLLAMA_URL: 'http://host.docker.internal:11434'
       LMSTUDIO_URL: 'http://host.docker.internal:1234'
-      ML_API_URL: 'http://mlapi:5000'
+      ML_API_URL: 'http://mltasks:8000'
     extra_hosts:
       - "host.docker.internal:host-gateway"
     command: >
       sh -c "pnpm run prisma:migrate &&
             pnpm run prisma:seed &&
             pnpm start"
-  mlapi:
+  mltasks:
     build:
-      context: ./apps/mlapi
+      context: ./apps/mltasks
       dockerfile: Dockerfile
     ports:
       - '127.0.0.1:8000:8000'
     environment:
-      - REDIS_URL=redis://redis:6379/0
-      - ALLOW_CORS_ORIGIN_URL=http://web:3000
+      REDIS_URL: 'redis://redis:6379/0'
+      DATABASE_URL: 'postgresql://postgres:postgres@dbmltasks:5432/postgres'
     networks:
-      - duckling-services-network
+      - duckling-mltasks-network
       - duckling-web-network
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
+    depends_on:
+      - dbmltasks
+      - redis
+    command: >
+      sh -c "./run.sh"
   redis:
-    image: redis:7-alpine
+    image: redis:7
     ports:
       - "127.0.0.1:6379:6379"
     networks:
-      - duckling-services-network
+      - duckling-mltasks-network
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -73,7 +97,8 @@ services:
 
 networks:
   duckling-web-network:
-  duckling-services-network:
+  duckling-mltasks-network:
 
 volumes:
-  postgres_data:
+  dbmltasks_data:
+  dbweb_data:

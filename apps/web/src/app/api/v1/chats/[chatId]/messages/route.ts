@@ -2,7 +2,7 @@ import {streamText} from "ai";
 import {safeParseInt} from "@/lib/common/parsers/primitives";
 import {HttpError} from "@/lib/common/http/http-error";
 import {prisma} from "@/lib/server/db/client";
-import {ChatMessage} from "@prisma/client";
+import {ChatMessage} from "@/generated/prisma";
 import {buildListItemResponse} from "@/lib/common/http/rest-response";
 import {chatMessageFromDb} from "@/lib/common/resources/chat-message-resource";
 import {ChatMessageAiCompatible, dbMessageListToAiSdk} from "@/lib/server/ai/llm";

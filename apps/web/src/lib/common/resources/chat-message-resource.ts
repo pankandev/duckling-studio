@@ -1,5 +1,5 @@
 import {z} from "zod";
-import {ChatMessage, ChatMessageRole} from "@prisma/client";
+import {ChatMessage, ChatMessageRole} from "@/generated/prisma";
 
 
 export const ChatMessageRoleSchema: z.Schema<ChatMessageRole> = z.enum(['ASSISTANT', 'USER']);

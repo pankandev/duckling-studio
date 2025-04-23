@@ -5,17 +5,43 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add mlapi and redis">
-      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/mlapi.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mlapi/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mlapi/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mlapi/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mlapi/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/models/base.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/models/datasets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/models/sqlalchemy_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/run.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/services/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/services/celery.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/generated/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/mlapi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/mlapi.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mlapi/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mlapi/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mlapi/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mlapi/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/eslint.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/prisma/seed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/prisma/seed.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/api/v1/chats/[chatId]/messages/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/api/v1/chats/[chatId]/messages/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/common/resources/chat-message-resource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/common/resources/chat-message-resource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/ai/llm.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/ai/llm.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/server/db/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/server/db/client.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +84,11 @@
     &quot;accountId&quot;: &quot;e5b37c62-b5d2-4d57-bbfb-1de040e74d5b&quot;
   }
 }</component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupGrunt">
+      <scroll-view-position x="0" y="0" />
+    </layout>
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -71,7 +102,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Docker.docker-compose.yml.dbmltasks: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.dbweb: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.mlapi: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.mltasks: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.postgres: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.redis: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.web: Compose Deployment.executor": "Run",
@@ -115,14 +149,14 @@
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\lib\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\apps\web" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\app\api\v1\llm-providers\[providerHandle]\models" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\images" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\components\inputs" />
-      <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\components\messages" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yml.mltasks: Compose Deployment">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -135,20 +169,38 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="docker-compose.yml.dbmltasks: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
+          <option name="services">
+            <list>
+              <option value="dbmltasks" />
+            </list>
+          </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.mlapi: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="docker-compose.yml.dbweb: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
           <option name="services">
             <list>
-              <option value="mlapi" />
+              <option value="dbweb" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.mltasks: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="mltasks" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
@@ -169,47 +221,33 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="web/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
-      <deployment type="dockerfile">
+    <configuration name="docker-compose.yml.web: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
         <settings>
-          <option name="containerName" value="" />
-          <option name="envVars">
+          <option name="services">
             <list>
-              <DockerEnvVarImpl>
-                <option name="name" value="DOCKER_BUILDKIT" />
-                <option name="value" value="0" />
-              </DockerEnvVarImpl>
+              <option value="web" />
             </list>
           </option>
-          <option name="sourceFilePath" value="apps/web/Dockerfile" />
+          <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="prisma:generate (1)" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/apps/web/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="prisma:generate" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Docker.docker-compose.yml.mlapi: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.dbmltasks: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.dbweb: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.mltasks: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
-      <item itemvalue="Docker.web/Dockerfile" />
-      <item itemvalue="npm.prisma:generate (1)" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.mltasks: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.dbmltasks: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.mlapi: Compose Deployment" />
-        <item itemvalue="npm.prisma:generate (1)" />
-        <item itemvalue="Docker.web/Dockerfile" />
+        <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.dbweb: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -286,7 +324,10 @@
       <workItem from="1745116890873" duration="622000" />
       <workItem from="1745118436585" duration="1449000" />
       <workItem from="1745124397689" duration="2086000" />
-      <workItem from="1745126562066" duration="2315000" />
+      <workItem from="1745126562066" duration="3819000" />
+      <workItem from="1745198372049" duration="265000" />
+      <workItem from="1745266691583" duration="7741000" />
+      <workItem from="1745365733576" duration="7603000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
@@ -608,7 +649,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745125757105</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="feat: add mlapi and redis">
+      <option name="closed" value="true" />
+      <created>1745129501977</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1745129501977</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
