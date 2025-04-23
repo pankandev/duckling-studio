@@ -24,6 +24,8 @@ async def list_dataset_items(
     :return: A list of items
     """
 
+    # TODO: Change to page_after_id query instead of offset. Offset is too slow for big datasets
+    # reference: https://stackoverflow.com/questions/26625614/select-query-with-offset-limit-is-much-too-slow
     return ListItemResponse(
         items=[
             DatasetItemResource.from_sql(item)
