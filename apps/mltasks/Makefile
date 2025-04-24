@@ -11,3 +11,9 @@ dbmigrate:
 dev:
 	pip install fastapi[standard]
 	fastapi run --reload
+
+run_api:
+	alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000
+
+run_celery:
+	alembic upgrade head && celery -A main worker

@@ -82,6 +82,28 @@ services:
       - redis
     command: >
       sh -c "./run.sh"
+  mltasks_celery_worker:
+    build:
+      context: ./apps/mltasks
+      dockerfile: Dockerfile
+    ports:
+      - '127.0.0.1:8000:8000'
+    environment:
+      REDIS_URL: 'redis://redis:6379/0'
+      DATABASE_URL: 'postgresql://postgres:postgres@dbmltasks:5432/postgres'
+    networks:
+      - duckling-mltasks-network
+      - duckling-web-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      - dbmltasks
+      - redis
+    command: >
+      sh -c "make run_celery"
   redis:
     image: redis:7
     ports:

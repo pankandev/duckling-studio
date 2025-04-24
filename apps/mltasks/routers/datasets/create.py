@@ -72,6 +72,7 @@ def process_csv_into_dataset(dataset_id: int, df: pd.DataFrame):
 
     session.commit()
     LOGGER.info(f"Finished importing {row_index} into dataset {dataset_id}")
+    session.close()
 
 
 @router.post('/datasets')

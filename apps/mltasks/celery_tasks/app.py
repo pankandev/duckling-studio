@@ -9,3 +9,4 @@ celery_app = Celery(
     broker=redis_url,
     backend=redis_url
 )
+

@@ -1,3 +1,4 @@
+celery~=5.5.1
 fastapi~=0.115.12
 uvicorn~=0.22.0
 pydantic~=2.11.3
@@ -6,6 +7,7 @@ sqlalchemy~=2.0.40
 psycopg2-binary~=2.9.10
 pandas~=2.2.3
 python-multipart~=0.0.20
+transformers~=4.51.3
 
 alembic~=1.15.2
 mypy~=1.15.0
