@@ -1,28 +1,28 @@
 from typing import Annotated
 
 import sqlalchemy as sa
-
-from fastapi import Depends, BackgroundTasks
+from celery.result import AsyncResult
+from fastapi import Depends
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
-from transformers import AutoTokenizer, Trainer, AutoModelForSequenceClassification
 
-from celery_tasks.train_classifier_model import train_classifier_model
-from models import TextClassifierDataset, TextClassifierDatasetItem
+from celery_tasks import celery_app
+from celery_tasks.train_classifier_model import train_classifier_model, ModelType
+from models import TextClassifierDataset
 from models.models import TextClassifierModel
 from resources.model import ModelResource
 from routers.models.router import router
 from services.app_error import AppError
-from services.db import get_db, SessionLocal
+from services.db import get_db
 from utils.responses import SingleItemResponse
 
 
+class TrainModelRequest(BaseModel):
+    type: ModelType
+
 
 @router.post('/datasets/{dataset_id}/train')
-def train_classifier(
-        dataset_id: int,
-        session: Annotated[Session, Depends(get_db)],
-        background_tasks: BackgroundTasks
-):
+def train_classifier(dataset_id: int, session: Annotated[Session, Depends(get_db)]):
     dataset = session.execute(
         sa.select(TextClassifierDataset.id).where(TextClassifierDataset.id == dataset_id)
     ).scalar_one_or_none()
@@ -38,9 +38,18 @@ def train_classifier(
         sa.insert(TextClassifierModel).returning(TextClassifierModel)
     ).scalar_one()
     model_resource = ModelResource.from_sql(model)
+
+    task: AsyncResult = train_classifier_model.delay(model.id)
+
+    session.execute(
+        sa.update(TextClassifierModel)
+        .where(TextClassifierModel.id == model.id)
+        .values({
+            TextClassifierModel.celery_task_id: task.id
+        })
+    )
     session.commit()
 
-    train_classifier_model.delay(model.id)
 
     return SingleItemResponse(
         item=model_resource

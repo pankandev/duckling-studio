@@ -12,7 +12,7 @@ evaluate~=0.4.3
 numpy~=2.2.5
 datasets~=3.5.0
 scikit-learn~=1.6.1
-mlflow~=2.13.2
+mlflow~=2.22.0
 
 alembic~=1.15.2
 mypy~=1.15.0

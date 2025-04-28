@@ -26,6 +26,7 @@ class TextClassifierModel(SQLModelBase, IdMixin, TimestampMixin):
 
     status: Mapped[ModelStatus] = mapped_column(sa.Enum(ModelStatus), nullable=False,
                                                 server_default=ModelStatus.IDLE.value, index=True)
+    celery_task_id: Mapped[uuid.UUID] = mapped_column(IdUUID, nullable=True)
 
 
 class TextClassifierModelMetric(SQLModelBase, IdMixin, TimestampMixin):
