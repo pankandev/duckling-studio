@@ -28,7 +28,10 @@ class TextClassifierDataset(SQLModelBase, IdMixin, TimestampMixin):
     Human-readable name for the dataset that will be displayed in the UI.
     """
 
-    labels: Mapped[list['TextClassifierDatasetLabel']] = relationship(order_by='TextClassifierDatasetLabel.id')
+    labels: Mapped[list['TextClassifierDatasetLabel']] = relationship(
+        back_populates='dataset',
+        order_by='TextClassifierDatasetLabel.id'
+    )
     """
     Collection of all possible classification labels defined for this dataset.
     """
@@ -91,7 +94,13 @@ class TextClassifierDatasetItem(SQLModelBase, IdMixin, TimestampMixin):
             'text_classifier_dataset_items_dataset_id_created_at_idx',
             dataset_id,
             sa.desc('created_at')
-        )
+        ),
+        sa.Index(
+            'idx_dataset_items_dataset_id_split_query',
+            'dataset_id',
+            'split',
+            'dataset_label_id',
+            postgresql_where=dataset_label_id.is_not(None)),
     )
 
 

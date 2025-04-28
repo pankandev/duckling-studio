@@ -6,6 +6,7 @@ from fastapi import Depends, BackgroundTasks
 from sqlalchemy.orm import Session
 from transformers import AutoTokenizer, Trainer, AutoModelForSequenceClassification
 
+from celery_tasks.train_classifier_model import train_classifier_model
 from models import TextClassifierDataset, TextClassifierDatasetItem
 from models.models import TextClassifierModel
 from resources.model import ModelResource
@@ -13,23 +14,6 @@ from routers.models.router import router
 from services.app_error import AppError
 from services.db import get_db, SessionLocal
 from utils.responses import SingleItemResponse
-
-
-def train_model(model_id: int):
-    db = SessionLocal()
-
-    # preprocess the text
-    tokenizer = AutoTokenizer.from_pretrained("distilbert/distilbert-base-uncased")
-    model = AutoModelForSequenceClassification.from_pretrained(
-        "distilbert/distilbert-base-uncased", num_labels=2, id2label=id2label, label2id=label2id
-    )
-    trainer = Trainer(
-        model=model,
-        
-    )
-    tokenizer()
-
-    db.close()
 
 
 
@@ -56,7 +40,7 @@ def train_classifier(
     model_resource = ModelResource.from_sql(model)
     session.commit()
 
-    background_tasks.add_task(train_model, model.id)
+    train_classifier_model.delay(model.id)
 
     return SingleItemResponse(
         item=model_resource

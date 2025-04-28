@@ -8,9 +8,18 @@ psycopg2-binary~=2.9.10
 pandas~=2.2.3
 python-multipart~=0.0.20
 transformers~=4.51.3
+evaluate~=0.4.3
+numpy~=2.2.5
+datasets~=3.5.0
+scikit-learn~=1.6.1
 
 alembic~=1.15.2
 mypy~=1.15.0
+torch~=2.7.0
+transformers[torch]~=4.51.3
 
 pandas-stubs~=2.2.3.250308
 celery-types~=0.23.0
+
+typing_extensions~=4.13.2
+kagglehub~=0.3.11

@@ -5,20 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add mlapi and redis">
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/train_classifier_model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/models/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/resources/model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/models/router.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/routers/models/train_classifier.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/classifier_models/dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/classifier_models/trainer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/notebooks/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/notebooks/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/celery_tasks/train_classifier_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/train_classifier_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/models/datasets.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/models/datasets.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/mypy.ini" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/mypy.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mltasks/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/routers/datasets/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/routers/datasets/create.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/run.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/services/celery.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/routers/models/train_classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/routers/models/train_classifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/classifier_models/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +130,7 @@
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\components\inputs" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.mltasks: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yml.dbmltasks: Compose Deployment">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -219,11 +217,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.docker-compose.yml.mltasks: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.dbmltasks: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.dbweb: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.mltasks: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -306,6 +304,9 @@
       <workItem from="1745365733576" duration="8316000" />
       <workItem from="1745387601068" duration="3667000" />
       <workItem from="1745451635579" duration="1831000" />
+      <workItem from="1745525870749" duration="7460000" />
+      <workItem from="1745819155902" duration="1770000" />
+      <workItem from="1745821975031" duration="558000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
