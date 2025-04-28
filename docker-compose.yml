@@ -91,6 +91,7 @@ services:
     environment:
       REDIS_URL: 'redis://redis:6379/0'
       DATABASE_URL: 'postgresql://postgres:postgres@dbmltasks:5432/postgres'
+      MLFLOW_TRACKING_SERVER_URL: 'http://mlflow:5000'
     networks:
       - duckling-mltasks-network
       - duckling-web-network
@@ -115,7 +116,14 @@ services:
       interval: 5s
       timeout: 2s
       retries: 10
-
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.22.0
+    ports:
+      - "127.0.0.1:5000:5000"
+    networks:
+      - duckling-mltasks-network
+    command: >
+      mlflow server --host 0.0.0.0 --port 5000
 
 networks:
   duckling-web-network:

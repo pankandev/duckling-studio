@@ -1,6 +1,8 @@
 import dataclasses
+import typing
 
 import evaluate
+import mlflow
 import numpy as np
 from datasets import DatasetDict
 from transformers import (
@@ -9,6 +11,7 @@ from transformers import (
     TrainingArguments,
     Trainer, AutoModelForSequenceClassification, AutoTokenizer
 )
+from transformers.integrations import MLflowCallback
 
 from celery_tasks.classifier_models.dataset import load_dataset_items
 
@@ -102,6 +105,7 @@ def create_trainer(model, tokenizer, dataset: DatasetDict) -> Trainer:
 
 @dataclasses.dataclass
 class TextClassifierConfiguration:
+    run_name: str
     dataset_id: int
     labels: list[str]
     learning_rate: float = 1e-5
@@ -109,51 +113,103 @@ class TextClassifierConfiguration:
     attention_dropout: float = 0.1
     weight_decay: float = 0.02
     num_train_epochs: int = 7
+    model_name: str = "distilbert/distilbert-base-uncased"
 
+    def to_dict_params(self) -> dict[str, typing.Any]:
+        return {
+            "dataset_id": self.dataset_id,
+            "labels": self.labels,
+            "learning_rate": self.learning_rate,
+            "dropout": self.dropout,
+            "attention_dropout": self.attention_dropout,
+            "weight_decay": self.weight_decay,
+            "num_train_epochs": self.num_train_epochs,
+            "model_name": self.model_name
+        }
 
 
 def train_classifier_pipeline(config: TextClassifierConfiguration):
-    # Process labels
-    all_labels, id2label, label2id = process_labels(config.labels)
+    """
+    Train a classifier pipeline using a dataset from PostgreSQL.
 
-    # Load and prepare data
-    tokenizer = AutoTokenizer.from_pretrained("distilbert/distilbert-base-uncased")
-    hf_dataset = load_dataset_items(config.dataset_id, tokenizer, label2id)
+    Parameters
+    ---
+    config : TextClassifierConfiguration
+        Configuration for training.
+    """
 
-    # load model
-    model = AutoModelForSequenceClassification.from_pretrained(
-        "distilbert/distilbert-base-uncased",
-        num_labels=len(all_labels),
-        id2label=id2label,
-        label2id=label2id,
-        dropout=config.dropout,
-        attention_dropout=config.attention_dropout,
-    )
+    with mlflow.start_run(run_name=config.run_name):
+        # Log configuration parameters
+        mlflow.log_params(config.to_dict_params())
 
-    # Setup training
-    data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
-    training_args = TrainingArguments(
-        learning_rate=config.learning_rate,
-        per_device_train_batch_size=16,
-        per_device_eval_batch_size=16,
-        num_train_epochs=config.num_train_epochs,
-        weight_decay=config.weight_decay,
-        eval_strategy="epoch",
-        save_strategy="epoch",
-        load_best_model_at_end=True,
-        push_to_hub=False,
-    )
-    trainer: Trainer | Trainer = Trainer(
-        model=model,
-        args=training_args,
-        train_dataset=hf_dataset["train"],
-        eval_dataset=hf_dataset["test"],
-        processing_class=tokenizer,
-        data_collator=data_collator,
-        compute_metrics=compute_metrics,
-    )
+        # Process labels
+        all_labels, id2label, label2id = process_labels(config.labels)
 
-    # Train model
-    trainer.train()
+        # Load and prepare data
+        tokenizer = AutoTokenizer.from_pretrained(config.model_name)
+        hf_dataset = load_dataset_items(config.dataset_id, tokenizer, label2id)
+
+        # Log labels
+        mlflow.log_dict(label2id, "label2id.json")
+
+        # load model
+        model = AutoModelForSequenceClassification.from_pretrained(
+            config.model_name,
+            num_labels=len(all_labels),
+            id2label=id2label,
+            label2id=label2id,
+            dropout=config.dropout,
+            attention_dropout=config.attention_dropout,
+        )
+
+        # Log dataset info
+        mlflow.log_dict({
+            "train_size": len(hf_dataset["train"]),
+            "test_size": len(hf_dataset["test"])
+        }, "dataset_info.json")
+
+        # Setup training
+        data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
+        training_args = TrainingArguments(
+            learning_rate=config.learning_rate,
+            per_device_train_batch_size=16,
+            per_device_eval_batch_size=16,
+            num_train_epochs=config.num_train_epochs,
+            weight_decay=config.weight_decay,
+            eval_strategy="epoch",
+            save_strategy="epoch",
+            load_best_model_at_end=True,
+            push_to_hub=False,
+        )
+        trainer: Trainer = Trainer(
+            model=model,
+            args=training_args,
+            train_dataset=hf_dataset["train"],
+            eval_dataset=hf_dataset["test"],
+            processing_class=tokenizer,
+            data_collator=data_collator,
+            compute_metrics=compute_metrics,
+            callbacks=[
+                MLflowCallback
+            ]
+        )
+
+        # Train model
+        trainer.train()
+
+        if trainer.state.best_metric is not None:
+            mlflow.log_metrics({
+                "accuracy": trainer.state.best_metric,
+            })
+
+        if trainer.state.best_model_checkpoint is None:
+            raise ValueError("No best checkpoint found.")
+
+        mlflow.log_artifact(trainer.state.best_model_checkpoint, "best_model_checkpoint")
+        mlflow.transformers.log_model(
+            config.model_name,
+            artifact_path="mlflow_model",
+            task="text-classification",
+        )
 
     return trainer.state.best_model_checkpoint

@@ -9,11 +9,10 @@ from transformers import (
 from models import TextClassifierDataset, TextClassifierDatasetItem
 from models.datasets import TrainTestSplit
 from models.models import TextClassifierModel
-from services.app_error import AppError
 from services.db import SessionLocal
 
 
-def get_dataset(session: Session, model_id: int) -> TextClassifierDataset:
+def get_dataset(session: Session, model_id: int) -> TextClassifierDataset | None:
     """
     Retrieve the dataset associated with a given model ID.
 
@@ -41,14 +40,6 @@ def get_dataset(session: Session, model_id: int) -> TextClassifierDataset:
         .join(TextClassifierDataset, TextClassifierModel.dataset_id == TextClassifierDataset.id)
         .options(subqueryload(TextClassifierDataset.labels))
     ).scalar_one_or_none()
-
-    if dataset is None:
-        raise AppError(
-            error_code='not_found',
-            status_code=404,
-            details={"id": model_id},
-            message=f"Model {model_id} not found"
-        )
 
     return dataset
 
