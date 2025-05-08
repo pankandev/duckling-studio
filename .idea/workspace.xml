@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add dataset items table view">
-      <change afterPath="$PROJECT_DIR$/apps/web/src/app/api/v1/datasets/[datasetId]/items/route.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/components/datasets/dataset-items-table.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/components/ui/table.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/client/api/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/client/api/client.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/client/api/datasets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/client/api/datasets.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/common/resources/dataset-resource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/common/resources/dataset-resource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/text-classification/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/layout.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -306,7 +300,7 @@
       <workItem from="1745856480125" duration="3851000" />
       <workItem from="1745974725356" duration="987000" />
       <workItem from="1746028198138" duration="15836000" />
-      <workItem from="1746673765107" duration="8737000" />
+      <workItem from="1746673765107" duration="9044000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
@@ -652,7 +646,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746677954596</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="feat: add dataset items table view">
+      <option name="closed" value="true" />
+      <created>1746685515309</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1746685515309</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
