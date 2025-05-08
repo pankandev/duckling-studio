@@ -4,30 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add datasets list view">
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/alembic/versions/b93d43f78286_.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/app/api/v1/datasets/route.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/lib/client/api/datasets.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/lib/common/resources/dataset-resource.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/lib/server/mltasks/api.ts" afterDir="false" />
+    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add dataset items table view">
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/api/v1/datasets/[datasetId]/items/route.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/components/datasets/dataset-items-table.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/components/ui/table.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/celery_tasks/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/celery_tasks/classifier_models/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/classifier_models/trainer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/celery_tasks/train_classifier_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/train_classifier_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/routers/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/routers/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/routers/models/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/routers/models/train_classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/routers/models/train_classifier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/next.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/client/api/client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/client/api/client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/client/api/datasets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/client/api/datasets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/common/resources/dataset-resource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/common/resources/dataset-resource.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -321,7 +306,7 @@
       <workItem from="1745856480125" duration="3851000" />
       <workItem from="1745974725356" duration="987000" />
       <workItem from="1746028198138" duration="15836000" />
-      <workItem from="1746673765107" duration="3896000" />
+      <workItem from="1746673765107" duration="8737000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
@@ -659,14 +644,21 @@
       <option name="project" value="LOCAL" />
       <updated>1745826852792</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="feat: add datasets list view">
+      <option name="closed" value="true" />
+      <created>1746677954595</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1746677954596</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: add delete and edit message buttons" />
     <MESSAGE value="feat: add chat llm configuration customization on db" />
     <MESSAGE value="refactor: moved chat configuration fetch into its own function to avoid duplication" />
     <MESSAGE value="chore: add application screenshot" />
@@ -691,6 +683,7 @@
     <MESSAGE value="feat: add mlapi and redis" />
     <MESSAGE value="feat: add mlflow tracking server" />
     <MESSAGE value="feat: add datasets list view" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add datasets list view" />
+    <MESSAGE value="feat: add dataset items table view" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add dataset items table view" />
   </component>
 </project>

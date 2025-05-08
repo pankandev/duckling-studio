@@ -43,6 +43,7 @@ async function parseJsonResponse<T>(response: Response, schema: z.Schema<T, z.Zo
     }
     const parsed = schema.safeParse(await response.json());
     if (!parsed.success) {
+        console.error(parsed.error);
         return err(HttpError.badRequestZod(parsed.error));
     }
     return ok(parsed.data);
