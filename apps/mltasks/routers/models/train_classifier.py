@@ -3,11 +3,11 @@ from typing import Annotated
 import sqlalchemy as sa
 from celery.result import AsyncResult
 from fastapi import Depends
-from pydantic import BaseModel
+from pydantic import BaseModel, RootModel
 from sqlalchemy.orm import Session
 
-from celery_tasks import celery_app
-from celery_tasks.train_classifier_model import train_classifier_model, ModelType
+from celery_tasks.classifier_models.trainer import TextClassifierTrainingArguments
+from celery_tasks.train_classifier_model import train_classifier_model, TextClassifierType
 from models import TextClassifierDataset
 from models.models import TextClassifierModel
 from resources.model import ModelResource
@@ -17,12 +17,17 @@ from services.db import get_db
 from utils.responses import SingleItemResponse
 
 
+class TextClassifierTrainingArgumentsPydantic(RootModel):
+    root: TextClassifierTrainingArguments
+
+
 class TrainModelRequest(BaseModel):
-    type: ModelType
+    type: TextClassifierType = TextClassifierType.HUGGING_FACE
+    training_args: TextClassifierTrainingArgumentsPydantic | None = None
 
 
 @router.post('/datasets/{dataset_id}/train')
-def train_classifier(dataset_id: int, session: Annotated[Session, Depends(get_db)]):
+def train_classifier(dataset_id: int, body: TrainModelRequest, session: Annotated[Session, Depends(get_db)]):
     dataset = session.execute(
         sa.select(TextClassifierDataset.id).where(TextClassifierDataset.id == dataset_id)
     ).scalar_one_or_none()
@@ -35,11 +40,13 @@ def train_classifier(dataset_id: int, session: Annotated[Session, Depends(get_db
             message=f"Dataset {dataset_id} not found"
         )
     model = session.execute(
-        sa.insert(TextClassifierModel).returning(TextClassifierModel)
+        sa.insert(TextClassifierModel).values({
+            TextClassifierModel.dataset_id: dataset_id,
+        }).returning(TextClassifierModel)
     ).scalar_one()
     model_resource = ModelResource.from_sql(model)
 
-    task: AsyncResult = train_classifier_model.delay(model.id)
+    task: AsyncResult = train_classifier_model.delay(model.id, body.type, body.training_args.root)
 
     session.execute(
         sa.update(TextClassifierModel)

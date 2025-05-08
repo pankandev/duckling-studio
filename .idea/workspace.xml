@@ -4,15 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add mlflow tracking server">
-      <change afterPath="$PROJECT_DIR$/apps/mltasks/.dockerignore" afterDir="false" />
+    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add datasets list view">
+      <change afterPath="$PROJECT_DIR$/apps/mltasks/alembic/versions/b93d43f78286_.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/api/v1/datasets/route.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/lib/client/api/datasets.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/lib/common/resources/dataset-resource.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/lib/server/mltasks/api.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mltasks/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/celery_tasks/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/celery_tasks/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/celery_tasks/classifier_models/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/classifier_models/trainer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mltasks/celery_tasks/train_classifier_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/train_classifier_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/models/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mltasks/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/routers/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/routers/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/routers/models/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/mltasks/routers/models/train_classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/routers/models/train_classifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/next.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +37,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
+        <option value="Python Script" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -129,7 +144,7 @@
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\components\inputs" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.mltasks: Compose Deployment">
+  <component name="RunManager" selected="npm.dev">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -139,19 +154,6 @@
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
       <deployment type="dockerfile">
         <settings />
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.dbmltasks: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="dbmltasks" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
       </deployment>
       <method v="2" />
     </configuration>
@@ -194,12 +196,12 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.web: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="docker-compose.yml.redis: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
           <option name="services">
             <list>
-              <option value="web" />
+              <option value="redis" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
@@ -207,20 +209,30 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/apps/web/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.mlflow: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.mltasks_celery_worker: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.dbmltasks: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.mltasks: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
+      <item itemvalue="npm.dev" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="Docker.docker-compose.yml.mltasks: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.mltasks_celery_worker: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.mlflow: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.dbmltasks: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -306,7 +318,10 @@
       <workItem from="1745525870749" duration="7460000" />
       <workItem from="1745819155902" duration="1770000" />
       <workItem from="1745821975031" duration="3511000" />
-      <workItem from="1745856480125" duration="686000" />
+      <workItem from="1745856480125" duration="3851000" />
+      <workItem from="1745974725356" duration="987000" />
+      <workItem from="1746028198138" duration="15836000" />
+      <workItem from="1746673765107" duration="3896000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
@@ -651,7 +666,6 @@
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: add endpoints to delete and edit messages" />
     <MESSAGE value="feat: add delete and edit message buttons" />
     <MESSAGE value="feat: add chat llm configuration customization on db" />
     <MESSAGE value="refactor: moved chat configuration fetch into its own function to avoid duplication" />
@@ -676,6 +690,7 @@
     <MESSAGE value="fix: fix LM Studio generated baseURL" />
     <MESSAGE value="feat: add mlapi and redis" />
     <MESSAGE value="feat: add mlflow tracking server" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add mlflow tracking server" />
+    <MESSAGE value="feat: add datasets list view" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add datasets list view" />
   </component>
 </project>

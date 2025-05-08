@@ -16,6 +16,7 @@ services:
       interval: 5s
       timeout: 2s
       retries: 20
+    restart: unless-stopped
     volumes:
       - dbweb_data:/var/lib/postgresql/data
   dbmltasks:
@@ -48,7 +49,7 @@ services:
       - '3000:3000'
     depends_on:
       - dbweb
-      # - mltasks
+      - mltasks
     environment:
       DATABASE_URL: 'postgresql://postgres:postgres@dbweb:5432/postgres?schema=public'
       OLLAMA_URL: 'http://host.docker.internal:11434'
@@ -60,6 +61,7 @@ services:
       sh -c "pnpm run prisma:migrate &&
             pnpm run prisma:seed &&
             pnpm start"
+    restart: unless-stopped
   mltasks:
     build:
       context: ./apps/mltasks
@@ -80,14 +82,14 @@ services:
     depends_on:
       - dbmltasks
       - redis
+      - mltasks_celery_worker
     command: >
       sh -c "make run_api"
   mltasks_celery_worker:
     build:
       context: ./apps/mltasks
       dockerfile: Dockerfile
-    ports:
-      - '127.0.0.1:8000:8000'
+    user: celeryuser
     environment:
       REDIS_URL: 'redis://redis:6379/0'
       DATABASE_URL: 'postgresql://postgres:postgres@dbmltasks:5432/postgres'
@@ -95,15 +97,23 @@ services:
     networks:
       - duckling-mltasks-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
-      interval: 30s
-      timeout: 10s
+      test: ["CMD", "PYTHONPATH=/app", "celery", "-A celery_tasks.app", "inspect", "ping"]
+      interval: 120s
+      timeout: 60s
       retries: 3
     depends_on:
       - dbmltasks
       - redis
+      - mlflow
     command: >
       sh -c "make run_celery"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
   redis:
     image: redis:7
     ports:
@@ -122,9 +132,8 @@ services:
     networks:
       - duckling-mltasks-network
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
-      interval: 5s
-      timeout: 2s
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health')"]
+      timeout: 5s
       retries: 10
     command: >
       mlflow server --host 0.0.0.0 --port 5000

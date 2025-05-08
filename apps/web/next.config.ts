@@ -4,6 +4,15 @@ const nextConfig: NextConfig = {
   sassOptions: {
     silenceDeprecations: ['import', 'legacy-js-api']
   },
+  async redirects() {
+    return [
+      {
+        source: "/text-classification",
+        destination: "/text-classification/datasets",
+        permanent: true,
+      }
+    ]
+  },
   async headers() {
     return [
       {

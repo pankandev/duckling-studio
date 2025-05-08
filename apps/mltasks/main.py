@@ -4,6 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
 from routers.datasets import router as datasets_router
+from routers.models import router as models_router
 from services.app_error import AppError
 
 logging.basicConfig(level=logging.INFO)
@@ -27,6 +28,7 @@ async def health():
 
 
 app.include_router(datasets_router)
+app.include_router(models_router)
 
 
 if __name__ == "__main__":

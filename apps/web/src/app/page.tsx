@@ -16,6 +16,13 @@ export default function Home() {
                                 <span>Chat</span>
                             </Link>
                         </Button>
+                        <Button asChild variant="outline"
+                                className="w-[10rem] max-w-full aspect-square h-auto flex flex-col gap-0.5">
+                            <Link href={'/text-classification/'} passHref>
+                                <MessageCircle size={32}></MessageCircle>
+                                <span>Classify Text</span>
+                            </Link>
+                        </Button>
                         <Button
                             variant="outline"
                             className="w-[10rem] max-w-full aspect-square h-auto flex flex-col gap-0.5"
