@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add home button to datasets layout">
-      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/items/page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/layout.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/models/page.tsx" afterDir="false" />
+    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add classifier models empty view">
+      <change afterPath="$PROJECT_DIR$/apps/web/src/components/datasets/dataset-models-table.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/next.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/page.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/app/text-classification/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/models/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/models/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/client/api/datasets.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/client/api/datasets.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/common/resources/dataset-resource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/common/resources/dataset-resource.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,55 +68,55 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.docker-compose.yml.dbmltasks: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.dbweb: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.mlapi: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.mlflow: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.mltasks: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.mltasks_celery_worker: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.postgres: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.redis: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.web: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.web/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/classifier&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.18.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.17.27&quot;,
-    &quot;jsx.switch.disabled&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/pcamp/WebstormProjects/claude-chat/src/app/api/v1&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
-    &quot;npm.create-migration.executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev (1).executor&quot;: &quot;Run&quot;,
-    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
-    &quot;npm.prisma:generate (1).executor&quot;: &quot;Run&quot;,
-    &quot;npm.prisma:generate.executor&quot;: &quot;Run&quot;,
-    &quot;npm.prisma:migrate.executor&quot;: &quot;Run&quot;,
-    &quot;npm.prisma:seed.executor&quot;: &quot;Run&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\pcamp\\WebstormProjects\\claude-chat\\apps\\web\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.docker-compose.yml.dbmltasks: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.dbweb: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.mlapi: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.mlflow: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.mltasks: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.mltasks_celery_worker: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.postgres: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.redis: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.web: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "Docker.web/Dockerfile.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "feature/classifier",
+    "ignore.virus.scanning.warn.message": "true",
+    "javascript.nodejs.core.library.configured.version": "20.18.0",
+    "javascript.nodejs.core.library.typings.version": "20.17.27",
+    "jsx.switch.disabled": "true",
+    "last_opened_file_path": "C:/Users/pcamp/WebstormProjects/claude-chat/apps/web/src/components/datasets",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "pnpm",
+    "npm.create-migration.executor": "Run",
+    "npm.dev (1).executor": "Run",
+    "npm.dev.executor": "Run",
+    "npm.prisma:generate (1).executor": "Run",
+    "npm.prisma:generate.executor": "Run",
+    "npm.prisma:migrate.executor": "Run",
+    "npm.prisma:seed.executor": "Run",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
+    "ts.external.directory.path": "C:\\Users\\pcamp\\WebstormProjects\\claude-chat\\apps\\web\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\apps\web\src\components\datasets" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\app\api\v1" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\lib\server\ai\models" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\app\api\v1\chats\[chatId]" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\components" />
-      <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\lib\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\apps\web\src\app\text-classification\datasets\[datasetId]\items" />
@@ -307,7 +304,7 @@
       <workItem from="1745974725356" duration="987000" />
       <workItem from="1746028198138" duration="15836000" />
       <workItem from="1746673765107" duration="9092000" />
-      <workItem from="1746764941103" duration="2056000" />
+      <workItem from="1746764941103" duration="3470000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
@@ -669,14 +666,21 @@
       <option name="project" value="LOCAL" />
       <updated>1746685656869</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="feat: add classifier models empty view">
+      <option name="closed" value="true" />
+      <created>1746768795699</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1746768795699</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="refactor: moved chat configuration fetch into its own function to avoid duplication" />
     <MESSAGE value="chore: add application screenshot" />
     <MESSAGE value="feat: add LLM config to chats and send message" />
     <MESSAGE value="feat: add LLM config selection" />
@@ -701,6 +705,7 @@
     <MESSAGE value="feat: add datasets list view" />
     <MESSAGE value="feat: add dataset items table view" />
     <MESSAGE value="feat: add home button to datasets layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add home button to datasets layout" />
+    <MESSAGE value="feat: add classifier models empty view" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add classifier models empty view" />
   </component>
 </project>

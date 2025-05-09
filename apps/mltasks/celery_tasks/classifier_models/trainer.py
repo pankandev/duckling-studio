@@ -108,7 +108,7 @@ def create_trainer(model, tokenizer, dataset: DatasetDict) -> Trainer:
     return trainer
 
 @dataclasses.dataclass
-class TextClassifierTrainingArguments(TrainingArguments):
+class TextClassifierTrainingArguments:
     learning_rate: float = 1e-5
     dropout: float = 0.1
     attention_dropout: float = 0.1

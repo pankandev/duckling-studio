@@ -21,6 +21,15 @@ export interface DatasetItemResource {
     label: DatasetLabelLiteResource | null;
 }
 
+export interface DatasetModelResource {
+    id: string;
+    status: string;
+    config: Record<string, unknown>;
+    trainAccuracy: number;
+    evaluationAccuracy: number;
+    mlflowPath: string | null;
+}
+
 export const DatasetLabelLiteResourceSchema: z.ZodSchema<DatasetLabelLiteResource, z.ZodTypeDef, unknown> = z.object({
     id: z.string(),
     label: z.string(),
@@ -42,4 +51,11 @@ export const DatasetItemResourceSchema: z.ZodSchema<DatasetItemResource, z.ZodTy
     id: z.number(),
     textContent: z.string(),
     label: DatasetLabelLiteResourceSchema.nullable(),
+});
+
+export const DatasetModelResourceSchema: z.ZodSchema<DatasetModelResource, z.ZodTypeDef, unknown> = z.object({
+    id: z.string(),
+    status: z.string(),
+    metrics: z.record(z.any()),
+    mlflowPath: z.string().nullable(),
 });
