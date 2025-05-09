@@ -115,6 +115,7 @@ class TextClassifierTrainingArguments:
     weight_decay: float = 0.02
     num_train_epochs: int = 7
     model_name: str = "distilbert/distilbert-base-uncased"
+    batch_size: int = 16
 
 
 @dataclasses.dataclass
@@ -182,8 +183,8 @@ def train_classifier_pipeline(config: TextClassifierConfiguration):
         data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
         training_args = TrainingArguments(
             learning_rate=config_training_args.learning_rate,
-            per_device_train_batch_size=16,
-            per_device_eval_batch_size=16,
+            per_device_train_batch_size=config_training_args.batch_size,
+            per_device_eval_batch_size=config_training_args.batch_size,
             num_train_epochs=config_training_args.num_train_epochs,
             weight_decay=config_training_args.weight_decay,
             eval_strategy="epoch",
