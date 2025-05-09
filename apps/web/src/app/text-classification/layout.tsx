@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from "next/link";
-import {Home} from "lucide-react";
+import {ChevronRight, Home} from "lucide-react";
 import {Button} from "@/components/ui/button";
 
 const TextClassificationLayout = ({children}: { children: React.ReactNode }) => {
@@ -16,7 +16,15 @@ const TextClassificationLayout = ({children}: { children: React.ReactNode }) => 
                             </span>
                         </Link>
                     </Button>
-                    <h1 className="font-bold">Text Classification</h1>
+                    <ChevronRight size={16}></ChevronRight>
+                    <Button asChild variant="ghost" className="text-sm flex flex-row justify-between items-center">
+                        <Link href={('/')}>
+                            <Home size={16}></Home>
+                            <span>
+                                Text Classification
+                            </span>
+                        </Link>
+                    </Button>
                 </div>
             </div>
             <div className="py-3 px-5">

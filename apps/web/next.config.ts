@@ -10,7 +10,12 @@ const nextConfig: NextConfig = {
         source: "/text-classification",
         destination: "/text-classification/datasets",
         permanent: true,
-      }
+      },
+      {
+        source: "/text-classification/datasets/:datasetId",
+        destination: "/text-classification/datasets/:datasetId/items",
+        permanent: true,
+      },
     ]
   },
   async headers() {

@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add dataset items table view">
+    <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="feat: add home button to datasets layout">
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/items/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/models/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/next.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/page.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/apps/web/src/app/text-classification/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/web/src/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,11 +122,11 @@
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\lib\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\apps\web\src\app\text-classification\datasets\[datasetId]\items" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\apps\web" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\app\api\v1\llm-providers\[providerHandle]\models" />
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\images" />
-      <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\src\components\inputs" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -300,7 +306,8 @@
       <workItem from="1745856480125" duration="3851000" />
       <workItem from="1745974725356" duration="987000" />
       <workItem from="1746028198138" duration="15836000" />
-      <workItem from="1746673765107" duration="9044000" />
+      <workItem from="1746673765107" duration="9092000" />
+      <workItem from="1746764941103" duration="2056000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
@@ -654,14 +661,21 @@
       <option name="project" value="LOCAL" />
       <updated>1746685515309</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="feat: add home button to datasets layout">
+      <option name="closed" value="true" />
+      <created>1746685656869</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1746685656869</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: add chat llm configuration customization on db" />
     <MESSAGE value="refactor: moved chat configuration fetch into its own function to avoid duplication" />
     <MESSAGE value="chore: add application screenshot" />
     <MESSAGE value="feat: add LLM config to chats and send message" />
@@ -686,6 +700,7 @@
     <MESSAGE value="feat: add mlflow tracking server" />
     <MESSAGE value="feat: add datasets list view" />
     <MESSAGE value="feat: add dataset items table view" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add dataset items table view" />
+    <MESSAGE value="feat: add home button to datasets layout" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add home button to datasets layout" />
   </component>
 </project>

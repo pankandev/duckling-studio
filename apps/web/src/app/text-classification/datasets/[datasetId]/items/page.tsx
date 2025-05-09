@@ -20,10 +20,9 @@ const DatasetDetailsPage = ({params: paramsReact}: { params: Promise<{ datasetId
     }
 
     return (
-        <div className="flex flex-col gap-2">
-            <h2>Dataset Details Page</h2>
+        <>
             {child}
-        </div>
+        </>
     );
 };
 
