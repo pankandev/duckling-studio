@@ -58,4 +58,7 @@ export const DatasetModelResourceSchema: z.ZodSchema<DatasetModelResource, z.Zod
     status: z.string(),
     metrics: z.record(z.any()),
     mlflowPath: z.string().nullable(),
+    config: z.record(z.unknown()),
+    trainAccuracy: z.number(),
+    evaluationAccuracy: z.number(),
 });
