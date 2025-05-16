@@ -1,3 +1,5 @@
+'use client';
+
 import React, {use} from 'react';
 import {useDatasetModels} from "@/lib/client/api/datasets";
 import DatasetModelsTable from "@/components/datasets/dataset-models-table";

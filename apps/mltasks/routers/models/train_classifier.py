@@ -3,10 +3,10 @@ from typing import Annotated
 import sqlalchemy as sa
 from celery.result import AsyncResult
 from fastapi import Depends
-from pydantic import BaseModel, RootModel
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from celery_tasks.classifier_models.trainer import TextClassifierTrainingArguments
+from celery_tasks.classifier_models.text_classifier_training_arguments import TextClassifierTrainingArguments
 from celery_tasks.train_classifier_model import train_classifier_model, TextClassifierType
 from models import TextClassifierDataset
 from models.models import TextClassifierModel
@@ -17,17 +17,17 @@ from services.db import get_db
 from utils.responses import SingleItemResponse
 
 
-class TextClassifierTrainingArgumentsPydantic(RootModel):
-    root: TextClassifierTrainingArguments
-
-
 class TrainModelRequest(BaseModel):
     type: TextClassifierType = TextClassifierType.HUGGING_FACE
-    training_args: TextClassifierTrainingArgumentsPydantic | None = None
+    training_args: TextClassifierTrainingArguments | None = None
 
 
-@router.post('/datasets/{dataset_id}/train')
+@router.post('/datasets/{dataset_id}/models/')
 def train_classifier(dataset_id: int, body: TrainModelRequest, session: Annotated[Session, Depends(get_db)]):
+    """
+    Trains a classifier model based on a given dataset.
+    """
+
     dataset = session.execute(
         sa.select(TextClassifierDataset.id).where(TextClassifierDataset.id == dataset_id)
     ).scalar_one_or_none()
@@ -46,7 +46,7 @@ def train_classifier(dataset_id: int, body: TrainModelRequest, session: Annotate
     ).scalar_one()
     model_resource = ModelResource.from_sql(model)
 
-    task: AsyncResult = train_classifier_model.delay(model.id, body.type, body.training_args.root)
+    task: AsyncResult = train_classifier_model.delay(model.id, body.type, body.training_args)
 
     session.execute(
         sa.update(TextClassifierModel)
@@ -56,7 +56,6 @@ def train_classifier(dataset_id: int, body: TrainModelRequest, session: Annotate
         })
     )
     session.commit()
-
 
     return SingleItemResponse(
         item=model_resource

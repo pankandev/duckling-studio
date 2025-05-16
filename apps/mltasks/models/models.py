@@ -10,7 +10,7 @@ from models.base import IdMixin, TimestampMixin
 from models.sqlalchemy_utils import IdUUID, IdInteger, generate_uuid4
 
 
-class ModelStatus(enum.Enum):
+class ModelStatus(str, enum.Enum):
     IDLE = 'idle'
     TRAINING = 'training'
     TRAINED = 'trained'

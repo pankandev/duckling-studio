@@ -1,10 +1,10 @@
-import dataclasses
 import typing
 
 import evaluate
 import mlflow
 import numpy as np
 from datasets import DatasetDict
+from pydantic import BaseModel
 from transformers import (
     PreTrainedTokenizerBase,
     DataCollatorWithPadding,
@@ -15,10 +15,9 @@ from transformers.integrations import MLflowCallback
 from transformers.utils import logging as hf_logging
 
 from celery_tasks.classifier_models.dataset import load_dataset_items
-
+from celery_tasks.classifier_models.text_classifier_training_arguments import TextClassifierConfiguration
 
 hf_logging.set_verbosity(hf_logging.WARNING)
-hf_logging.disable_progress_bar()
 
 
 def process_labels(labels: list[str]) -> tuple[list[str], dict[int, str], dict[str, int]]:
@@ -107,38 +106,13 @@ def create_trainer(model, tokenizer, dataset: DatasetDict) -> Trainer:
 
     return trainer
 
-@dataclasses.dataclass
-class TextClassifierTrainingArguments:
-    learning_rate: float = 1e-5
-    dropout: float = 0.1
-    attention_dropout: float = 0.1
-    weight_decay: float = 0.02
-    num_train_epochs: int = 7
-    model_name: str = "distilbert/distilbert-base-uncased"
-    batch_size: int = 16
+class TrainingResult(BaseModel):
+    mlflow_run_id: str
+    bestMetric: float
+    metricType: str
 
 
-@dataclasses.dataclass
-class TextClassifierConfiguration:
-    run_name: str
-    dataset_id: int
-    labels: list[str]
-    training_args: TextClassifierTrainingArguments
-
-    def to_dict_params(self) -> dict[str, typing.Any]:
-        return {
-            "dataset_id": self.dataset_id,
-            "labels": self.labels,
-            "learning_rate": self.training_args.learning_rate,
-            "dropout": self.training_args.dropout,
-            "attention_dropout": self.training_args.attention_dropout,
-            "weight_decay": self.training_args.weight_decay,
-            "num_train_epochs": self.training_args.num_train_epochs,
-            "model_name": self.training_args.model_name
-        }
-
-
-def train_classifier_pipeline(config: TextClassifierConfiguration):
+def train_classifier_pipeline(config: TextClassifierConfiguration) -> TrainingResult:
     """
     Train a classifier pipeline using a dataset from PostgreSQL.
 
@@ -149,9 +123,10 @@ def train_classifier_pipeline(config: TextClassifierConfiguration):
     """
 
     config_training_args = config.training_args
-    with mlflow.start_run(run_name=config.run_name):
+    with mlflow.start_run(run_name=config.run_name) as run:
+
         # Log configuration parameters
-        mlflow.log_params(config.to_dict_params())
+        mlflow.log_params(config.model_dump())
 
         # Process labels
         all_labels, id2label, label2id = process_labels(config.labels)
@@ -216,11 +191,15 @@ def train_classifier_pipeline(config: TextClassifierConfiguration):
         if trainer.state.best_model_checkpoint is None:
             raise ValueError("No best checkpoint found.")
 
-        mlflow.log_artifact(trainer.state.best_model_checkpoint, "best_model_checkpoint")
         mlflow.transformers.log_model(
-            config_training_args.model_name,
-            artifact_path="mlflow_model",
-            task="text-classification",
+            trainer.state.best_model_checkpoint,
+            artifact_path="best_checkpoint",
+            task="text-classification"
         )
+        run_id = run.info.run_id
 
-    return trainer.state.best_model_checkpoint
+    return TrainingResult(
+        mlflow_run_id=run_id,
+        bestMetric=trainer.state.best_metric,
+        metricType='accuracy',
+    )
