@@ -1,5 +1,6 @@
 import {z} from "zod";
 import {DateTime} from "luxon";
+import {coerceDateTimeSchema} from "@/lib/common/schemas/datetime";
 
 export interface DatasetLabelLiteResource {
     id: string;
@@ -44,19 +45,23 @@ export interface DatasetItemResource {
 export const DatasetModelStatusSchema = z.enum(['idle', 'training', 'trained', 'failed']);
 export type DatasetModelStatus = z.infer<typeof DatasetModelStatusSchema>;
 
+export interface DatasetModelMetricResource {
+    type: string;
+    value: number;
+}
 
 export interface DatasetModelResultResource {
-    trainAccuracy: number;
-    evaluationAccuracy: number;
-    metrics: Record<string, unknown>;
+    metrics: DatasetModelMetricResource[];
 }
+
 export interface DatasetModelResource {
     id: number;
-    status: DatasetModelStatus;
-    mlflowPath: string | null;
+    mlflowRunId: string | null;
     config: Record<string, unknown>;
-    result: DatasetModelResultResource | null;
+    status: DatasetModelStatus;
     createdAt: DateTime;
+    updatedAt: DateTime;
+    result: DatasetModelResultResource | null;
 }
 
 export const DatasetLabelLiteResourceSchema: z.ZodSchema<DatasetLabelLiteResource, z.ZodTypeDef, unknown> = z.object({
@@ -82,19 +87,22 @@ export const DatasetItemResourceSchema: z.ZodSchema<DatasetItemResource, z.ZodTy
     label: DatasetLabelLiteResourceSchema.nullable(),
 });
 
+export const DatasetModelMetricResourceSchema: z.ZodSchema<DatasetModelMetricResource> = z.object({
+    type: z.string(),
+    value: z.number(),
+});
 
 export const DatasetModelResultResourceSchema: z.ZodSchema<DatasetModelResultResource, z.ZodTypeDef, unknown> = z.object({
-    trainAccuracy: z.number(),
-    evaluationAccuracy: z.number(),
-    metrics: z.record(z.unknown()),
+    metrics: z.array(DatasetModelMetricResourceSchema),
 });
 
 
 export const DatasetModelResourceSchema: z.ZodSchema<DatasetModelResource, z.ZodTypeDef, unknown> = z.object({
     id: z.number(),
     status: DatasetModelStatusSchema,
-    mlflowPath: z.string().nullable(),
+    mlflowRunId: z.string().nullable(),
     config: z.record(z.unknown()),
     result: DatasetModelResultResourceSchema.nullable(),
-    createdAt: z.string().transform(d => DateTime.fromISO(d)),
+    createdAt: coerceDateTimeSchema,
+    updatedAt: coerceDateTimeSchema,
 });

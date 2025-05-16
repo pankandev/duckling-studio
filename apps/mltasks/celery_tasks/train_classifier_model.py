@@ -11,6 +11,7 @@ from celery_tasks.classifier_models.dataset import get_dataset
 from celery_tasks.classifier_models.text_classifier_training_arguments import TextClassifierTrainingArguments, TextClassifierConfiguration
 from celery_tasks.classifier_models.trainer import train_classifier_pipeline, TrainingResult
 from models import ModelStatus, TextClassifierModel
+from models.models import TextClassifierModelMetric
 from services.db import SessionLocal
 
 
@@ -23,6 +24,24 @@ def _update_model_status(session: Session, model_id: int, status: ModelStatus):
         .where(TextClassifierModel.id == model_id)
         .values({
             TextClassifierModel.status: status
+        })
+    )
+
+def _set_model_trained(session: Session, model_id: int, result: TrainingResult):
+    session.execute(
+        sa.update(TextClassifierModel)
+        .where(TextClassifierModel.id == model_id)
+        .values({
+            TextClassifierModel.status: ModelStatus.TRAINED,
+            TextClassifierModel.mlflow_run_id: result.mlflow_run_id,
+        })
+    )
+    session.execute(
+        sa.insert(TextClassifierModelMetric)
+        .values({
+            TextClassifierModelMetric.model_id: model_id,
+            TextClassifierModelMetric.name: result.metric_type,
+            TextClassifierModelMetric.value: result.best_metric,
         })
     )
 
@@ -80,7 +99,7 @@ class TrainClassifierTask(Task):
             raise e
 
         session = SessionLocal()
-        _update_model_status(session, model_id, ModelStatus.TRAINED)
+        _set_model_trained(session, model_id, result)
         session.commit()
         session.close()
 

@@ -9,7 +9,6 @@ dbmigrate:
 	alembic upgrade head
 
 dev:
-	pip install fastapi[standard]
 	fastapi run --reload
 
 run_api:

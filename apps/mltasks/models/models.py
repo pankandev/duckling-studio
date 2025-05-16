@@ -3,7 +3,7 @@ import typing
 import uuid
 
 import sqlalchemy as sa
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from models import SQLModelBase, TextClassifierDataset
 from models.base import IdMixin, TimestampMixin
@@ -28,6 +28,17 @@ class TextClassifierModel(SQLModelBase, IdMixin, TimestampMixin):
                                                 server_default=ModelStatus.IDLE.value, index=True)
     celery_task_id: Mapped[uuid.UUID] = mapped_column(IdUUID, nullable=True)
 
+    mlflow_run_id: Mapped[str | None] = mapped_column(sa.String(256), nullable=True)
+
+    config: Mapped[dict[str, typing.Any]] = mapped_column(sa.JSON(), nullable=False, server_default='{}')
+
+    metrics: Mapped[list['TextClassifierModelMetric']] = relationship(
+        'TextClassifierModelMetric',
+        back_populates='model',
+        cascade='all, delete-orphan',
+        lazy='dynamic'
+    )
+
 
 class TextClassifierModelMetric(SQLModelBase, IdMixin, TimestampMixin):
     __tablename__ = 'text_classifier_model_metrics'
@@ -37,3 +48,8 @@ class TextClassifierModelMetric(SQLModelBase, IdMixin, TimestampMixin):
 
     name: Mapped[str] = mapped_column(sa.String(256), nullable=False, index=True)
     value: Mapped[typing.Any] = mapped_column(sa.JSON(), nullable=False)
+
+    model: Mapped['TextClassifierModel'] = relationship(
+        TextClassifierModel,
+        back_populates='metrics'
+    )

@@ -4,6 +4,7 @@ import {z} from "zod";
 import {buildListItemResponse} from "@/lib/common/http/rest-response";
 import {DatasetModelResourceSchema} from "@/lib/common/resources/dataset-resource";
 import {safeParseInt} from "@/lib/common/parsers/primitives";
+import {TrainNewClassifierBodySchema} from "@/lib/common/resources/train-new-classifier";
 
 const MLModelItemResponse = z.object({
     items: z.array(DatasetModelResourceSchema),
@@ -26,4 +27,29 @@ export async function GET(request: Request, {params}: {params: Promise<{datasetI
     const data = await response.json();
     const parsedResponse = MLModelItemResponse.parse(data);
     return buildListItemResponse(parsedResponse.items);
+}
+
+export async function POST(request: Request, {params}: {params: Promise<{datasetId: string}>}): Promise<Response> {
+    const datasetIdRaw = (await params).datasetId;
+    const datasetIdParse = safeParseInt(datasetIdRaw);
+    if (!datasetIdParse.success) {
+        return HttpError.badRequestZod(datasetIdParse.error).asResponse();
+    }
+    const datasetId = datasetIdParse.data;
+
+    const bodyParse = TrainNewClassifierBodySchema.safeParse(await request.json());
+    if (!bodyParse.success) {
+        return HttpError.badRequestZod(bodyParse.error).asResponse();
+    }
+
+    return await fetch(
+        getMLTasksAPIURL(`/datasets/${datasetId}/models`),
+        {
+            method: 'POST',
+            body: JSON.stringify(bodyParse.data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+    );
 }

@@ -1,23 +1,14 @@
 import typing
 
-import evaluate
-import mlflow
 import numpy as np
-from datasets import DatasetDict
+
+if typing.TYPE_CHECKING:
+    from datasets import DatasetDict
+    from transformers import Trainer
+
 from pydantic import BaseModel
-from transformers import (
-    PreTrainedTokenizerBase,
-    DataCollatorWithPadding,
-    TrainingArguments,
-    Trainer, AutoModelForSequenceClassification, AutoTokenizer
-)
-from transformers.integrations import MLflowCallback
-from transformers.utils import logging as hf_logging
 
-from celery_tasks.classifier_models.dataset import load_dataset_items
 from celery_tasks.classifier_models.text_classifier_training_arguments import TextClassifierConfiguration
-
-hf_logging.set_verbosity(hf_logging.WARNING)
 
 
 def process_labels(labels: list[str]) -> tuple[list[str], dict[int, str], dict[str, int]]:
@@ -55,6 +46,8 @@ def compute_metrics(eval_pred: tuple[np.ndarray, np.ndarray]) -> dict[str, float
     dict
         Computed metrics (accuracy).
     """
+    import evaluate
+
     accuracy = evaluate.load("accuracy")
     predictions, labels = eval_pred
     predictions = np.argmax(predictions, axis=1)
@@ -62,7 +55,7 @@ def compute_metrics(eval_pred: tuple[np.ndarray, np.ndarray]) -> dict[str, float
     return accuracy.compute(predictions=predictions, references=labels)
 
 
-def create_trainer(model, tokenizer, dataset: DatasetDict) -> Trainer:
+def create_trainer(model, tokenizer, dataset: 'DatasetDict') -> 'Trainer':
     """
     Create a HuggingFace Trainer object.
 
@@ -80,6 +73,12 @@ def create_trainer(model, tokenizer, dataset: DatasetDict) -> Trainer:
     Trainer
         HuggingFace Trainer instance.
     """
+    from transformers import (
+        DataCollatorWithPadding,
+        TrainingArguments,
+        Trainer
+    )
+
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
     training_args = TrainingArguments(
         learning_rate=1e-5,
@@ -108,8 +107,8 @@ def create_trainer(model, tokenizer, dataset: DatasetDict) -> Trainer:
 
 class TrainingResult(BaseModel):
     mlflow_run_id: str
-    bestMetric: float
-    metricType: str
+    best_metric: float
+    metric_type: str
 
 
 def train_classifier_pipeline(config: TextClassifierConfiguration) -> TrainingResult:
@@ -121,6 +120,16 @@ def train_classifier_pipeline(config: TextClassifierConfiguration) -> TrainingRe
     config : TextClassifierConfiguration
         Configuration for training.
     """
+    import mlflow
+
+    from transformers import (
+        DataCollatorWithPadding,
+        TrainingArguments,
+        Trainer, AutoModelForSequenceClassification, AutoTokenizer
+    )
+    from transformers.integrations import MLflowCallback
+
+    from celery_tasks.classifier_models.dataset import load_dataset_items
 
     config_training_args = config.training_args
     with mlflow.start_run(run_name=config.run_name) as run:
@@ -200,6 +209,6 @@ def train_classifier_pipeline(config: TextClassifierConfiguration) -> TrainingRe
 
     return TrainingResult(
         mlflow_run_id=run_id,
-        bestMetric=trainer.state.best_metric,
-        metricType='accuracy',
+        best_metric=trainer.state.best_metric,
+        metric_type='accuracy',
     )

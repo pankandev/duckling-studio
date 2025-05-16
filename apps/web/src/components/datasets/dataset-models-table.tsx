@@ -1,19 +1,24 @@
 import React from 'react';
-import {DatasetModelResource} from "@/lib/common/resources/dataset-resource";
-import {Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
-import {json} from "node:stream/consumers";
+import {DatasetModelResource, DatasetModelStatus} from "@/lib/common/resources/dataset-resource";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+
+const statusClassNames: Record<DatasetModelStatus, string> = {
+    training: 'text-chart-4',
+    trained: 'text-chart-2',
+    failed: 'text-chart-5',
+    idle: 'text-muted',
+}
 
 const DatasetModelsTable = ({items}: {items: DatasetModelResource[]}) => {
     return (
         <Table>
-            <TableCaption>Dataset Models</TableCaption>
             <TableHeader>
                 <TableRow>
                     <TableHead>ID</TableHead>
                     <TableHead>Status</TableHead>
-                    <TableHead>Train Accuracy</TableHead>
-                    <TableHead>Evaluation Accuracy</TableHead>
-                    <TableHead>MLFlow</TableHead>
+                    <TableHead>Metric Type</TableHead>
+                    <TableHead>Metric Value</TableHead>
+                    <TableHead>MLFlow Run Id</TableHead>
                     <TableHead>Creation Time</TableHead>
                 </TableRow>
             </TableHeader>
@@ -22,11 +27,11 @@ const DatasetModelsTable = ({items}: {items: DatasetModelResource[]}) => {
                     items.map((item) => (
                         <TableRow key={item.id}>
                             <TableCell>{item.id}</TableCell>
-                            <TableCell className="italic text-muted">{item.status.toUpperCase()}</TableCell>
-                            <TableCell>{item.result?.trainAccuracy}</TableCell>
-                            <TableCell>{item.result?.evaluationAccuracy}</TableCell>
-                            <TableCell>{item.mlflowPath}</TableCell>
-                            <TableCell>{item.createdAt.toFormat('yyyy-mm-dd hh:mm:ss')}</TableCell>
+                            <TableCell className={'italic text-muted ' + statusClassNames[item.status]}>{item.status.toUpperCase()}</TableCell>
+                            <TableCell>{item.result?.metrics[0]?.type ?? '-'}</TableCell>
+                            <TableCell>{item.result?.metrics[0]?.value ?? '-'}</TableCell>
+                            <TableCell>{item.mlflowRunId ?? '-'}</TableCell>
+                            <TableCell>{item.createdAt.toRelative()}</TableCell>
                         </TableRow>
                     ))
                 }
