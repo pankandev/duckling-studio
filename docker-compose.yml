@@ -107,6 +107,8 @@ services:
       - mlflow
     command: >
       sh -c "make run_celery"
+    volumes:
+      - trainer_output:/app/trainer_output
     deploy:
       resources:
         reservations:
@@ -145,3 +147,5 @@ networks:
 volumes:
   dbmltasks_data:
   dbweb_data:
+  trainer_output:
+

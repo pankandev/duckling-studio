@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5dfd9d5c-8400-4145-a18d-33ed69adf962" name="Changes" comment="fix: fix missing fields on dataset resource schema">
-      <change afterPath="$PROJECT_DIR$/apps/web/src/lib/client/api/train-classifier.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/lib/common/resources/train-new-classifier.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apps/web/src/lib/common/schemas/datetime.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/celery_tasks/classifier_models/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/classifier_models/trainer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/celery_tasks/train_classifier_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/celery_tasks/train_classifier_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/models/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/mltasks/resources/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/resources/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/app/api/v1/datasets/[datasetId]/models/route.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/api/v1/datasets/[datasetId]/models/route.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/models/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/app/text-classification/datasets/[datasetId]/models/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/components/datasets/dataset-models-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/components/datasets/dataset-models-table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/web/src/lib/common/resources/dataset-resource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/apps/web/src/lib/common/resources/dataset-resource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/mltasks/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/apps/mltasks/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,49 +59,49 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.docker-compose.yml.dbmltasks: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.dbweb: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.mlapi: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.mlflow: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.mltasks: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.mltasks_celery_worker: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.postgres: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.redis: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.web: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
-    "Docker.web/Dockerfile.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "feature/classifier",
-    "ignore.virus.scanning.warn.message": "true",
-    "javascript.nodejs.core.library.configured.version": "22.15.0",
-    "javascript.nodejs.core.library.typings.version": "22.15.17",
-    "jsx.switch.disabled": "true",
-    "last_opened_file_path": "/home/pankandev/.local/share/pnpm/pnpm",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "node",
-    "nodejs_package_manager_path": "pnpm",
-    "npm.build.executor": "Run",
-    "npm.create-migration.executor": "Run",
-    "npm.dev (1).executor": "Run",
-    "npm.dev.executor": "Run",
-    "npm.prisma:generate (1).executor": "Run",
-    "npm.prisma:generate.executor": "Run",
-    "npm.prisma:migrate.executor": "Run",
-    "npm.prisma:seed.executor": "Run",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "ts.external.directory.path": "/home/pankandev/git/duckling-studio/apps/web/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.docker-compose.yml.dbmltasks: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.dbweb: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.mlapi: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.mlflow: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.mltasks: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.mltasks_celery_worker: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.postgres: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.redis: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.web: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.web/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/classifier&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;22.15.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;22.15.17&quot;,
+    &quot;jsx.switch.disabled&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/pankandev/.local/share/pnpm/pnpm&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.create-migration.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev (1).executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;npm.prisma:generate (1).executor&quot;: &quot;Run&quot;,
+    &quot;npm.prisma:generate.executor&quot;: &quot;Run&quot;,
+    &quot;npm.prisma:migrate.executor&quot;: &quot;Run&quot;,
+    &quot;npm.prisma:seed.executor&quot;: &quot;Run&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/pankandev/git/duckling-studio/apps/web/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\apps\web\src\components\datasets" />
@@ -128,7 +118,7 @@
       <recent name="C:\Users\pcamp\WebstormProjects\claude-chat\images" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.web: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yml.mltasks: Compose Deployment">
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -206,9 +196,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.mltasks: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.web: Compose Deployment" />
         <item itemvalue="npm.build" />
-        <item itemvalue="Docker.docker-compose.yml.mltasks: Compose Deployment" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       </list>
@@ -303,7 +293,8 @@
       <workItem from="1746764941103" duration="3857000" />
       <workItem from="1747181168081" duration="761000" />
       <workItem from="1747377017334" duration="6926000" />
-      <workItem from="1747415531451" duration="7542000" />
+      <workItem from="1747415531451" duration="10760000" />
+      <workItem from="1747466694404" duration="1189000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add base routes">
       <option name="closed" value="true" />
