@@ -13,7 +13,7 @@ export class OllamaFactory implements ModelFactory {
     private static async load(url: string): Promise<OllamaProvider> {
         const ai = await import("ollama-ai-provider");
         return ai.createOllama({
-            baseURL: url
+            baseURL: url + '/api'
         });
     }
 
