@@ -13,7 +13,7 @@ from utils.responses import ListItemResponse
 
 
 @router.get('/datasets/{dataset_id}/models/')
-def list_models(dataset_id: int, session: Annotated[Session, Depends(get_db)]):
+async def list_models(dataset_id: int, session: Annotated[Session, Depends(get_db)]):
     dataset = session.execute(
         sa.select(TextClassifierDataset.id)
         .where(TextClassifierDataset.id == dataset_id)

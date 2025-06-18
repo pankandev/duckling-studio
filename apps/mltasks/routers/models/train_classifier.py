@@ -23,7 +23,7 @@ class TrainModelRequest(BaseModel):
 
 
 @router.post('/datasets/{dataset_id}/models/')
-def train_classifier(dataset_id: int, body: TrainModelRequest, session: Annotated[Session, Depends(get_db)]):
+async def train_classifier(dataset_id: int, body: TrainModelRequest, session: Annotated[Session, Depends(get_db)]):
     """
     Trains a classifier model based on a given dataset.
     """

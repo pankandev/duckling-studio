@@ -33,7 +33,7 @@ class TrainTestSplitResponse(BaseModel):
 
 
 @router.post('/datasets/{dataset_id}/train-test-split')
-def handle_train_test_split(
+async def handle_train_test_split(
         dataset_id: int,
         request: TrainTestSplitRequest,
         session: Annotated[Session, Depends(get_db)]
